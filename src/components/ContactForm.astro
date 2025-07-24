@@ -1,0 +1,36 @@
+---
+import Section from "./Section.astro"
+import Headline from "./headline.astro"
+import Form from "./Form.astro"
+import InputField from "./InputField.astro"
+import Button from "./Button.astro";
+---
+
+<Section
+  bgColor="white"
+  id="contact"
+>
+  <div class="grid md:grid-cols-2 gap-12 md:gap-8">
+    <div class="flex flex-col gap-8">
+      <Headline level={2} underline>Kontakt</Headline>
+      <ol class="list-none space-y-2">
+        <li>Telefon: 06737 7474-0</li>
+        <li>Telefon: 06737 7474-0</li>
+        <li>E-Mail: info@helpmed.de</li>
+      </ol>
+      <Button as="a" href="https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form">Termin vereinbaren</Button>
+    </div>
+    <Form>
+      <InputField itype="text" id="name" name="name" required>
+        Name:
+      </InputField>
+      <InputField itype="email" id="email" name="email" required>
+        E-Mail:
+      </InputField>
+      <InputField itype="textarea" id="message" name="message" required>
+        Nachricht:
+      </InputField>
+      <Button type="submit">Absenden</Button>
+    </Form>
+  </div>
+</Section>

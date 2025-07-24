@@ -1,0 +1,77 @@
+---
+type Props = {
+  links?: { text: string, href: string }[];
+};
+
+const { links }: Props = Astro.props;
+---
+
+<nav id="navbar" class="sticky top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
+  <a href="/" class="row-start-1 col-start-1 col-span-1 ml-10 my-auto justify-self-start text-green-700 font-bold text-2xl cursor-default p-2 rounded-lg bg-white">
+    HELP MED
+  </a>
+  <div id="hamburger" class="row-start-1 col-start-2 mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-1 cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
+    <span id="ham-1" class="bg-teal-800 h-2 w-10 rounded-full" />
+    <span id="ham-2" class="bg-teal-800 h-2 w-10 rounded-full" />
+    <span id="ham-3" class="bg-teal-800 h-2 w-10 rounded-full" />
+  </div>
+  <ol id="nav-links" class="max-md:rounded-bl-2xl max-md:opacity-100 max-md:overflow-hidden max-md:row-start-2 max-md:col-start-1 md:my-auto md:mr-10 max-md:w-fit max-md:justify-self-end max-md:col-span-2 max-md:shadow-xl md:row-start-1 md:col-start-2 md:col-span-1 md:justify-self-end max-md:absolute max-md:flex-col flex max-md:hidden md:gap-8 md:px-5 md:py-2 bg-white transition-all md:rounded-full">
+    <li><a class="nav-link hover:text-gray-500 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5 max-md:border-t-4 max-md:border-teal-800" href="#home">Startseite</a></li>
+    <li><a class="nav-link hover:text-gray-500 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href="#about">Über uns</a></li>
+    <li><a class="nav-link hover:text-gray-500 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href="#services">Leistungen</a></li>
+    <li><a class="nav-link hover:text-gray-500 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href="#contact">Kontakt</a></li>
+  </ol>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const navLinks = document.getElementById('nav-links');
+  const allLinks = document.getElementsByClassName('nav-link');
+  const hamburger = document.getElementById('hamburger');
+  const ham1 = document.getElementById('ham-1');
+  const ham2 = document.getElementById('ham-2'); 
+  const ham3 = document.getElementById('ham-3');
+
+  hamburger?.addEventListener('click', () => {
+    navLinks?.classList.toggle('max-md:hidden');
+    ham1?.classList.toggle('rotate-45');
+    ham1?.classList.toggle('translate-y-3');
+    ham2?.classList.toggle('bg-transparent');
+    ham3?.classList.toggle('-rotate-45');
+    ham3?.classList.toggle('-translate-y-3');
+  });
+
+  Array.from(allLinks).forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks?.classList.add('max-md:!opacity-0');
+      link?.classList.add('max-md:pointer-events-none');
+      ham1?.classList.toggle('rotate-45');
+      ham1?.classList.toggle('translate-y-3');
+      ham2?.classList.toggle('bg-transparent');
+      ham3?.classList.toggle('-rotate-45');
+      ham3?.classList.toggle('-translate-y-3');
+      setTimeout(() => {
+        navLinks?.classList.add('max-md:hidden');
+        navLinks?.classList.remove('max-md:!opacity-0');
+        link?.classList.remove('max-md:pointer-events-none');
+      }, 300);
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      navbar?.classList.add('!backdrop-blur-lg', 'shadow-sm', '!bg-transparent', 'border-teal-700', 'border-b-2');
+      navLinks?.classList.add('md:!bg-teal-900', 'md:text-white');
+      Array.from(allLinks).forEach(link => {
+        link.classList.add('hover:!text-gray-300');
+      });
+    } else {
+      navbar?.classList.remove('!backdrop-blur-lg', 'shadow-sm', '!bg-transparent', 'border-teal-700', 'border-b-2');
+      navLinks?.classList.remove('md:!bg-teal-900', 'md:text-white');
+      Array.from(allLinks).forEach(link => {
+        link.classList.remove('hover:!text-gray-300');
+      });
+    }
+  });
+</script>
+

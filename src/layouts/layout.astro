@@ -1,0 +1,32 @@
+---
+import BaseLayout from "./baseLayout.astro";
+import Footer from "../components/footer.astro";
+import MainNav from "../components/mainNav.astro";
+
+type Props = {
+  title?: string,
+  description?: string,
+  ownNav?: boolean,
+  ownFooter?: boolean,
+}
+const { title, description, ownNav=false, ownFooter=false }: Props = Astro.props;
+---
+
+<BaseLayout {title} {description}>
+  { !ownNav &&
+    <MainNav />
+  }
+  <div class="flex-grow">
+    <slot />
+  </div>
+  { !ownFooter &&
+    <Footer 
+      links={[
+        {text: "instagram", href: "https://www.instagram.com"},
+        {text: "youtube", href: "https://www.instagram.com"},
+        {text: "website", href: "/"},
+      ]}
+    />
+  }
+  { ownFooter && <slot name="footer" />}
+</BaseLayout>

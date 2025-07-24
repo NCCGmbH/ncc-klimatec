@@ -1,0 +1,35 @@
+---
+type Props = {
+  type?: any,
+  id?: string,
+  as?: "button" | "a",
+  danger?: boolean,
+  onClickEvent?: string,
+  href?: any,
+}
+const { type, id, as="a", danger=false, onClickEvent = 'default-event', href }: Props = Astro.props;
+---
+
+{ as === "a" ? (
+  <a 
+    class="border-2 text-lg px-4 py-2 text-teal-800 hover:text-white border-teal-800 bg-white hover:bg-teal-800 transition-colors rounded-full leading-none max-w-min whitespace-nowrap cursor-pointer select-none"
+    href={href ?? undefined}
+    target="_blank"
+    rel="noopener noreferrer"
+    id={id}
+    data-event={onClickEvent}
+    onclick="this.dispatchEvent(new CustomEvent(this.dataset.event, { bubbles: true }))"
+  >
+    <slot />
+  </a>
+) : (
+  <button 
+    class="border-2 text-[1.2rem] px-4 py-2 text-teal-800 hover:text-white border-teal-800 bg-white hover:bg-teal-800 transition-colors rounded-full leading-none max-w-min whitespace-nowrap",
+    type={type ?? undefined}
+    id={id}
+    data-event={onClickEvent}
+    onclick="this.dispatchEvent(new CustomEvent(this.dataset.event, { bubbles: true }))"
+  >
+    <slot />
+  </button>
+)}

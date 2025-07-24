@@ -1,0 +1,26 @@
+---
+import "../styles/global.css";
+
+type Props = {
+  title?: string,
+  description?: string,
+}
+
+const { title="title", description }: Props = Astro.props;
+---
+
+<html lang="de" class="scroll-smooth">
+  <head>
+    <title>{title}</title>
+    {description && (<meta name="description" content={description} />)}
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-gray-900 font-manrope">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,38 @@
+---
+import type { BgColors, Padding } from "../types";
+
+type Props = {
+  bgColor?: BgColors,
+  paddingTop?: Padding,
+  paddingBottom?: Padding,
+  id?: string
+}
+
+const { bgColor = "white", paddingTop = "large", paddingBottom = "large", id }: Props = Astro.props;
+
+const bgColorClass = {
+  white: "bg-white",
+  gray: "bg-gray-100",
+  green: "bg-green-700",
+}[bgColor] || "bg-white";
+
+const paddingTopClass = {
+  none: "pt-0",
+  small: "pt-6",
+  medium: "pt-12",
+  large: "pt-20 lg:pt-24",
+}[paddingTop] || "pt-20";
+
+const paddingBottomClass = {
+  none: "pb-0",
+  small: "pb-6",
+  medium: "pb-12",
+  large: "pb-20 lg:pb-24",
+}[paddingBottom] || "pt-20";
+---
+
+<section id={id} class:list={[bgColorClass, paddingTopClass, paddingBottomClass, "scroll-mt-20"]}>
+  <div class="mx-auto max-w-[1200px] w-full px-[5%]">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,31 @@
+---
+import type { string } from "astro:schema";
+import { type BgColors } from "../types";
+
+import Headline from "./headline.astro"
+import Section from "./Section.astro"
+
+type Props = {
+  bgColor?: BgColors,
+  h2: string,
+  h3: string,
+  image: string;
+}
+
+const { bgColor = "white", h2, h3, image }: Props = Astro.props;
+---
+
+<Section id="about" {bgColor}>
+  <div class="grid md:grid-cols-[auto_1fr] gap-12 items-center">
+    <img src={`/public/images/${image}`} alt="profile" class="w-64 aspect-square object-cover rounded-full max-sm:justify-self-center" />
+    <div class="felx flex-col space-y-8">
+      <Headline level={2} underline>{h2}</Headline>
+      <div class="space-y-4">
+        <Headline level={3}>HELP MED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit.</Headline>
+        <div>
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>

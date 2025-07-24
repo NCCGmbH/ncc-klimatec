@@ -1,16 +1,59 @@
 ---
+export const prerender = false;
+import Layout from "../layouts/layout.astro";
+import TextBlock from "../components/textBlock.astro";
+import Header from "../components/header.astro";
 
+import Services from "../components/Services.astro";
+import ServicesItem from "../components/ServicesItem.astro";
+import About from "../components/About.astro";
+import ContactForm from "../components/ContactForm.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <Header />
+  
+  <About
+    bgColor="white"
+    h2="Über uns"
+    h3="HELP MED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit."
+    image="profil.png"
+  >
+    Unter Leitung von Dr. Elena Staubitz (Ärztin, LT) verbinden wir moderne orthomolekulare Medizin 
+    mit persönlicher Betreuung. Unsere Philosophie: Gesundheit ist kein Zufall - sondern das Ergebnis 
+    gezielter Unterstützung Ihrer körpereigenen Systeme.
+    <br />
+    <br />
+    Die Praxis befindet sich im Gesundheitshaus Undenheim gemeinsam mit Herrn Dr. Albrecht 
+    (Facharzt für Allgemeinmedizin).
+  </About>
+
+  <Services head>
+    <ServicesItem 
+      headline="Integrale Ernährung" 
+      image="spinat.png"
+    >
+      Analytische Ernährungsberatung zur Verbesserung von Energie, Stoffwechsel und Lebensqualität - abgestimmt auf Ihre körperliche Konstitution.
+    </ServicesItem>
+    <ServicesItem 
+      headline="Mikronährstofftherapie" 
+      image="krauter.png"
+    >
+      Gezielte Zufuhr von Vitaminen, Spurenelementen, Aminosäuren und sekundären Pflanzenstoffen zur Unterstützung von Zellfunktion, Immunabwehr und Leistungsfähigkeit.
+    </ServicesItem>
+    <ServicesItem 
+      headline="Ordnungstherapie" 
+      image="steine.png"
+    >
+      Strukturschaffung für Körper und Geist - mit gesunder Tagesrhythmik, Stressmanagement und praxisnahen Alltagsstrategien.
+    </ServicesItem>
+    <ServicesItem 
+      headline="Darmgesundheit" 
+      image="blatt.png"
+    >
+      Analyse und Regulation der Darmflora (Mikrobiom) zur Behandlung von Verdauungsbeschwerden, Immunschwächen und chronischen Entzündungen.
+    </ServicesItem>
+  </Services>
+
+  <ContactForm />
+</Layout>

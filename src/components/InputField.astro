@@ -1,0 +1,36 @@
+---
+
+type Props = {
+  itype?: astroHTML.JSX.HTMLInputTypeAttribute | "textarea";
+  id?: string;
+  name?: string;
+  required?: boolean;
+  autofocus?: boolean;
+};
+
+const { itype, id, name, required=false, autofocus=false }: Props = Astro.props;
+---
+
+<label>
+  <div>
+    <slot />
+  </div>
+  {itype === "textarea" ? (
+    <textarea
+      autofocus={autofocus}
+      id={id}
+      name={name ?? undefined}
+      required={required ? true : undefined}
+      class="w-full h-24 max-h-64 focus:ring-teal-400 focus:ring-2 outline-none border-2 rounded-md border-teal-700 px-1 bg-gray-100"
+    />
+  ) : (
+    <input
+      autofocus={autofocus}
+      id={id}
+      name={name ?? undefined}
+      type={itype ?? undefined}
+      required={required ? true : undefined}
+      class="max-w-64 w-full focus:ring-teal-400 focus:ring-2 outline-none border-2 rounded-md border-teal-700 px-1 bg-gray-100"
+    />
+  )}
+</label>
