@@ -11,7 +11,7 @@ const { links }: Props = Astro.props;
 
 <div id="nav-overlay" class="fixed inset-0 z-40 hidden transition-all"></div>
 
-<nav id="navbar" class="sticky overflow-y-visible overflow-x-clip top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
+<nav id="navbar" class="sticky max-md:overflow-y-visible max-md:overflow-x-clip top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
   <Image
     src={logo}
     loading="eager"
@@ -60,10 +60,12 @@ const { links }: Props = Astro.props;
       setTimeout(() => {
         navLinks?.classList.remove('max-md:translate-x-[100%]');
         navLinks?.classList.remove('max-md:opacity-0');
+        navbar?.classList.remove('max-md:overflow-x-clip');
       }, 0);
     } else {
       navLinks?.classList.add('max-md:translate-x-[100%]');
       navLinks?.classList.add('max-md:opacity-0');
+      navbar?.classList.add('max-md:overflow-x-clip');
       setTimeout(() => {
         navLinks?.classList.add('max-md:hidden');
       }, 500);      
@@ -73,6 +75,7 @@ const { links }: Props = Astro.props;
   navOverlay?.addEventListener('click', () => {
     navLinks?.classList.add('max-md:translate-x-[100%]');
     navLinks?.classList.add('max-md:opacity-0');
+    navbar?.classList.add('max-md:overflow-x-clip');
     setTimeout(() => {
       navLinks?.classList.add('max-md:hidden');
     }, 500);   
@@ -91,6 +94,7 @@ const { links }: Props = Astro.props;
       navOverlay?.classList.add('hidden');
       navLinks?.classList.add('max-md:translate-x-[100%]');
       navLinks?.classList.add('max-md:opacity-0');
+      navbar?.classList.add('max-md:overflow-x-clip');
       setTimeout(() => {
         navLinks?.classList.add('max-md:hidden');
       }, 500); 
@@ -110,6 +114,7 @@ const { links }: Props = Astro.props;
     
         navLinks?.classList.add('max-md:translate-x-[100%]');
         navLinks?.classList.add('max-md:opacity-0');
+        navbar?.classList.add('max-md:overflow-x-clip');
         setTimeout(() => {
           navLinks?.classList.add('max-md:hidden');
           link?.classList.remove('max-md:pointer-events-none');
