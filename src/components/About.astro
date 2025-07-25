@@ -17,7 +17,7 @@ const { bgColor = "white", h2, h3, image }: Props = Astro.props;
 
 <Section id="about" {bgColor}>
   <div class="grid md:grid-cols-[auto_1fr] gap-12 items-center">
-    <img src={`/public/images/${image}`} alt="profile" class="w-64 aspect-square object-cover rounded-full max-sm:justify-self-center" />
+    <img src={`/images/${image}`} alt="profile" class="w-64 aspect-square object-cover rounded-full max-sm:justify-self-center" />
     <div class="felx flex-col space-y-8">
       <Headline level={2} underline>{h2}</Headline>
       <div class="space-y-4">
