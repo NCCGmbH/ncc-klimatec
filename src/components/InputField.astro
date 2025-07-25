@@ -21,7 +21,7 @@ const { itype, id, name, required=false, autofocus=false }: Props = Astro.props;
       id={id}
       name={name ?? undefined}
       required={required ? true : undefined}
-      class="w-full h-24 max-h-64 focus:ring-teal-400 focus:ring-2 outline-none border-2 rounded-md border-teal-700 px-1 bg-gray-100"
+      class="w-full h-24 max-h-64 focus:ring-teal-400 focus:ring-2 outline-none rounded-md px-1 bg-[#ebeeef]"
     />
   ) : (
     <input
@@ -30,7 +30,7 @@ const { itype, id, name, required=false, autofocus=false }: Props = Astro.props;
       name={name ?? undefined}
       type={itype ?? undefined}
       required={required ? true : undefined}
-      class="max-w-64 w-full focus:ring-teal-400 focus:ring-2 outline-none border-2 rounded-md border-teal-700 px-1 bg-gray-100"
+      class="max-w-64 w-full focus:ring-teal-400 focus:ring-2 outline-none rounded-md px-1 bg-[#ebeeef]"
     />
   )}
 </label>
