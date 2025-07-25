@@ -16,7 +16,7 @@ const textColorClass = {
 }[textColor];
 ---
 <div class:list={[textColorClass, "break-words"]}>
-  { (level == 1) && <h1 class="text-5xl text-shadow"><slot/></h1> }
+  { (level == 1) && <h1 class="text-4xl sm:text-5xl text-shadow"><slot/></h1> }
   { (level == 2) && <h2 class="text-3xl"><slot/></h2> }
   { (level == 3) && <h3 class="text-xl font-bold"><slot/></h3> }
   { underline && <div class="h-1 w-24 bg-gradient-to-r from-green-500 to-cyan-500 rounded-full"></div>}
