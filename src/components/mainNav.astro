@@ -9,6 +9,8 @@ type Props = {
 const { links }: Props = Astro.props;
 ---
 
+<div id="nav-overlay" class="fixed inset-0 z-40 hidden transition-all"></div>
+
 <nav id="navbar" class="sticky top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
   <Image
     src={logo}
@@ -25,7 +27,7 @@ const { links }: Props = Astro.props;
     <span id="ham-2" class="bg-teal-800 h-[6px] w-10 rounded-full" />
     <span id="ham-3" class="bg-teal-800 h-[6px] w-10 rounded-full" />
   </div>
-  <ol id="nav-links" class="max-md:rounded-bl-2xl max-md:border-t-2 max-md:border-teal-700 max-md:opacity-100 max-md:overflow-hidden max-md:row-start-2 max-md:col-start-1 md:my-auto md:mr-10 max-md:w-fit max-md:justify-self-end max-md:col-span-2 max-md:shadow-xl md:row-start-1 md:col-start-2 md:col-span-1 md:justify-self-end max-md:absolute max-md:flex-col flex max-md:hidden md:gap-4 lg:gap-8 md:px-5 md:py-2 bg-white transition-all md:rounded-full">
+  <ol id="nav-links" class="max-md:translate-x-[100%] max-md:rounded-bl-2xl max-md:border-t-2 max-md:border-teal-700 max-md:opacity-0 max-md:overflow-hidden max-md:row-start-2 max-md:col-start-1 md:my-auto md:mr-10 max-md:w-fit max-md:justify-self-end max-md:col-span-2 max-md:shadow-xl md:row-start-1 md:col-start-2 md:col-span-1 md:justify-self-end max-md:absolute max-md:flex-col flex max-md:hidden md:gap-4 lg:gap-8 md:px-5 md:py-2 bg-white transition-all md:rounded-full">
     { links.map((link) => (
       <li>
         <a class="nav-link hover:text-gray-800 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href={link.href}>
@@ -44,14 +46,41 @@ const { links }: Props = Astro.props;
   const ham1 = document.getElementById('ham-1');
   const ham2 = document.getElementById('ham-2'); 
   const ham3 = document.getElementById('ham-3');
+  const navOverlay = document.getElementById('nav-overlay');
 
   hamburger?.addEventListener('click', () => {
-    navLinks?.classList.toggle('max-md:hidden');
+    navOverlay?.classList.toggle('hidden');
     ham1?.classList.toggle('rotate-45');
     ham1?.classList.toggle('translate-y-[10px]');
     ham2?.classList.toggle('bg-transparent');
     ham3?.classList.toggle('-rotate-45');
     ham3?.classList.toggle('-translate-y-[10px]');
+    if (navLinks?.classList.contains('max-md:hidden')) {
+      navLinks?.classList.remove('max-md:hidden');
+      setTimeout(() => {
+        navLinks?.classList.add('max-md:translate-x-[0]');
+        navLinks?.classList.remove('max-md:opacity-0');
+      }, 0);
+    } else {
+      navLinks?.classList.remove('max-md:translate-x-[0]');
+      navLinks?.classList.add('max-md:opacity-0');
+      setTimeout(() => {
+        navLinks?.classList.add('max-md:hidden');
+      }, 500);      
+    }
+  });
+
+  navOverlay?.addEventListener('click', () => {
+    navLinks?.classList.remove('max-md:translate-x-[0]');
+    navLinks?.classList.add('max-md:opacity-0');
+    setTimeout(() => {
+      navLinks?.classList.add('max-md:hidden');
+    }, 500);   
+    navOverlay?.classList.add('hidden');
+    // ... Hamburger Animation zurücksetzen ...
+    ham1?.classList.remove('rotate-45', 'translate-y-[10px]');
+    ham2?.classList.remove('bg-transparent');
+    ham3?.classList.remove('-rotate-45', '-translate-y-[10px]');
   });
 
   window.addEventListener('resize', () => {
@@ -59,13 +88,17 @@ const { links }: Props = Astro.props;
       ham1?.classList.remove('rotate-45', 'translate-y-[10px]');
       ham2?.classList.remove('bg-transparent');
       ham3?.classList.remove('-rotate-45', '-translate-y-[10px]');
-      navLinks?.classList.add('max-md:hidden');
+      navOverlay?.classList.add('hidden');
+      navLinks?.classList.remove('max-md:translate-x-[0]');
+      navLinks?.classList.add('max-md:opacity-0');
+      setTimeout(() => {
+        navLinks?.classList.add('max-md:hidden');
+      }, 500); 
     }
   });
 
   Array.from(allLinks).forEach(link => {
     link.addEventListener('click', () => {
-      navLinks?.classList.add('max-md:!opacity-0');
       link?.classList.add('max-md:pointer-events-none');
       if (window.innerWidth < 768) {
         ham1?.classList.toggle('rotate-45');
@@ -73,12 +106,15 @@ const { links }: Props = Astro.props;
         ham2?.classList.toggle('bg-transparent');
         ham3?.classList.toggle('-rotate-45');
         ham3?.classList.toggle('-translate-y-[10px]');
+        navOverlay?.classList.add('hidden');
+    
+        navLinks?.classList.remove('max-md:translate-x-[0]');
+        navLinks?.classList.add('max-md:opacity-0');
+        setTimeout(() => {
+          navLinks?.classList.add('max-md:hidden');
+          link?.classList.remove('max-md:pointer-events-none');
+        }, 300);
       }
-      setTimeout(() => {
-        navLinks?.classList.add('max-md:hidden');
-        navLinks?.classList.remove('max-md:!opacity-0');
-        link?.classList.remove('max-md:pointer-events-none');
-      }, 300);
     });
   });
 

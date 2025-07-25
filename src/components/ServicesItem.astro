@@ -6,27 +6,50 @@ type Props = {
   image: ImageMetadata,
   alt: string,
   headline: string,
+  id: number,
 }
 
 const {
   image,
   alt,
-  headline
+  headline,
+  id
 }: Props = Astro.props;
 ---
 
+<style>
+  .overlay-toggle:checked ~ .service-overlay {
+    display: flex;
+  }
+  .service-overlay {
+    display: none;
+  }
+</style>
+
 <div class="flex flex-col gap-8">
-  <Image
-    src={image}
-    alt={alt}
-    widths={[300, 600]}
-    sizes="(max-width: 768px) 100vw, 600px"
-    class="w-full aspect-square object-cover rounded-3xl sm:rounded-3xl lg:rounded-2xl shadow-lg"
-  />
+  <input type="checkbox" id={"overlay-toggle-" + id} class="overlay-toggle hidden" />
+  <label for={"overlay-toggle-" + id} class="cursor-pointer">
+    <Image
+      src={image}
+      alt={alt}
+      widths={[300, 600]}
+      sizes="(max-width: 768px) 100vw, 600px"
+      class="w-full aspect-square object-cover rounded-3xl shadow-lg"
+    />
+  </label>
   <div class="flex flex-col gap-2">
     <Headline level={3}>{headline}</Headline>
     <div>
       <slot />
     </div>
   </div>
+  <label for={"overlay-toggle-" + id} class="service-overlay fixed inset-0 z-50 bg-black/40 backdrop-blur-lg items-center justify-center">
+    <Image
+      src={image}
+      alt={alt}
+      widths={[600]}
+      sizes="600px"
+      class="object-cover rounded-xl aspect-square w-[80vw] h-[80vw] max-w-[80vh] max-h-[80vh]"
+    />
+  </label>
 </div>
