@@ -1,19 +1,28 @@
 ---
 import Headline from './headline.astro';
+import { Image } from 'astro:assets';
 
 type Props = {
-  image: string,
+  image: ImageMetadata,
+  alt: string,
   headline: string,
 }
 
 const {
   image,
+  alt,
   headline
 }: Props = Astro.props;
 ---
 
 <div class="flex flex-col gap-8">
-  <img src=`/images/${image}` alt="Header" class="w-full aspect-square object-cover rounded-3xl sm:rounded-3xl lg:rounded-2xl shadow-lg" />
+  <Image
+    src={image}
+    alt={alt}
+    widths={[300, 600]}
+    sizes="(max-width: 768px) 100vw, 600px"
+    class="w-full aspect-square object-cover rounded-3xl sm:rounded-3xl lg:rounded-2xl shadow-lg"
+  />
   <div class="flex flex-col gap-2">
     <Headline level={3}>{headline}</Headline>
     <div>

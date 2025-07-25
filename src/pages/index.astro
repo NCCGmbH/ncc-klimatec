@@ -7,6 +7,12 @@ import Services from "../components/Services.astro";
 import ServicesItem from "../components/ServicesItem.astro";
 import About from "../components/About.astro";
 import ContactForm from "../components/ContactForm.astro";
+
+import Spinat from "../assets/images/spinat.png";
+import Krauter from "../assets/images/krauter.png";
+import Steine from "../assets/images/steine.png";
+import Blatt from "../assets/images/blatt.png";
+import Profil from "../assets/images/profil.png";
 ---
 
 <Layout>
@@ -16,7 +22,7 @@ import ContactForm from "../components/ContactForm.astro";
     bgColor="white"
     h2="Über uns"
     h3="HELP MED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit."
-    image="profil.png"
+    image={Profil}
   >
     Unter Leitung von Dr. Elena Staubitz (Ärztin, LT) verbinden wir moderne orthomolekulare Medizin 
     mit persönlicher Betreuung. Unsere Philosophie: Gesundheit ist kein Zufall - sondern das Ergebnis 
@@ -30,25 +36,29 @@ import ContactForm from "../components/ContactForm.astro";
   <Services head>
     <ServicesItem 
       headline="Integrale Ernährung" 
-      image="spinat.png"
+      image={Spinat}
+      alt="Spinat"
     >
       Analytische Ernährungsberatung zur Verbesserung von Energie, Stoffwechsel und Lebensqualität - abgestimmt auf Ihre körperliche Konstitution.
     </ServicesItem>
     <ServicesItem 
       headline="Mikronährstofftherapie" 
-      image="krauter.png"
+      image={Krauter}
+      alt="Kräuter"
     >
       Gezielte Zufuhr von Vitaminen, Spurenelementen, Aminosäuren und sekundären Pflanzenstoffen zur Unterstützung von Zellfunktion, Immunabwehr und Leistungsfähigkeit.
     </ServicesItem>
     <ServicesItem 
       headline="Ordnungstherapie" 
-      image="steine.png"
+      image={Steine}
+      alt="Steine"
     >
       Strukturschaffung für Körper und Geist - mit gesunder Tagesrhythmik, Stressmanagement und praxisnahen Alltagsstrategien.
     </ServicesItem>
     <ServicesItem 
       headline="Darmgesundheit" 
-      image="blatt.png"
+      image={Blatt}
+      alt="Blatt"
     >
       Analyse und Regulation der Darmflora (Mikrobiom) zur Behandlung von Verdauungsbeschwerden, Immunschwächen und chronischen Entzündungen.
     </ServicesItem>

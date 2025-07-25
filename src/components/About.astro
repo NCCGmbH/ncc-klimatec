@@ -5,11 +5,13 @@ import { type BgColors } from "../types";
 import Headline from "./headline.astro"
 import Section from "./Section.astro"
 
+import { Image } from 'astro:assets';
+
 type Props = {
   bgColor?: BgColors,
   h2: string,
   h3: string,
-  image: string;
+  image: ImageMetadata;
 }
 
 const { bgColor = "white", h2, h3, image }: Props = Astro.props;
@@ -17,7 +19,13 @@ const { bgColor = "white", h2, h3, image }: Props = Astro.props;
 
 <Section id="about" {bgColor}>
   <div class="grid md:grid-cols-[auto_1fr] gap-12 items-center">
-    <img src={`/images/${image}`} alt="profile" class="w-64 aspect-square object-cover rounded-full max-sm:justify-self-center" />
+    <Image
+      src={image}
+      alt="Profil"
+      widths={[300, 600]}
+      sizes="(max-width: 768px) 100vw, 600px"
+      class="w-64 aspect-square object-cover rounded-full max-sm:justify-self-center"
+    />
     <div class="felx flex-col space-y-8">
       <Headline level={2} underline>{h2}</Headline>
       <div class="space-y-4">
