@@ -6,13 +6,17 @@ type Props = {
   danger?: boolean,
   onClickEvent?: string,
   href?: any,
+  dark?: boolean,
 }
-const { type, id, as="a", danger=false, onClickEvent = 'default-event', href }: Props = Astro.props;
+const { type, id, as="a", danger=false, onClickEvent = 'default-event', href, dark=false }: Props = Astro.props;
 ---
 
 { as === "a" ? (
   <a 
-    class="border-2 text-lg px-4 py-2 text-teal-800 hover:text-white border-teal-800 bg-white hover:bg-teal-800 transition-colors rounded-full leading-none max-w-min whitespace-nowrap cursor-pointer select-none"
+    class:list={[
+      "border-2 text-lg px-4 py-2 transition-colors rounded-full leading-none max-w-min whitespace-nowrap cursor-pointer select-none",
+      dark ? "bg-cyan-700 text-white hover:bg-cyan-600 border-cyan-700" : "text-teal-800 hover:text-white bg-white hover:bg-teal-800 border-teal-800",
+    ]}
     href={href ?? undefined}
     target="_blank"
     rel="noopener noreferrer"

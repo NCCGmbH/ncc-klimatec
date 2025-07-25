@@ -1,6 +1,6 @@
 ---
 type Props = {
-  links?: { text: string, href: string }[];
+  links: { text: string, href: string }[];
 };
 
 const { links }: Props = Astro.props;
@@ -10,16 +10,19 @@ const { links }: Props = Astro.props;
   <a href="/" class="row-start-1 col-start-1 col-span-1 ml-10 my-auto justify-self-start text-green-700 font-bold text-2xl cursor-default p-2 rounded-lg bg-white">
     HELP MED
   </a>
-  <div id="hamburger" class="row-start-1 col-start-2 mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-1 cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
-    <span id="ham-1" class="bg-teal-800 h-2 w-10 rounded-full" />
-    <span id="ham-2" class="bg-teal-800 h-2 w-10 rounded-full" />
-    <span id="ham-3" class="bg-teal-800 h-2 w-10 rounded-full" />
+  <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-1 cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
+    <span id="ham-1" class="bg-teal-800 h-[6px] w-10 rounded-full" />
+    <span id="ham-2" class="bg-teal-800 h-[6px] w-10 rounded-full" />
+    <span id="ham-3" class="bg-teal-800 h-[6px] w-10 rounded-full" />
   </div>
-  <ol id="nav-links" class="max-md:rounded-bl-2xl max-md:opacity-100 max-md:overflow-hidden max-md:row-start-2 max-md:col-start-1 md:my-auto md:mr-10 max-md:w-fit max-md:justify-self-end max-md:col-span-2 max-md:shadow-xl md:row-start-1 md:col-start-2 md:col-span-1 md:justify-self-end max-md:absolute max-md:flex-col flex max-md:hidden md:gap-8 md:px-5 md:py-2 bg-white transition-all md:rounded-full">
-    <li><a class="nav-link hover:text-gray-500 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5 max-md:border-t-4 max-md:border-teal-800" href="#home">Startseite</a></li>
-    <li><a class="nav-link hover:text-gray-500 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href="#about">Über uns</a></li>
-    <li><a class="nav-link hover:text-gray-500 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href="#services">Leistungen</a></li>
-    <li><a class="nav-link hover:text-gray-500 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href="#contact">Kontakt</a></li>
+  <ol id="nav-links" class="max-md:rounded-bl-2xl border-t-2 border-teal-700 max-md:opacity-100 max-md:overflow-hidden max-md:row-start-2 max-md:col-start-1 md:my-auto md:mr-10 max-md:w-fit max-md:justify-self-end max-md:col-span-2 max-md:shadow-xl md:row-start-1 md:col-start-2 md:col-span-1 md:justify-self-end max-md:absolute max-md:flex-col flex max-md:hidden md:gap-4 lg:gap-8 md:px-5 md:py-2 bg-white transition-all md:rounded-full">
+    { links.map((link) => (
+      <li>
+        <a class="nav-link hover:text-gray-800 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href={link.href}>
+          {link.text}
+        </a>
+      </li>
+    )) }
   </ol>
 </nav>
 
@@ -35,21 +38,32 @@ const { links }: Props = Astro.props;
   hamburger?.addEventListener('click', () => {
     navLinks?.classList.toggle('max-md:hidden');
     ham1?.classList.toggle('rotate-45');
-    ham1?.classList.toggle('translate-y-3');
+    ham1?.classList.toggle('translate-y-[10px]');
     ham2?.classList.toggle('bg-transparent');
     ham3?.classList.toggle('-rotate-45');
-    ham3?.classList.toggle('-translate-y-3');
+    ham3?.classList.toggle('-translate-y-[10px]');
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      ham1?.classList.remove('rotate-45', 'translate-y-[10px]');
+      ham2?.classList.remove('bg-transparent');
+      ham3?.classList.remove('-rotate-45', '-translate-y-[10px]');
+      navLinks?.classList.add('max-md:hidden');
+    }
   });
 
   Array.from(allLinks).forEach(link => {
     link.addEventListener('click', () => {
       navLinks?.classList.add('max-md:!opacity-0');
       link?.classList.add('max-md:pointer-events-none');
-      ham1?.classList.toggle('rotate-45');
-      ham1?.classList.toggle('translate-y-3');
-      ham2?.classList.toggle('bg-transparent');
-      ham3?.classList.toggle('-rotate-45');
-      ham3?.classList.toggle('-translate-y-3');
+      if (window.innerWidth < 768) {
+        ham1?.classList.toggle('rotate-45');
+        ham1?.classList.toggle('translate-y-[10px]');
+        ham2?.classList.toggle('bg-transparent');
+        ham3?.classList.toggle('-rotate-45');
+        ham3?.classList.toggle('-translate-y-[10px]');
+      }
       setTimeout(() => {
         navLinks?.classList.add('max-md:hidden');
         navLinks?.classList.remove('max-md:!opacity-0');

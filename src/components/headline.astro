@@ -5,9 +5,11 @@ type Props = {
   level?: HeadlineLevel,
   textColor?: HeadlineColor,
   underline?: boolean,
+  shadow?: boolean,
+  bold?: boolean,
 }
 
-const { level=2, textColor="green", underline=false }: Props = Astro.props
+const { level=2, textColor="green", underline=false, shadow=false, bold=false }: Props = Astro.props
 
 const textColorClass = {
   white: "text-white",
@@ -16,14 +18,20 @@ const textColorClass = {
 }[textColor];
 ---
 <div class:list={[textColorClass, "break-words"]}>
-  { (level == 1) && <h1 class="text-4xl sm:text-5xl text-shadow"><slot/></h1> }
-  { (level == 2) && <h2 class="text-3xl"><slot/></h2> }
-  { (level == 3) && <h3 class="text-xl font-bold"><slot/></h3> }
+  { (level == 1) && <h1 class:list={["text-5xl", shadow && "text-shadow"]}><slot/></h1> }
+  { (level == 2) && <h2 class:list={["text-3xl", shadow && "text-shadow"]}><slot/></h2> }
+  { (level == 3) && <h3 class:list={["text-xl", shadow && "text-shadow-small", bold && "font-semibold"]}><slot/></h3> }
   { underline && <div class="h-1 w-24 bg-gradient-to-r from-green-500 to-cyan-500 rounded-full"></div>}
 </div>
 
 <style>
   .text-shadow {
     text-shadow: 2px 2px 4px #000000; /* Beispiel: blauer Schatten */
+  }
+</style>
+
+<style>
+  .text-shadow-small {
+    text-shadow: 1px 1px 2px #000000; /* Beispiel: blauer Schatten */
   }
 </style>

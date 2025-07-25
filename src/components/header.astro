@@ -17,14 +17,15 @@ import Button from "./Button.astro"
     priority
     loading="eager"
   />
-  <div class="absolute inset-0 w-full max-w-[1200px] md:px-[5%] mx-auto self-center">
-    <div class="space-y-8 md:space-y-4 w-full md:max-w-[600px]">
-      <div class="max-md:px-[5%]">
-        <h1 class="text-4xl sm:text-5xl text-white text-shadow">Ihre Gesundheit ganzheitlich verstehen und stärken</h1>
+  <div class="absolute z-20 inset-0 bg-[#003a24]/70 md:bg-teal-800/40 mix-blend-multiply"></div>
+  <div class="absolute z-30 inset-0 w-full max-w-[1200px] md:px-[5%] mx-auto self-center">
+    <div class="space-y-8 md:space-y-4 w-full md:max-w-[600px] max-md:px-[5%]">
+      <div class="">
+        <Headline shadow textColor="white" level={1}>Ihre Gesundheit ganzheitlich verstehen und stärken</Headline>
       </div>
-      <div class="bg-white/80 max-md:px-[5%] max-md:py-6 md:p-6 md:rounded-2xl shadow-xl flex flex-col gap-4">
-        <Headline level={2}>Mit moderner Orthomolekularmedizin, Mikronährstofftherapie und integrativer Beratung fundiert, individuell, effektiv.</Headline>
-        <Button as="a" href="https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form">Termin vereinbaren</Button>
+      <div class="flex flex-col gap-4">
+        <Headline shadow textColor="white" level={3}>Mit moderner Orthomolekularmedizin, Mikronährstofftherapie und integrativer Beratung fundiert, individuell, effektiv.</Headline>
+        <Button dark as="a" href="https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form">Jetzt Termin vereinbaren</Button>
       </div>
     </div>
   </div>

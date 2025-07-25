@@ -8,27 +8,24 @@ type Props = {
   description: string,
   image: string,
   domain: string,
-  ownNav?: boolean,
   ownFooter?: boolean,
 }
-const { title, description, image, domain, ownNav=false, ownFooter=false }: Props = Astro.props;
+const { title, description, image, domain, ownFooter=false }: Props = Astro.props;
 ---
 
 <BaseLayout {title} {description} {image} {domain}>
-  { !ownNav &&
-    <MainNav />
-  }
+  <MainNav links={[
+      { text: "Startseite", href: "#home" },
+      { text: "Über uns", href: "#about" },
+      { text: "Leistungen", href: "#services" },
+      { text: "Reviews", href: "#reviews" },
+      { text: "Kontakt", href: "#contact" }
+  ]} />
   <div class="flex-grow">
     <slot />
   </div>
   { !ownFooter &&
-    <Footer 
-      links={[
-        {text: "instagram", href: "https://www.instagram.com"},
-        {text: "youtube", href: "https://www.instagram.com"},
-        {text: "website", href: "/"},
-      ]}
-    />
+    <Footer />
   }
   { ownFooter && <slot name="footer" />}
 </BaseLayout>
