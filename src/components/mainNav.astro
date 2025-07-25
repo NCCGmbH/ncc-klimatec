@@ -15,7 +15,7 @@ const { links }: Props = Astro.props;
     <span id="ham-2" class="bg-teal-800 h-[6px] w-10 rounded-full" />
     <span id="ham-3" class="bg-teal-800 h-[6px] w-10 rounded-full" />
   </div>
-  <ol id="nav-links" class="max-md:rounded-bl-2xl border-t-2 border-teal-700 max-md:opacity-100 max-md:overflow-hidden max-md:row-start-2 max-md:col-start-1 md:my-auto md:mr-10 max-md:w-fit max-md:justify-self-end max-md:col-span-2 max-md:shadow-xl md:row-start-1 md:col-start-2 md:col-span-1 md:justify-self-end max-md:absolute max-md:flex-col flex max-md:hidden md:gap-4 lg:gap-8 md:px-5 md:py-2 bg-white transition-all md:rounded-full">
+  <ol id="nav-links" class="max-md:rounded-bl-2xl max-md:border-t-2 max-md:border-teal-700 max-md:opacity-100 max-md:overflow-hidden max-md:row-start-2 max-md:col-start-1 md:my-auto md:mr-10 max-md:w-fit max-md:justify-self-end max-md:col-span-2 max-md:shadow-xl md:row-start-1 md:col-start-2 md:col-span-1 md:justify-self-end max-md:absolute max-md:flex-col flex max-md:hidden md:gap-4 lg:gap-8 md:px-5 md:py-2 bg-white transition-all md:rounded-full">
     { links.map((link) => (
       <li>
         <a class="nav-link hover:text-gray-800 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href={link.href}>
