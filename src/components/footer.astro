@@ -6,6 +6,12 @@ type Props = {
 const {links}: Props = Astro.props;
 ---
 
-<footer class="w-full gap-4 py-14 bg-teal-900 text-white text-lg flex items-center justify-center">
+<footer class="w-full gap-4 py-14 bg-teal-900 text-white text-lg flex max-md:flex-col items-center justify-center">
   <p>© 2025 HELP MED - Elena Staubitz</p>
+  <span class="max-md:hidden">|</span>
+  <div class="flex gap-4">
+    <a class="hover:underline" href="/datenschutz">Datenschutz</a>
+    <span>|</span>
+    <a class="hover:underline" href="/impressum">Impressum</a>
+  </div>
 </footer>

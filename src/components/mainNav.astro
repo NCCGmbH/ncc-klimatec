@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.jpeg';
+
 type Props = {
   links: { text: string, href: string }[];
 };
@@ -7,10 +10,17 @@ const { links }: Props = Astro.props;
 ---
 
 <nav id="navbar" class="sticky top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
-  <a href="/" class="row-start-1 col-start-1 col-span-1 ml-10 my-auto justify-self-start text-green-700 font-bold text-2xl cursor-default p-2 rounded-lg bg-white">
-    HELP MED
-  </a>
-  <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-1 cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
+  <Image
+    src={logo}
+    loading="eager"
+    alt="Logo"
+    widths={[128, 256, 512]}
+    sizes="128px"
+    priority
+    format="webp"
+    class="row-start-1 w-auto h-12 object-scale-down col-start-1 col-span-1 bg-[#f8f8f8] ml-[5vw] md:ml-10 my-auto justify-self-start cursor-default p-2 rounded-lg"
+  />
+  <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-1 cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
     <span id="ham-1" class="bg-teal-800 h-[6px] w-10 rounded-full" />
     <span id="ham-2" class="bg-teal-800 h-[6px] w-10 rounded-full" />
     <span id="ham-3" class="bg-teal-800 h-[6px] w-10 rounded-full" />
