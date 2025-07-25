@@ -1,12 +1,20 @@
 ---
+import { Image } from 'astro:assets';
+import HeroImage from '../assets/images/farn.jpg';
+
 import Headline from "./headline.astro"
-import Section from "./Section.astro"
 import Button from "./Button.astro"
 ---
 <div id="home" class="block h-[5rem] -mt-[5rem]"></div>
 <section class="relative w-full overflow-hidden">
-  <img src="/images/farn.jpg" alt="header image" class="w-full object-cover h-[calc(100vh-5rem)] max-md:min-h-[100vw] md:max-h-[700px]" />
-  
+  <Image
+    src={HeroImage}
+    alt="Hero"
+    widths={[400, 800, 1200]}
+    sizes="(max-width: 768px) 100vw, 800px"
+    format="webp"
+    class="w-full object-cover h-[calc(100vh-5rem)] max-md:min-h-[100vw] md:max-h-[700px]"
+  />
   <div class="absolute inset-0 w-full max-w-[1200px] md:px-[5%] mx-auto self-center">
     <div class="space-y-8 md:space-y-4 w-full md:max-w-[600px]">
       <div class="max-md:px-[5%]">
