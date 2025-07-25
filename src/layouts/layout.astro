@@ -4,15 +4,17 @@ import Footer from "../components/footer.astro";
 import MainNav from "../components/mainNav.astro";
 
 type Props = {
-  title?: string,
-  description?: string,
+  title: string,
+  description: string,
+  image: string,
+  domain: string,
   ownNav?: boolean,
   ownFooter?: boolean,
 }
-const { title, description, ownNav=false, ownFooter=false }: Props = Astro.props;
+const { title, description, image, domain, ownNav=false, ownFooter=false }: Props = Astro.props;
 ---
 
-<BaseLayout {title} {description}>
+<BaseLayout {title} {description} {image} {domain}>
   { !ownNav &&
     <MainNav />
   }
