@@ -11,7 +11,7 @@ const { links }: Props = Astro.props;
 
 <div id="nav-overlay" class="fixed inset-0 z-40 hidden transition-all"></div>
 
-<nav id="navbar" class="sticky top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
+<nav id="navbar" class="sticky overflow-y-visible overflow-x-clip top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
   <Image
     src={logo}
     loading="eager"
@@ -58,11 +58,11 @@ const { links }: Props = Astro.props;
     if (navLinks?.classList.contains('max-md:hidden')) {
       navLinks?.classList.remove('max-md:hidden');
       setTimeout(() => {
-        navLinks?.classList.add('max-md:translate-x-[0]');
+        navLinks?.classList.remove('max-md:translate-x-[100%]');
         navLinks?.classList.remove('max-md:opacity-0');
       }, 0);
     } else {
-      navLinks?.classList.remove('max-md:translate-x-[0]');
+      navLinks?.classList.add('max-md:translate-x-[100%]');
       navLinks?.classList.add('max-md:opacity-0');
       setTimeout(() => {
         navLinks?.classList.add('max-md:hidden');
@@ -71,7 +71,7 @@ const { links }: Props = Astro.props;
   });
 
   navOverlay?.addEventListener('click', () => {
-    navLinks?.classList.remove('max-md:translate-x-[0]');
+    navLinks?.classList.add('max-md:translate-x-[100%]');
     navLinks?.classList.add('max-md:opacity-0');
     setTimeout(() => {
       navLinks?.classList.add('max-md:hidden');
@@ -89,7 +89,7 @@ const { links }: Props = Astro.props;
       ham2?.classList.remove('bg-transparent');
       ham3?.classList.remove('-rotate-45', '-translate-y-[10px]');
       navOverlay?.classList.add('hidden');
-      navLinks?.classList.remove('max-md:translate-x-[0]');
+      navLinks?.classList.add('max-md:translate-x-[100%]');
       navLinks?.classList.add('max-md:opacity-0');
       setTimeout(() => {
         navLinks?.classList.add('max-md:hidden');
@@ -108,7 +108,7 @@ const { links }: Props = Astro.props;
         ham3?.classList.toggle('-translate-y-[10px]');
         navOverlay?.classList.add('hidden');
     
-        navLinks?.classList.remove('max-md:translate-x-[0]');
+        navLinks?.classList.add('max-md:translate-x-[100%]');
         navLinks?.classList.add('max-md:opacity-0');
         setTimeout(() => {
           navLinks?.classList.add('max-md:hidden');
