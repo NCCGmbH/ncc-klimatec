@@ -73,6 +73,7 @@ const { links }: Props = Astro.props;
     navLinks?.classList.remove('hidden');
     navLinks?.classList.add('flex');
     setTimeout(() => {
+      navbar?.classList.remove('overflow-x-clip');
       navLinks?.classList.remove('translate-x-full');
       navLinks?.classList.remove('opacity-0');
       hamburger?.classList.remove('pointer-events-none');
@@ -98,6 +99,7 @@ const { links }: Props = Astro.props;
       navLinks?.classList.add('hidden');
       navLinks?.classList.remove('pointer-events-none');
       hamburger?.classList.remove('pointer-events-none');
+      navbar?.classList.add('overflow-x-clip');
     }, 150);
   }
 
