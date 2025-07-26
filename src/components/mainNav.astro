@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '../assets/images/logo.jpeg';
+import logo from '../assets/images/logo.jpg';
 
 type Props = {
   links: { text: string, href: string }[];
@@ -13,6 +13,7 @@ const { links }: Props = Astro.props;
 
 <nav id="navbar" class="sticky overflow-x-clip overflow-y-visible md:overflow-visible top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
   <Image
+    id="logo"
     src={logo}
     loading="eager"
     alt="Logo"
@@ -20,7 +21,7 @@ const { links }: Props = Astro.props;
     sizes="128px"
     priority
     format="webp"
-    class="row-start-1 w-auto h-12 object-scale-down col-start-1 col-span-1 bg-[#f8f8f8] ml-[5vw] md:ml-10 my-auto justify-self-start cursor-default p-2 rounded-lg"
+    class="row-start-1 cursor-pointer w-auto h-12 object-scale-down col-start-1 col-span-1 bg-white ml-[5vw] md:ml-10 my-auto justify-self-start cursor-default p-1 rounded-lg"
   />
   <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-[6px] cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
     <span id="ham-1" class="bg-teal-800 h-[6px] w-10 rounded-full" />
@@ -58,6 +59,18 @@ const { links }: Props = Astro.props;
   const ham2 = document.getElementById('ham-2'); 
   const ham3 = document.getElementById('ham-3');
   const navOverlay = document.getElementById('nav-overlay');
+  const logo = document.getElementById('logo');
+
+  logo?.addEventListener('click', () => {
+    if (window.location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.innerWidth < 768) {
+        closeNav();
+      }
+    } else {
+      window.location.href = '/';
+    }
+  });
 
   function openNav() {
     /** Burger -> X */
