@@ -9,9 +9,9 @@ type Props = {
 const { links }: Props = Astro.props;
 ---
 
-<div id="nav-overlay" class="fixed inset-0 z-40 hidden transition-all"></div>
+<div id="nav-overlay" class="fixed inset-0 z-40 hidden"></div>
 
-<nav id="navbar" class="sticky max-md:overflow-y-visible max-md:overflow-x-clip top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
+<nav id="navbar" class="sticky overflow-y-visible overflow-x-clip md:overflow-visible top-0 z-50 h-20 w-full max-w-full grid grid-cols-[auto_1fr] md:items-center bg-white backdrop-blur-lg text-teal-800 transition-all text-xl md:text-[1.2rem] shadow-xl shadow-teal-400/10">
   <Image
     src={logo}
     loading="eager"
@@ -22,15 +22,26 @@ const { links }: Props = Astro.props;
     format="webp"
     class="row-start-1 w-auto h-12 object-scale-down col-start-1 col-span-1 bg-[#f8f8f8] ml-[5vw] md:ml-10 my-auto justify-self-start cursor-default p-2 rounded-lg"
   />
-  <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-1 cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
+  <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-[6px] cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
     <span id="ham-1" class="bg-teal-800 h-[6px] w-10 rounded-full" />
     <span id="ham-2" class="bg-teal-800 h-[6px] w-10 rounded-full" />
     <span id="ham-3" class="bg-teal-800 h-[6px] w-10 rounded-full" />
   </div>
-  <ol id="nav-links" class="max-md:translate-x-[100%] max-md:rounded-bl-2xl max-md:border-t-2 max-md:border-teal-700 max-md:opacity-0 max-md:overflow-hidden max-md:row-start-2 max-md:col-start-1 md:my-auto md:mr-10 max-md:w-fit max-md:justify-self-end max-md:col-span-2 max-md:shadow-xl md:row-start-1 md:col-start-2 md:col-span-1 md:justify-self-end max-md:absolute max-md:flex-col flex max-md:hidden md:gap-4 lg:gap-8 md:px-5 md:py-2 bg-white transition-all md:rounded-full">
+  <ol id="nav-links" class:list={[
+    "hidden absolute flex-col md:flex md:static md:flex-row overflow-hidden",
+    "bg-white shadow-xl md:shadow-none",
+    "translate-x-full md:translate-x-0", 
+    "rounded-bl-2xl md:rounded-full",
+     "border-t-2 border-teal-700 md:border-none", 
+     "opacity-0 md:opacity-100", 
+     "row-start-2 md:row-start-1 col-start-1 md:col-start-2 col-span-2 md:col-span-1", 
+     "md:my-auto md:mr-10 md:gap-4 lg:gap-8 md:px-5 md:py-2", 
+     "w-fit justify-self-end",
+     "transition-all"
+  ]}>
     { links.map((link) => (
       <li>
-        <a class="nav-link hover:text-gray-800 transition-all max-md:block max-md:hover:bg-teal-800 max-md:hover:!text-white text-center py-3 max-md:px-5" href={link.href}>
+        <a class="nav-link block md:inline-block hover:bg-teal-800 md:hover:bg-transparent hover:text-white md:hover:text-gray-800 text-center py-3 md:py-0 px-5 md:px-0 transition-all" href={link.href}>
           {link.text}
         </a>
       </li>
@@ -48,77 +59,72 @@ const { links }: Props = Astro.props;
   const ham3 = document.getElementById('ham-3');
   const navOverlay = document.getElementById('nav-overlay');
 
+  function openNav() {
+    /** Burger -> X */
+    hamburger?.classList.add('pointer-events-none');
+    ham1?.classList.add('rotate-45', 'translate-y-[12px]');
+    ham2?.classList.add('bg-transparent');
+    ham3?.classList.add('-rotate-45', '-translate-y-[12px]');
+
+    /** Nav Overlay */
+    navOverlay?.classList.remove('hidden');
+
+    /** Nav Links */
+    navLinks?.classList.remove('hidden');
+    navLinks?.classList.add('flex');
+    setTimeout(() => {
+      navLinks?.classList.remove('translate-x-full');
+      navLinks?.classList.remove('opacity-0');
+      hamburger?.classList.remove('pointer-events-none');
+    }, 1);
+  }
+
+  function closeNav() {
+    /** X -> Burger */
+    ham1?.classList.remove('rotate-45', 'translate-y-[12px]');
+    ham2?.classList.remove('bg-transparent');
+    ham3?.classList.remove('-rotate-45', '-translate-y-[12px]');
+    hamburger?.classList.add('pointer-events-none');
+
+    /** Nav Overlay */
+    navOverlay?.classList.add('hidden');
+
+    /** Nav Links */
+    navLinks?.classList.add('pointer-events-none');
+    navLinks?.classList.add('translate-x-full');
+    navLinks?.classList.add('opacity-0');
+    setTimeout(() => {
+      navLinks?.classList.remove('flex');
+      navLinks?.classList.add('hidden');
+      navLinks?.classList.remove('pointer-events-none');
+      hamburger?.classList.remove('pointer-events-none');
+    }, 150);
+  }
+
   hamburger?.addEventListener('click', () => {
-    navOverlay?.classList.toggle('hidden');
-    ham1?.classList.toggle('rotate-45');
-    ham1?.classList.toggle('translate-y-[10px]');
-    ham2?.classList.toggle('bg-transparent');
-    ham3?.classList.toggle('-rotate-45');
-    ham3?.classList.toggle('-translate-y-[10px]');
-    if (navLinks?.classList.contains('max-md:hidden')) {
-      navLinks?.classList.remove('max-md:hidden');
-      setTimeout(() => {
-        navLinks?.classList.remove('max-md:translate-x-[100%]');
-        navLinks?.classList.remove('max-md:opacity-0');
-        navbar?.classList.remove('max-md:overflow-x-clip');
-      }, 0);
+    const isClosed = navLinks?.classList.contains('hidden');
+
+    if (isClosed) {
+      openNav();
     } else {
-      navLinks?.classList.add('max-md:translate-x-[100%]');
-      navLinks?.classList.add('max-md:opacity-0');
-      navbar?.classList.add('max-md:overflow-x-clip');
-      setTimeout(() => {
-        navLinks?.classList.add('max-md:hidden');
-      }, 500);      
+      closeNav();
     }
   });
 
   navOverlay?.addEventListener('click', () => {
-    navLinks?.classList.add('max-md:translate-x-[100%]');
-    navLinks?.classList.add('max-md:opacity-0');
-    navbar?.classList.add('max-md:overflow-x-clip');
-    setTimeout(() => {
-      navLinks?.classList.add('max-md:hidden');
-    }, 500);   
-    navOverlay?.classList.add('hidden');
-    // ... Hamburger Animation zurücksetzen ...
-    ham1?.classList.remove('rotate-45', 'translate-y-[10px]');
-    ham2?.classList.remove('bg-transparent');
-    ham3?.classList.remove('-rotate-45', '-translate-y-[10px]');
+    closeNav();
   });
 
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 768) {
-      ham1?.classList.remove('rotate-45', 'translate-y-[10px]');
-      ham2?.classList.remove('bg-transparent');
-      ham3?.classList.remove('-rotate-45', '-translate-y-[10px]');
-      navOverlay?.classList.add('hidden');
-      navLinks?.classList.add('max-md:translate-x-[100%]');
-      navLinks?.classList.add('max-md:opacity-0');
-      navbar?.classList.add('max-md:overflow-x-clip');
-      setTimeout(() => {
-        navLinks?.classList.add('max-md:hidden');
-      }, 500); 
+      closeNav();
     }
   });
 
   Array.from(allLinks).forEach(link => {
     link.addEventListener('click', () => {
-      link?.classList.add('max-md:pointer-events-none');
       if (window.innerWidth < 768) {
-        ham1?.classList.toggle('rotate-45');
-        ham1?.classList.toggle('translate-y-[10px]');
-        ham2?.classList.toggle('bg-transparent');
-        ham3?.classList.toggle('-rotate-45');
-        ham3?.classList.toggle('-translate-y-[10px]');
-        navOverlay?.classList.add('hidden');
-    
-        navLinks?.classList.add('max-md:translate-x-[100%]');
-        navLinks?.classList.add('max-md:opacity-0');
-        navbar?.classList.add('max-md:overflow-x-clip');
-        setTimeout(() => {
-          navLinks?.classList.add('max-md:hidden');
-          link?.classList.remove('max-md:pointer-events-none');
-        }, 300);
+        closeNav();
       }
     });
   });
