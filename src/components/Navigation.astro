@@ -21,12 +21,12 @@ const { links }: Props = Astro.props;
     sizes="128px"
     priority
     format="webp"
-    class="row-start-1 cursor-pointer w-auto h-12 object-scale-down col-start-1 col-span-1 bg-white ml-[5vw] md:ml-10 my-auto justify-self-start cursor-default p-1 rounded-lg"
+    class="row-start-1 cursor-pointer w-auto h-12 object-scale-down col-start-1 col-span-1 bg-white ml-[5vw] md:ml-10 my-auto justify-self-start rounded-lg"
   />
   <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-[6px] cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
-    <span id="ham-1" class="bg-teal-800 h-[6px] w-10 rounded-full" />
-    <span id="ham-2" class="bg-teal-800 h-[6px] w-10 rounded-full" />
-    <span id="ham-3" class="bg-teal-800 h-[6px] w-10 rounded-full" />
+    <span id="ham-1" class="bg-teal-800 h-1 w-10 rounded-full" />
+    <span id="ham-2" class="bg-teal-800 h-1 w-10 rounded-full" />
+    <span id="ham-3" class="bg-teal-800 h-1 w-10 rounded-full" />
   </div>
   <ol id="nav-links" class:list={[
     "hidden absolute flex-col md:flex md:static md:flex-row overflow-hidden",
@@ -75,9 +75,9 @@ const { links }: Props = Astro.props;
   function openNav() {
     /** Burger -> X */
     hamburger?.classList.add('pointer-events-none');
-    ham1?.classList.add('rotate-45', 'translate-y-[12px]');
+    ham1?.classList.add('rotate-45', 'translate-y-[10px]');
     ham2?.classList.add('bg-transparent');
-    ham3?.classList.add('-rotate-45', '-translate-y-[12px]');
+    ham3?.classList.add('-rotate-45', '-translate-y-[10px]');
 
     /** Nav Overlay */
     navOverlay?.classList.remove('hidden');
@@ -95,9 +95,9 @@ const { links }: Props = Astro.props;
 
   function closeNav() {
     /** X -> Burger */
-    ham1?.classList.remove('rotate-45', 'translate-y-[12px]');
+    ham1?.classList.remove('rotate-45', 'translate-y-[10px]');
     ham2?.classList.remove('bg-transparent');
-    ham3?.classList.remove('-rotate-45', '-translate-y-[12px]');
+    ham3?.classList.remove('-rotate-45', '-translate-y-[10px]');
     hamburger?.classList.add('pointer-events-none');
 
     /** Nav Overlay */

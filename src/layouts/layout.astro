@@ -1,31 +1,54 @@
 ---
-import BaseLayout from "./baseLayout.astro";
-import Footer from "../components/footer.astro";
-import MainNav from "../components/mainNav.astro";
+import "../styles/global.css";
 
 type Props = {
   title: string,
   description: string,
   image: string,
   domain: string,
-  ownFooter?: boolean,
 }
-const { title, description, image, domain, ownFooter=false }: Props = Astro.props;
+
+const { title, description, image, domain }: Props = Astro.props;
 ---
 
-<BaseLayout {title} {description} {image} {domain}>
-  <MainNav links={[
-      { text: "Startseite", href: "#home" },
-      { text: "Über uns", href: "#about" },
-      { text: "Leistungen", href: "#services" },
-      { text: "Reviews", href: "#reviews" },
-      { text: "Kontakt", href: "#contact" }
-  ]} />
-  <div class="flex-grow">
-    <slot />
-  </div>
-  { !ownFooter &&
-    <Footer />
-  }
-  { ownFooter && <slot name="footer" />}
-</BaseLayout>
+<html lang="de" class="scroll-smooth">
+  <head>
+    <title>{title}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content=`/images/${image}` />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={domain} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content=`/images/${image}` />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={domain} />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-gray-900 font-manrope">
+    <slot name="nav" />
+    <div class="flex-grow">
+      <slot />
+    </div>
+    <slot name="footer" />
+  </body>
+</html>

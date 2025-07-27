@@ -1,20 +1,26 @@
 ---
+// Layout
+import Layout from "../layouts/Layout.astro";
+
+// Components
+import Navigation from "../components/Navigation.astro";
 import Section from "../components/Section.astro";
-import Headline from "../components/headline.astro";
-import BaseLayout from "../layouts/baseLayout.astro";
-import MainNav from "../components/mainNav.astro";
+import Headline from "../components/Headline.astro";
 ---
-<BaseLayout
-  title="Impressum"
-  description="Impressum für die Website HELP MED - Elena Staubitz"
+
+<Layout
+  title="helpMED - Impressum"
+  description="Impressum für die Website helpMED - Elena Staubitz"
   image="/assets/images/logo.jpeg"
-  domain="https://help-med-92t9.vercel.app/"
+  domain="https://helpmed.de/impressum"
 >
-  <MainNav links={[
-      { text: "Startseite", href: "/" },
-      { text: "Impreesum", href: "/impressum" },
-      { text: "Datenschutz", href: "/datenschutz" },
+
+  <Navigation slot="nav" links={[
+    { text: "Startseite", href: "/" },
+    { text: "Impreesum", href: "/impressum" },
+    { text: "Datenschutz", href: "/datenschutz" },
   ]} />
+
   <Section>
     <div class="flex flex-col gap-4">
       <Headline level={1}>Impressum</Headline>
@@ -57,4 +63,5 @@ import MainNav from "../components/mainNav.astro";
       <p>Die auf unserer Webseite veröffentlichen Inhalte und Werke unterliegen dem deutschen Urheberrecht (<a class="text-teal-900 hover:underline" href="http://www.gesetze-im-internet.de/bundesrecht/urhg/gesamt.pdf">http://www.gesetze-im-internet.de/bundesrecht/urhg/gesamt.pdf</a>). Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung des geistigen Eigentums in ideeller und materieller Sicht des Urhebers außerhalb der Grenzen des Urheberrechtes bedürfen der vorherigen schriftlichen Zustimmung des jeweiligen Urhebers i.S.d. Urhebergesetzes (<a class="text-teal-900 hover:underline" href="http://www.gesetze-im-internet.de/bundesrecht/urhg/gesamt.pdf">http://www.gesetze-im-internet.de/bundesrecht/urhg/gesamt.pdf</a>). Downloads und Kopien dieser Seite sind nur für den privaten und nicht kommerziellen Gebrauch erlaubt. Sind die Inhalte auf unserer Webseite nicht von uns erstellt wurden, sind die Urheberrechte Dritter zu beachten. Die Inhalte Dritter werden als solche kenntlich gemacht. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte unverzüglich entfernen.</p>
     </div>
   </Section>
-</BaseLayout>
+
+</Layout>

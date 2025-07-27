@@ -1,10 +1,17 @@
 ---
-import Headline from "./headline.astro"
+import Headline from "./Headline.astro"
 import Section from "./Section.astro"
+
+type Props = {
+  bgColor?: "white" | "gray",
+  headline: string,
+};
+
+const { bgColor="gray", headline }: Props = Astro.props;
 ---
 
-<Section id="services" bgColor="gray">
-  <Headline level={2} underline>Leistungen</Headline>
+<Section id="services" bgColor={bgColor}>
+  <Headline level={2} underline>{headline}</Headline>
   <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mt-8">
     <slot />
   </div>

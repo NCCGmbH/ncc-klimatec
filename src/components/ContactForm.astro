@@ -1,9 +1,19 @@
 ---
 import Section from "./Section.astro"
-import Headline from "./headline.astro"
+import Headline from "./Headline.astro"
 import Form from "./Form.astro"
 import InputField from "./InputField.astro"
 import Button from "./Button.astro";
+
+type Props = {
+  contactLines: string[],
+  button: {
+    text: string,
+    href: string
+  },
+};
+
+const { contactLines, button }: Props = Astro.props;
 ---
 
 <Section
@@ -15,26 +25,15 @@ import Button from "./Button.astro";
       <Headline level={2} underline>Kontakt</Headline>
       <div class="flex flex-col gap-6">
         <ol class="list-none space-y-2">
-          <li>Telefon: 0171 6547853</li>
-          <li>E-Mail: info@helpmed.de</li>
+          {contactLines.map((line) => (
+            <li>{line}</li>
+          ))}
         </ol>
-        <Button as="a" href="https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form">Jetzt Termin vereinbaren</Button>
+        <Button as="a" href={button.href}>{button.text}</Button>
       </div>
     </div>
     <div class="flex flex-col gap-4">
-      <p>Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular.</p>
-      <Form>
-        <InputField itype="text" id="name" name="name" required>
-          Name:
-        </InputField>
-        <InputField itype="email" id="email" name="email" required>
-          E-Mail:
-        </InputField>
-        <InputField itype="textarea" id="message" name="message" required>
-          Nachricht:
-        </InputField>
-        <Button as="a" href="https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form">Absenden</Button>
-      </Form>
+      <slot />
     </div>
   </div>
 </Section>

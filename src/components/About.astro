@@ -2,22 +2,22 @@
 import type { string } from "astro:schema";
 import { type BgColors } from "../types";
 
-import Headline from "./headline.astro"
+import Headline from "./Headline.astro"
 import Section from "./Section.astro"
 
 import { Image } from 'astro:assets';
 
 type Props = {
   bgColor?: BgColors,
-  h2: string,
-  h3: string,
+  headline: string,
+  subtitle: string,
   image: ImageMetadata;
 }
 
-const { bgColor = "white", h2, h3, image }: Props = Astro.props;
+const { bgColor="white", headline, subtitle, image }: Props = Astro.props;
 ---
 
-<Section id="about" {bgColor}>
+<Section id="about" bgColor={bgColor}>
   <div class="grid md:grid-cols-[auto_1fr] gap-12 items-center">
     <Image
       src={image}
@@ -27,9 +27,9 @@ const { bgColor = "white", h2, h3, image }: Props = Astro.props;
       class="w-64 aspect-square object-cover rounded-full max-sm:justify-self-center"
     />
     <div class="felx flex-col space-y-8">
-      <Headline level={2} underline>{h2}</Headline>
+      <Headline level={2} underline>{headline}</Headline>
       <div class="space-y-4">
-        <Headline level={3}>{h3}</Headline>
+        <Headline level={3}>{subtitle}</Headline>
         <div>
           <slot />
         </div>

@@ -1,0 +1,20 @@
+---
+import Section from "./Section.astro";
+import Headline from "./Headline.astro";
+
+type Props = {
+  headline: string,
+  bgColor?: "white" | "gray",
+};
+
+const { headline, bgColor="white" }: Props = Astro.props;
+---
+
+<Section id="reviews" bgColor={bgColor} >
+  <div class="flex flex-col gap-8">
+    <Headline underline>{headline}</Headline>
+    <div class="flex flex-col gap-6">
+      <slot />
+    </div>
+  </div>
+</Section>

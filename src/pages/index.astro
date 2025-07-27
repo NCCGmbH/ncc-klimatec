@@ -1,33 +1,60 @@
 ---
-import Layout from "../layouts/layout.astro";
-import TextBlock from "../components/textBlock.astro";
-import Header from "../components/header.astro";
+// Layout
+import Layout from "../layouts/Layout.astro";
 
+// Components
+import Navigation from "../components/Navigation.astro";
+import HeroSection from "../components/HeroSection.astro";
+import About from "../components/About.astro";
 import Services from "../components/Services.astro";
 import ServicesItem from "../components/ServicesItem.astro";
-import About from "../components/About.astro";
+import ReviewSection from "../components/ReviewSection.astro";
+import Review from "../components/Review.astro";
 import ContactForm from "../components/ContactForm.astro";
+import Form from "../components/Form.astro";
+import InputField from "../components/InputField.astro";
+import Button from "../components/Button.astro";
+import Footer from "../components/Footer.astro";
 
+// Images
+import HeroImage from "../assets/images/farn.jpg";
+import Profil from "../assets/images/profil.jpg";
 import Spinat from "../assets/images/spinat.png";
 import Krauter from "../assets/images/krauter.png";
 import Steine from "../assets/images/steine.png";
 import Blatt from "../assets/images/blatt.png";
-import Profil from "../assets/images/profil.jpg";
-import Patientenbewertungen from "../components/Patientenbewertungen.astro";
 ---
 
 <Layout
   title="helpMED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit"
   description="helpMED bietet moderne orthomolekulare Medizin, Mikronährstofftherapie und integrative Beratung für Ihre Gesundheit. Erfahren Sie mehr über unsere Leistungen und Philosophie."
   image="og-image.png"
-  domain="https://helpmed.de"
+  domain="https://helpmed.de/"
 >
-  <Header />
+
+  <Navigation slot="nav" links={[
+    { text: "Startseite", href: "#home" },
+    { text: "Über uns", href: "#about" },
+    { text: "Leistungen", href: "#services" },
+    { text: "Reviews", href: "#reviews" },
+    { text: "Kontakt", href: "#contact" }
+  ]} />
+
+  <HeroSection 
+    title="Ihre Gesundheit ganzheitlich verstehen und stärken"
+    heroImage={HeroImage}
+    button={{
+      text: "Jetzt Termin vereinbaren",
+      href: "https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form"
+    }}
+  >
+    <p slot="subtitle">Mit moderner Orthomolekularmedizin, Mikronährstofftherapie und individuelle Beratung<br />&ndash; fundiert, individuell, effektiv</p>
+  </HeroSection>
   
   <About
     bgColor="white"
-    h2="Über uns"
-    h3="helpMED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit."
+    headline="Über uns"
+    subtitle="helpMED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit."
     image={Profil}
   >
     Unter der Leitung von Elena Staubitz (Ärztin, LT) verbinden wir moderne orthomolekulare Medizin 
@@ -39,7 +66,10 @@ import Patientenbewertungen from "../components/Patientenbewertungen.astro";
     (Facharzt für Allgemeinmedizin).
   </About>
 
-  <Services head>
+  <Services
+    bgColor="gray"
+    headline="Leistungen"
+  >
     <ServicesItem 
       headline="Integrale Ernährung" 
       image={Spinat}
@@ -74,7 +104,56 @@ import Patientenbewertungen from "../components/Patientenbewertungen.astro";
     </ServicesItem>
   </Services>
 
-  <Patientenbewertungen />
+  <ReviewSection
+    headline="Patientenbewertungen"
+    bgColor="white"
+  >
+    <Review 
+      text="Frau Staubitz hat mir geholfen, meine chronische Erschöpfung endlich in den Griff zu bekommen."
+      info="Julia R., 38"
+    />
+    <Review 
+      text="Ich fühlte mich zum ersten Mal wirklich ganzheitlich betrachtet. Keine bloße Symptombehandlung - sondern Ursachenklärung."
+      info="Tobias W., 44"
+    />
+    <Review 
+      text="Nach der Darmtherapie waren meine Beschwerden wie weggeblasen. Danke für die klare Diagnostik und einfühlsame Betreuung."
+      info="Jan O., 30"
+    />
+  </ReviewSection>
 
-  <ContactForm />
+  <ContactForm 
+    contactLines={[
+      "Telefon: 0171 6547853",
+      "E-Mail: info@helpmed.de"
+    ]}
+    button={{
+      text: "Jetzt Termin vereinbaren",
+      href: "https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form"
+    }}
+  >
+    <p>Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular.</p>
+    <Form>
+      <InputField itype="text" id="name" name="name" required>
+        Name:
+      </InputField>
+      <InputField itype="email" id="email" name="email" required>
+        E-Mail:
+      </InputField>
+      <InputField itype="textarea" id="message" name="message" required>
+        Nachricht:
+      </InputField>
+      <Button as="a" href="https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form">Absenden</Button>
+    </Form>
+  </ContactForm>
+
+  <Footer slot="footer" 
+    text="© 2025 helpMED - A subdivision of NCC GmbH"
+    links={[
+      { text: "Impressum", href: "/impressum" },
+      { text: "Datenschutz", href: "/datenschutz" },
+      { text: "Kontakt", href: "#contact" }
+    ]}
+  />
+
 </Layout>

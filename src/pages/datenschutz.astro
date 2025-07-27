@@ -1,20 +1,26 @@
 ---
+// Layout
+import Layout from "../layouts/Layout.astro";
+
+// Components
+import Navigation from "../components/Navigation.astro";
 import Section from "../components/Section.astro";
-import Headline from "../components/headline.astro";
-import BaseLayout from "../layouts/baseLayout.astro";
-import MainNav from "../components/mainNav.astro";
+import Headline from "../components/Headline.astro";
 ---
-<BaseLayout
-  title="Datenschutz"
-  description="Datenschutzinformationen für die Website HELP MED - Elena Staubitz"
+
+<Layout
+  title="helpMED - Datenschutz"
+  description="Datenschutzinformationen für die Website helpMED - Elena Staubitz"
   image="/assets/images/logo.jpeg"
-  domain="https://help-med-92t9.vercel.app/"
+  domain="https://helpmed.de/datenschutz"
 >
-  <MainNav links={[
-      { text: "Startseite", href: "/" },
-      { text: "Impreesum", href: "/impressum" },
-      { text: "Datenschutz", href: "/datenschutz" },
+
+  <Navigation slot="nav" links={[
+    { text: "Startseite", href: "/" },
+    { text: "Impreesum", href: "/impressum" },
+    { text: "Datenschutz", href: "/datenschutz" },
   ]} />
+
   <Section>
     <div class="flex flex-col gap-6">
       <Headline level={1}>Datenschutz</Headline>
@@ -108,4 +114,5 @@ import MainNav from "../components/mainNav.astro";
       <p>Sofern sich aus den sonstigen Informationen dieser Erklärung über spezifische Verarbeitungssituationen nichts anderes ergibt, werden gespeicherte personenbezogene Daten im Übrigen dann gelöscht, wenn sie für die Zwecke, für die sie erhoben oder auf sonstige Weise verarbeitet wurden, nicht mehr notwendig sind.</p>
     </div>
   </Section>
-</BaseLayout>
+
+</Layout>
