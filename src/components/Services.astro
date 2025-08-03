@@ -5,12 +5,13 @@ import Section from "./Section.astro"
 type Props = {
   bgColor?: "white" | "gray",
   headline: string,
+  ID: string
 };
 
-const { bgColor="gray", headline }: Props = Astro.props;
+const { bgColor="gray", headline, ID }: Props = Astro.props;
 ---
 
-<Section id="services" bgColor={bgColor}>
+<Section id={ID} bgColor={bgColor}>
   <Headline level={2} underline>{headline}</Headline>
   <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mt-8">
     <slot />

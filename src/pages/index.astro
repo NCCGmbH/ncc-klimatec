@@ -17,7 +17,7 @@ import Button from "../components/Button.astro";
 import Footer from "../components/Footer.astro";
 
 // Images
-import HeroImage from "../assets/images/farn.jpg";
+import HeroImage from "../assets/images/tastatur.jpg";
 import Profil from "../assets/images/profil.jpg";
 import Spinat from "../assets/images/spinat.png";
 import Krauter from "../assets/images/krauter.png";
@@ -26,22 +26,23 @@ import Blatt from "../assets/images/blatt.png";
 ---
 
 <BaseLayout
-  title="helpMED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit"
-  description="helpMED bietet moderne orthomolekulare Medizin, Mikronährstofftherapie und integrative Beratung für Ihre Gesundheit. Erfahren Sie mehr über unsere Leistungen und Philosophie."
+  title="NCC GmbH - Wir helfen bei IT-Problemen jeglicher Art"
+  description="Die NCC GmbH ist Ihr Partner für IT-Service, Netzwerktechnik und smarte Sicherheitslösungen – kompetent, unabhängig und zuverlässig. Jetzt mehr über unser Leistungsspektrum erfahren."
   image="og-image.png"
-  domain="https://helpmed.de/"
+  domain="https://nccgmbh.com/"
 >
 
   <Navigation slot="nav" links={[
     { text: "Startseite", href: "#home" },
-    { text: "Über uns", href: "#about" },
     { text: "Leistungen", href: "#services" },
     { text: "Reviews", href: "#reviews" },
+    { text: "Über uns", href: "#about" },
+    { text: "Subdevisionss", href: "#subdevisions" },
     { text: "Kontakt", href: "#contact" }
   ]} />
-
+  
   <HeroSection 
-    title="Ihre Gesundheit ganzheitlich verstehen und stärken"
+    title="Wir helfen bei IT-Problemen jeglicher Art"
     heroImage={HeroImage}
     button={{
       text: "Jetzt Termin vereinbaren",
@@ -50,25 +51,12 @@ import Blatt from "../assets/images/blatt.png";
   >
     <p slot="subtitle">Mit moderner Orthomolekularmedizin, Mikronährstofftherapie und individuelle Beratung<br />&ndash; fundiert, individuell, effektiv</p>
   </HeroSection>
-  
-  <About
-    bgColor="white"
-    headline="Über uns"
-    subtitle="helpMED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit."
-    image={Profil}
-  >
-    Unter der Leitung von Elena Staubitz (Ärztin, LT) verbinden wir moderne orthomolekulare Medizin 
-    mit persönlicher Betreuung. Unsere Philosophie: Gesundheit ist kein Zufall - sondern das Ergebnis 
-    gezielter Unterstützung Ihrer körpereigenen Systeme.
-    <br />
-    <br />
-    Die Praxis befindet sich im Gesundheitshaus Undenheim gemeinsam mit Herrn Dr. Albrecht 
-    (Facharzt für Allgemeinmedizin).
-  </About>
+
 
   <Services
     bgColor="gray"
     headline="Leistungen"
+    ID="services"
   >
     <ServicesItem 
       headline="Integrale Ernährung" 
@@ -121,6 +109,60 @@ import Blatt from "../assets/images/blatt.png";
       info="Jan O., 30"
     />
   </ReviewSection>
+
+  <About
+    bgColor="white"
+    headline="Über uns"
+    subtitle="helpMED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit."
+    image={Profil}
+  >
+    Unter der Leitung von Elena Staubitz (Ärztin, LT) verbinden wir moderne orthomolekulare Medizin 
+    mit persönlicher Betreuung. Unsere Philosophie: Gesundheit ist kein Zufall - sondern das Ergebnis 
+    gezielter Unterstützung Ihrer körpereigenen Systeme.
+    <br />
+    <br />
+    Die Praxis befindet sich im Gesundheitshaus Undenheim gemeinsam mit Herrn Dr. Albrecht 
+    (Facharzt für Allgemeinmedizin).
+  </About>
+
+ <Services
+    bgColor="gray"
+    headline="Subdevisions"
+    ID="subdevisions"
+  >
+    <ServicesItem 
+      headline="Integrale Ernährung" 
+      image={Spinat}
+      alt="Spinat"
+      id={1}
+    >
+      Analytische Ernährungsberatung zur Verbesserung von Energie, Stoffwechsel und Lebensqualität - abgestimmt auf Ihre körperliche Konstitution.
+    </ServicesItem>
+    <ServicesItem 
+      headline="Mikronährstofftherapie" 
+      image={Krauter}
+      alt="Kräuter"
+      id={2}
+    >
+      Gezielte Zufuhr von Vitaminen, Spurenelementen, Aminosäuren und sekundären Pflanzenstoffen zur Unterstützung von Zellfunktion, Immunabwehr und Leistungsfähigkeit.
+    </ServicesItem>
+    <ServicesItem 
+      headline="Ordnungstherapie" 
+      image={Steine}
+      alt="Steine"
+      id={3}
+    >
+      Strukturschaffung für Körper und Geist - mit gesunder Tagesrhythmik, Stressmanagement und praxisnahen Alltagsstrategien.
+    </ServicesItem>
+    <ServicesItem 
+      headline="Darmgesundheit" 
+      image={Blatt}
+      alt="Blatt"
+      id={4}
+    >
+      Analyse und Regulation der Darmflora (Mikrobiom) zur Behandlung von Verdauungsbeschwerden, Immunschwächen und chronischen Entzündungen.
+    </ServicesItem>
+  </Services>
 
   <ContactForm 
     contactLines={[
