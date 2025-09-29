@@ -18,11 +18,13 @@ import Footer from "../components/Footer.astro";
 
 // Images
 import HeroImage from "../assets/images/tastatur.jpg";
-import Profil from "../assets/images/profil.jpg";
-import Spinat from "../assets/images/spinat.png";
-import Krauter from "../assets/images/krauter.png";
-import Steine from "../assets/images/steine.png";
-import Blatt from "../assets/images/blatt.png";
+import Logo from "../assets/images/logo.png";
+import picart_pc from "../assets/images/picart_pc.png";
+import Helpmed from "../assets/images/helpmed.jpg";
+import Laptop from "../assets/images/laptop.jpg";
+import Beratung from "../assets/images/Beratung.jpg";
+import Netzwerk from "../assets/images/Netzwerk.jpg";
+import Settings from "../assets/images/Settings.jpg";
 ---
 
 <BaseLayout
@@ -45,56 +47,56 @@ import Blatt from "../assets/images/blatt.png";
     title="Wir helfen bei IT-Problemen jeglicher Art"
     heroImage={HeroImage}
     button={{
-      text: "Jetzt Termin vereinbaren",
-      href: "https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form"
+      text: "Kontakt aufnehmen",
+      href: "#contact"
     }}
   >
-    <p slot="subtitle">Mit moderner Orthomolekularmedizin, Mikronährstofftherapie und individuelle Beratung<br />&ndash; fundiert, individuell, effektiv</p>
+    <p slot="subtitle">Professionelle IT-Dienstleistungen, Netzwerktechnik und maßgeschneiderte Sicherheitslösungen für Privatpersonen und Unternehmen.<br />&ndash; Persönlich. Schnell. Unabhängig.</p>
   </HeroSection>
 
 
   <Services
-    bgColor="gray"
+    bgColor="white"
     headline="Leistungen"
     ID="services"
   >
     <ServicesItem 
-      headline="Integrale Ernährung" 
-      image={Spinat}
+      headline="IT-Service & Reparatur" 
+      image={Laptop}
       alt="Spinat"
       id={1}
     >
-      Analytische Ernährungsberatung zur Verbesserung von Energie, Stoffwechsel und Lebensqualität - abgestimmt auf Ihre körperliche Konstitution.
+      Ob defekter Laptop, langsamer PC oder fehlerhafte Software – wir finden die Ursache und lösen das Problem effizient. Vor-Ort-Service oder Fernwartung – Sie entscheiden!
     </ServicesItem>
     <ServicesItem 
-      headline="Mikronährstofftherapie" 
-      image={Krauter}
+      headline="Netzwerk & Infrastruktur" 
+      image={Netzwerk}
       alt="Kräuter"
       id={2}
     >
-      Gezielte Zufuhr von Vitaminen, Spurenelementen, Aminosäuren und sekundären Pflanzenstoffen zur Unterstützung von Zellfunktion, Immunabwehr und Leistungsfähigkeit.
+      Vom privaten WLAN bis zum komplexen Firmennetzwerk: Wir planen, installieren und betreuen Ihre Netzwerklösungen – sicher, zuverlässig und herstellerunabhängig.
     </ServicesItem>
     <ServicesItem 
-      headline="Ordnungstherapie" 
-      image={Steine}
+      headline="Beratung & Betreuung" 
+      image={Beratung}
       alt="Steine"
       id={3}
     >
-      Strukturschaffung für Körper und Geist - mit gesunder Tagesrhythmik, Stressmanagement und praxisnahen Alltagsstrategien.
+      Wir unterstützen Sie bei der Auswahl und Einrichtung moderner Technik – mit individueller Beratung, verständlich erklärt. Ideal für Privatpersonen und kleine Unternehmen.
     </ServicesItem>
     <ServicesItem 
-      headline="Darmgesundheit" 
-      image={Blatt}
-      alt="Blatt"
+      headline="Sicherheit & Smart Home" 
+      image={Settings}
+      alt="Steine"
       id={4}
     >
-      Analyse und Regulation der Darmflora (Mikrobiom) zur Behandlung von Verdauungsbeschwerden, Immunschwächen und chronischen Entzündungen.
+      Ob Kameraüberwachung, Alarmanlage oder intelligente Lichtsteuerung – wir setzen Ihre Wünsche in Sachen Sicherheit und Komfort technisch sauber um.
     </ServicesItem>
   </Services>
 
   <ReviewSection
     headline="Patientenbewertungen"
-    bgColor="white"
+    bgColor="gray"
   >
     <Review 
       text="Frau Staubitz hat mir geholfen, meine chronische Erschöpfung endlich in den Griff zu bekommen."
@@ -113,16 +115,17 @@ import Blatt from "../assets/images/blatt.png";
   <About
     bgColor="white"
     headline="Über uns"
-    subtitle="helpMED - Ihre Praxis für ganzheitliche, wissenschaftlich fundierte Gesundheit."
-    image={Profil}
+    subtitle="NCC GmbH – Ihr verlässlicher Partner für zukunftsfähige IT- und Kommunikationslösungen."
+    image={Logo}
   >
-    Unter der Leitung von Elena Staubitz (Ärztin, LT) verbinden wir moderne orthomolekulare Medizin 
-    mit persönlicher Betreuung. Unsere Philosophie: Gesundheit ist kein Zufall - sondern das Ergebnis 
-    gezielter Unterstützung Ihrer körpereigenen Systeme.
+    Die <strong>NCC Network Communication Computer GmbH </strong>mit Sitz in Undenheim steht seit über 30 Jahren für zuverlässige IT‑Lösungen und moderne Kommunikationstechnologien. 
+    <br />
+    <strong>Ob Netzwerktechnik, IT-Sicherheit, VoIP oder Cloud:</strong> 
+    <br />
+    Wir entwickeln maßgeschneiderte Systeme, die auf die individuellen Bedürfnisse unserer Kunden abgestimmt sind.
     <br />
     <br />
-    Die Praxis befindet sich im Gesundheitshaus Undenheim gemeinsam mit Herrn Dr. Albrecht 
-    (Facharzt für Allgemeinmedizin).
+    Unser erfahrenes Team verbindet technisches Know-how mit praxisnaher Beratung – effizient, kreativ und lösungsorientiert. Dabei setzen wir auf persönliche Betreuung und langfristige Partnerschaften, um Unternehmen technologisch nachhaltig zu unterstützen.
   </About>
 
  <Services
@@ -130,49 +133,57 @@ import Blatt from "../assets/images/blatt.png";
     headline="Subdevisions"
     ID="subdevisions"
   >
-    <ServicesItem 
-      headline="Integrale Ernährung" 
-      image={Spinat}
-      alt="Spinat"
-      id={1}
-    >
-      Analytische Ernährungsberatung zur Verbesserung von Energie, Stoffwechsel und Lebensqualität - abgestimmt auf Ihre körperliche Konstitution.
-    </ServicesItem>
-    <ServicesItem 
-      headline="Mikronährstofftherapie" 
-      image={Krauter}
-      alt="Kräuter"
+
+  <ServicesItem 
+      headline="HelpMED" 
+      image={Helpmed}
+      alt="HelpMED"
       id={2}
     >
-      Gezielte Zufuhr von Vitaminen, Spurenelementen, Aminosäuren und sekundären Pflanzenstoffen zur Unterstützung von Zellfunktion, Immunabwehr und Leistungsfähigkeit.
+      Helpmed berät Patienten ganzheitlich im Bereich der Orthomolekularmedizin, Mikronährstofftherapie und Ernährungsoptimierung. Unsere Mission ist es, Gesundheit ursachenorientiert zu fördern und körperliche Balance zu erhalten.
     </ServicesItem>
-    <ServicesItem 
-      headline="Ordnungstherapie" 
-      image={Steine}
-      alt="Steine"
+
+     <ServicesItem 
+      headline="myBodyMinerals" 
+      image={Helpmed}
+      alt="myBodyMinerals"
       id={3}
     >
-      Strukturschaffung für Körper und Geist - mit gesunder Tagesrhythmik, Stressmanagement und praxisnahen Alltagsstrategien.
+      myBodyMinerals begleitet Sie auf dem Weg zu mehr Energie und Wohlbefinden mit individuell abgestimmten Nahrungsergänzungen. Nach einer Blutanalyse erhalten Sie genau die Mineralstoffe und Vitamine, die Ihr Körper wirklich braucht.
     </ServicesItem>
+
     <ServicesItem 
-      headline="Darmgesundheit" 
-      image={Blatt}
-      alt="Blatt"
+      headline="EOS Designs" 
+      image={Helpmed}
+      alt="EOS Design"
       id={4}
     >
-      Analyse und Regulation der Darmflora (Mikrobiom) zur Behandlung von Verdauungsbeschwerden, Immunschwächen und chronischen Entzündungen.
+      EOS Design steht für luxuriöse Maßanfertigung, die höchste Schneiderkunst mit exklusiven Stoffen verbindet. Jedes Kleidungsstück ist ein Unikat, das Eleganz und Persönlichkeit auf unvergleichliche Weise vereint.
+    </ServicesItem>
+    
+    <ServicesItem 
+      headline="NCC Immo" 
+      image={Logo}
+      alt="NCC Immo"
+      id={1}
+    >
+      NCC Immo begleitet Sie kompetent beim Kauf und Verkauf von Immobilien. Als lizenzierte Makler bieten wir professionelle Beratung und eine zuverlässige Abwicklung rund um Ihre Immobilie.
     </ServicesItem>
   </Services>
 
   <ContactForm 
     contactLines={[
-      "Telefon: 0171 6547853",
-      "E-Mail: info@helpmed.de"
+      "Telefon: 06737 761073",
+      "Mobile: 0151 59044488",
+      "Fax: 06737 751074",
+      "E-Mail: info@nccgmbh.de"
     ]}
+    <!--
     button={{
       text: "Jetzt Termin vereinbaren",
       href: "https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form"
     }}
+    -->
   >
     <p>Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular.</p>
     <Form>
@@ -190,7 +201,7 @@ import Blatt from "../assets/images/blatt.png";
   </ContactForm>
 
   <Footer slot="footer" 
-    text="© 2025 helpMED - A subdivision of NCC GmbH"
+    text="© 2025 NCC Network Communication Computer GmbH"
     links={[
       { text: "Impressum", href: "/impressum" },
       { text: "Datenschutz", href: "/datenschutz" },
