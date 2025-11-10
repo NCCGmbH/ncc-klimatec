@@ -37,9 +37,8 @@ import Settings from "../assets/images/Settings.jpg";
   <Navigation slot="nav" links={[
     { text: "Startseite", href: "#home" },
     { text: "Leistungen", href: "#services" },
-    { text: "Reviews", href: "#reviews" },
     { text: "Über uns", href: "#about" },
-    { text: "Subdevisionss", href: "#subdevisions" },
+    { text: "Subdevisions", href: "#subdevisions" },
     { text: "Kontakt", href: "#contact" }
   ]} />
   
@@ -51,7 +50,12 @@ import Settings from "../assets/images/Settings.jpg";
       href: "#contact"
     }}
   >
-    <p slot="subtitle">Professionelle IT-Dienstleistungen, Netzwerktechnik und maßgeschneiderte Sicherheitslösungen für Privatpersonen und Unternehmen.<br />&ndash; Persönlich. Schnell. Unabhängig.</p>
+    <div slot="subtitle" class="space-y-2">
+      <p>Professionelle IT-Dienstleistungen, Netzwerktechnik und maßgeschneiderte Sicherheitslösungen für Privatpersonen und Unternehmen.</p>
+      <ul class="list-disc list-inside">
+        <li>Persönlich. Schnell. Unabhängig.</li>
+      </ol>
+    </div>
   </HeroSection>
 
 
@@ -94,26 +98,8 @@ import Settings from "../assets/images/Settings.jpg";
     </ServicesItem>
   </Services>
 
-  <ReviewSection
-    headline="Patientenbewertungen"
-    bgColor="gray"
-  >
-    <Review 
-      text="Frau Staubitz hat mir geholfen, meine chronische Erschöpfung endlich in den Griff zu bekommen."
-      info="Julia R., 38"
-    />
-    <Review 
-      text="Ich fühlte mich zum ersten Mal wirklich ganzheitlich betrachtet. Keine bloße Symptombehandlung - sondern Ursachenklärung."
-      info="Tobias W., 44"
-    />
-    <Review 
-      text="Nach der Darmtherapie waren meine Beschwerden wie weggeblasen. Danke für die klare Diagnostik und einfühlsame Betreuung."
-      info="Jan O., 30"
-    />
-  </ReviewSection>
-
   <About
-    bgColor="white"
+    bgColor="gray"
     headline="Über uns"
     subtitle="NCC GmbH – Ihr verlässlicher Partner für zukunftsfähige IT- und Kommunikationslösungen."
     image={Logo}
@@ -129,7 +115,7 @@ import Settings from "../assets/images/Settings.jpg";
   </About>
 
  <Services
-    bgColor="gray"
+    bgColor="white"
     headline="Subdevisions"
     ID="subdevisions"
   >
@@ -138,7 +124,8 @@ import Settings from "../assets/images/Settings.jpg";
       headline="HelpMED" 
       image={Helpmed}
       alt="HelpMED"
-      id={2}
+      fullWidth
+      id={5}
     >
       Helpmed berät Patienten ganzheitlich im Bereich der Orthomolekularmedizin, Mikronährstofftherapie und Ernährungsoptimierung. Unsere Mission ist es, Gesundheit ursachenorientiert zu fördern und körperliche Balance zu erhalten.
     </ServicesItem>
@@ -147,7 +134,8 @@ import Settings from "../assets/images/Settings.jpg";
       headline="myBodyMinerals" 
       image={Helpmed}
       alt="myBodyMinerals"
-      id={3}
+      fullWidth
+      id={6}
     >
       myBodyMinerals begleitet Sie auf dem Weg zu mehr Energie und Wohlbefinden mit individuell abgestimmten Nahrungsergänzungen. Nach einer Blutanalyse erhalten Sie genau die Mineralstoffe und Vitamine, die Ihr Körper wirklich braucht.
     </ServicesItem>
@@ -156,7 +144,8 @@ import Settings from "../assets/images/Settings.jpg";
       headline="EOS Designs" 
       image={Helpmed}
       alt="EOS Design"
-      id={4}
+      fullWidth
+      id={7}
     >
       EOS Design steht für luxuriöse Maßanfertigung, die höchste Schneiderkunst mit exklusiven Stoffen verbindet. Jedes Kleidungsstück ist ein Unikat, das Eleganz und Persönlichkeit auf unvergleichliche Weise vereint.
     </ServicesItem>
@@ -165,25 +154,26 @@ import Settings from "../assets/images/Settings.jpg";
       headline="NCC Immo" 
       image={Logo}
       alt="NCC Immo"
-      id={1}
+      fullWidth
+      padding
+      id={8}
     >
       NCC Immo begleitet Sie kompetent beim Kauf und Verkauf von Immobilien. Als lizenzierte Makler bieten wir professionelle Beratung und eine zuverlässige Abwicklung rund um Ihre Immobilie.
     </ServicesItem>
   </Services>
 
   <ContactForm 
+    bgColor="gray"
     contactLines={[
       "Telefon: 06737 761073",
       "Mobile: 0151 59044488",
       "Fax: 06737 751074",
       "E-Mail: info@nccgmbh.de"
     ]}
-    <!--
     button={{
       text: "Jetzt Termin vereinbaren",
       href: "https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form"
     }}
-    -->
   >
     <p>Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular.</p>
     <Form>

@@ -20,19 +20,19 @@ const paddingTopClass = {
   none: "pt-0",
   small: "pt-6",
   medium: "pt-12",
-  large: "pt-20 lg:pt-24",
+  large: "pt-20 lg:pt-32",
 }[paddingTop] || "pt-20";
 
 const paddingBottomClass = {
   none: "pb-0",
   small: "pb-6",
   medium: "pb-12",
-  large: "pb-20 lg:pb-24",
+  large: "pb-20 lg:pb-32",
 }[paddingBottom] || "pt-20";
 ---
 
 <section id={id} class:list={[bgColorClass, paddingTopClass, paddingBottomClass, "scroll-mt-20"]}>
-  <div class="mx-auto max-w-[1200px] w-full px-[5%]">
+  <div class="mx-auto max-w-[1200px] w-full max-xl:px-[5%]">
     <slot />
   </div>
 </section>
