@@ -8,7 +8,7 @@ import Button from "./Button.astro";
 type Props = {
   bgColor?: "white" | "gray",
   contactLines: string[],
-  button: {
+  button?: {
     text: string,
     href: string
   },
@@ -30,7 +30,9 @@ const { contactLines, button, bgColor }: Props = Astro.props;
             <li>{line}</li>
           ))}
         </ol>
-        <Button as="a" href={button.href}>{button.text}</Button>
+        {button && (
+          <Button as="a" href={button.href}>{button.text}</Button>
+        )}
       </div>
     </div>
     <div class="flex flex-col gap-4">

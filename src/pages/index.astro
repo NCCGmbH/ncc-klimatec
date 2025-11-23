@@ -173,25 +173,32 @@ import logoEos from "../assets/images/logo_eos.png";
       "Fax: 06737 751074",
       "E-Mail: info@nccgmbh.de"
     ]}
-    button={{
-      text: "Jetzt Termin vereinbaren",
-      href: "https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form"
-    }}
   >
     <p>Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular.</p>
     <Form>
-      <InputField itype="text" id="name" name="name" required>
-        Name:
-      </InputField>
-      <InputField itype="email" id="email" name="email" required>
-        E-Mail:
-      </InputField>
       <InputField itype="textarea" id="message" name="message" required>
         Nachricht:
       </InputField>
-      <Button as="a" href="https://ncc.encece.de/index.php/apps/appointments/pub/QoeEROlgMdkSdssEYg%3D%3D/form">Absenden</Button>
+      <Button id="openMail" as="a" href="">Absenden</Button>
     </Form>
   </ContactForm>
+
+  <script>
+    const TO = "info@nccgmbh.de";                 // << anpassen
+    const SUBJECT = "Anfrage NCC Webseite";    // << optional
+
+    const openMail = document.getElementById("openMail")
+
+    openMail?.addEventListener("click", () => {
+      const message = document.getElementById("message") as HTMLInputElement
+      const msg = message?.value.trim();
+      if (!msg) { alert("Bitte eine Nachricht eingeben."); return; }
+
+      // Öffnet NUR das Standard-Mailprogramm mit fertig befüllter Mail
+      const href = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(msg)}`;
+      window.location.href = href;
+    });
+  </script>
 
   <Footer slot="footer" 
     text="© 2025 NCC Network Communication Computer GmbH"
