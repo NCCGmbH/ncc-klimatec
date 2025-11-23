@@ -176,6 +176,12 @@ import logoEos from "../assets/images/logo_eos.png";
   >
     <p>Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular.</p>
     <Form>
+      <InputField itype="text" id="name" name="name" required>
+        Name:
+      </InputField>
+      <InputField itype="text" id="telefon" name="email" required>
+        Telefon:
+      </InputField>
       <InputField itype="textarea" id="message" name="message" required>
         Nachricht:
       </InputField>
@@ -190,12 +196,18 @@ import logoEos from "../assets/images/logo_eos.png";
     const openMail = document.getElementById("openMail")
 
     openMail?.addEventListener("click", () => {
-      const message = document.getElementById("message") as HTMLInputElement
+      const message = document.getElementById("message") as HTMLInputElement;
+      const name = document.getElementById("name") as HTMLInputElement;
+      const telefon = document.getElementById("telefon") as HTMLInputElement;
+      const nameStr = name?.value.trim();
+      const telefonStr = telefon?.value.trim();
       const msg = message?.value.trim();
-      if (!msg) { alert("Bitte eine Nachricht eingeben."); return; }
+      if (!msg || !nameStr ||  !telefonStr) { alert("Bitte alle Felder ausfüllen."); return; }
+
+      const finalMessage = `Name: ${nameStr}\n\nTelefon: ${telefonStr}\n\n${msg}`;
 
       // Öffnet NUR das Standard-Mailprogramm mit fertig befüllter Mail
-      const href = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(msg)}`;
+      const href = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(finalMessage)}`;
       window.location.href = href;
     });
   </script>
