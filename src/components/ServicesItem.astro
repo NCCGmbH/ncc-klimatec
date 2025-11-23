@@ -1,4 +1,5 @@
 ---
+import type { boolean } from 'astro:schema';
 import Headline from './Headline.astro';
 import { Image } from 'astro:assets';
 
@@ -7,13 +8,17 @@ type Props = {
   alt: string,
   headline: string,
   id: number,
+  fullWidth?: boolean,
+  padding?: boolean,
 }
 
 const {
   image,
   alt,
   headline,
-  id
+  id,
+  fullWidth = false,
+  padding = false,
 }: Props = Astro.props;
 ---
 
@@ -28,13 +33,13 @@ const {
 
 <div class="flex flex-col gap-8">
   <input type="checkbox" id={"overlay-toggle-" + id} class="overlay-toggle hidden" />
-  <label for={"overlay-toggle-" + id} class="cursor-pointer">
+  <label for={"overlay-toggle-" + id} class="cursor-pointer bg-white rounded-3xl shadow-lg aspect-square overflow-hidden flex items-center justify-center">
     <Image
       src={image}
       alt={alt}
       widths={[300, 600]}
       sizes="(max-width: 768px) 100vw, 600px"
-      class="w-full aspect-square object-cover rounded-3xl shadow-lg"
+      class:list={["w-full", fullWidth ? "" : "aspect-square object-cover", padding && "px-4"]}
     />
   </label>
   <div class="flex flex-col gap-2">
@@ -47,9 +52,8 @@ const {
     <Image
       src={image}
       alt={alt}
-      widths={[600]}
-      sizes="600px"
-      class="object-cover rounded-xl aspect-square w-[80vw] h-[80vw] max-w-[80vh] max-h-[80vh]"
+      widths={[400, 800, 1200]}
+      class="object-cover rounded-xl max-w-[95vw] sm:max-w-[min(80vw,1080px)] max-h-[80vh]"
     />
   </label>
 </div>

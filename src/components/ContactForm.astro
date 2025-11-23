@@ -6,6 +6,7 @@ import InputField from "./InputField.astro"
 import Button from "./Button.astro";
 
 type Props = {
+  bgColor?: "white" | "gray",
   contactLines: string[],
   button: {
     text: string,
@@ -13,11 +14,11 @@ type Props = {
   },
 };
 
-const { contactLines, button }: Props = Astro.props;
+const { contactLines, button, bgColor }: Props = Astro.props;
 ---
 
 <Section
-  bgColor="white"
+  {bgColor}
   id="contact"
 >
   <div class="grid md:grid-cols-2 gap-12 md:gap-8">

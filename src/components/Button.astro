@@ -15,7 +15,7 @@ const { type, id, as="a", danger=false, onClickEvent = 'default-event', href, da
   <a 
     class:list={[
       "border-2 text-lg px-4 py-2 transition-colors rounded-full leading-none max-w-min whitespace-nowrap cursor-pointer select-none",
-      dark ? "bg-sky-800 text-white hover:bg-sky-700 border-sky-800" : "text-sky-800 hover:text-white bg-white hover:bg-teal-800 border-teal-800",
+      dark ? "bg-sky-800 text-white hover:bg-sky-700 border-sky-800" : "text-sky-800 hover:text-white bg-white hover:bg-sky-800 border-sky-800",
     ]}
     href={href ?? undefined}
     target="_blank"
@@ -28,7 +28,7 @@ const { type, id, as="a", danger=false, onClickEvent = 'default-event', href, da
   </a>
 ) : (
   <button 
-    class="border-2 text-[1.2rem] px-4 py-2 text-teal-800 hover:text-white border-teal-800 bg-white hover:bg-teal-800 transition-colors rounded-full leading-none max-w-min whitespace-nowrap",
+    class="border-2 text-[1.2rem] px-4 py-2 text-sky-800 hover:text-white border-sky-800 bg-white hover:bg-sky-800 transition-colors rounded-full leading-none max-w-min whitespace-nowrap"
     type={type ?? undefined}
     id={id}
     data-event={onClickEvent}

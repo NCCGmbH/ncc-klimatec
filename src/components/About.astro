@@ -19,13 +19,15 @@ const { bgColor="white", headline, subtitle, image }: Props = Astro.props;
 
 <Section id="about" bgColor={bgColor}>
   <div class="grid md:grid-cols-[auto_1fr] gap-12 items-center">
-    <Image
-      src={image}
-      alt="Profil"
-      widths={[256]}
-      sizes="256px"
-      class="w-64 aspect-square object-cover rounded-full max-sm:justify-self-center"
-    />
+    <div class="aspect-square w-64 flex items-center rounded-full bg-white max-sm:justify-self-center sm:self-start shadow-xl">
+      <Image
+        src={image}
+        alt="Profil"
+        widths={[256]}
+        sizes="256px"
+        class="w-30 px-4"
+      />
+    </div>
     <div class="felx flex-col space-y-8">
       <Headline level={2} underline>{headline}</Headline>
       <div class="space-y-4">
