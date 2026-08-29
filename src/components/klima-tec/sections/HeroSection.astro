@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+
+import Headline from "../atoms/Headline.astro"
+import Button from "../atoms/Button.astro"
+import Underscore from '../atoms/Underscore.astro';
+import Section from '../../Section.astro';
+import HeroItems from '../molecules/HeroItems.astro';
+
+type Props = {
+  id: string,
+  image: ImageMetadata,
+};
+
+const { id, image }: Props = Astro.props;
+---
+
+<Section {id} fullWidth paddingBottom='none' paddingTop='none'>
+  <div class="relative">
+    <Image
+      src={image}
+      alt="Hero"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 768px) 100vw, 800px"
+      format="webp"
+      class:list={["w-full object-cover lg:px-[1px]"]}
+      priority
+      loading="eager"
+    />
+    <div class:list={[
+      "absolute inset-0 flex flex-col gap-4 px-8 py-16 max-w-[35rem]",
+      "bg-gradient-to-r from-ncc-light-blue from-0% via-ncc-light-blue via-90% to-transparent to-100%"  
+    ]}>
+      <slot />
+    </div>
+    <svg
+      class="absolute bottom-[-1px] left-0 w-full h-24 md:h-32"
+      viewBox="0 0 1440 40"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,20 C300,40 1080,20 1440,0 L1440,40 L0,40 Z"
+        class="fill-white"
+      />
+    </svg>
+  </div>
+</Section>

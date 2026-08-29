@@ -1,0 +1,10 @@
+---
+type Props = {
+  length?: "sm" | "md" | "lg",
+  class?: string,
+}
+
+const { length="md", class: classList }: Props = Astro.props;
+---
+
+<div class:list={["h-1 w-16 rounded-full bg-ncc-green", classList]} />

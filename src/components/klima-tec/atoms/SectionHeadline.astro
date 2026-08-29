@@ -1,0 +1,33 @@
+---
+import Underscore from './Underscore.astro';
+
+type HeadlineLevel = 1 | 2 | 3 | 4;
+
+type Props = {
+  level?: HeadlineLevel,
+  center?: boolean,
+  class?: string,
+}
+
+const {
+  level=2,
+  center=false,
+  class: classList
+}: Props = Astro.props;
+
+const Tag = (
+  {
+    1: "h1",
+    2: "h2",
+    3: "h3",
+    4: "h4",
+  } as const
+)[level];
+---
+
+<div class:list={["break-words leading-tight flex flex-col gap-4", center && "items-center"]}>
+  <Tag class:list={["text-[16px] font-bold tracking-widest uppercase text-ncc-green", classList]}>
+    <slot />
+  </Tag>
+  <Underscore />
+</div>

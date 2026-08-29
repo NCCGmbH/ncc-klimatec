@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '../assets/images/logo.png';
+import logo from '../../../assets/svgs/ncc-klimatec-logo.svg?raw';
 
 type Props = {
   links: { text: string, href: string }[];
@@ -11,39 +11,30 @@ const { links }: Props = Astro.props;
 
 <div id="nav-overlay" class="fixed inset-0 z-40 hidden"></div>
 
-<nav id="navbar" class="sticky overflow-x-clip overflow-y-visible md:overflow-visible top-0 z-50 h-20 w-full bg-white max-w-full shadow-xl shadow-sky-600/10">
-  <div class="mx-auto max-w-[1200px] h-full grid grid-cols-[auto_1fr] md:items-center backdrop-blur-lg text-sky-800 transition-all text-xl md:text-[1.2rem]">
-    <Image
-      id="logo"
-      src={logo}
-      loading="eager"
-      alt="Logo"
-      widths={[128, 256, 512]}
-      sizes="128px"
-      priority
-      format="webp"
-      class="row-start-1 cursor-pointer w-auto h-12 object-scale-down col-start-1 col-span-1 bg-white ml-[5vw] md:ml-[4vw] xl:ml-0 my-auto justify-self-start rounded-md p-1"
-    />
+<nav id="navbar" class="sticky overflow-x-clip overflow-y-visible md:overflow-visible top-0 h-12 z-50 w-full backdrop-blur-xl bg-white/75 max-w-full shadow-black/25 transition-all">
+  <div class="mx-auto max-w-[1200px] h-full grid grid-cols-[auto_1fr] md:items-center text-blue-900 transition-all text-xl md:text-[1.2rem]">
+    <div id="logo" class="row-start-1 cursor-pointer [&>*]:max-w-20 [&>*]:h-fit w-fit col-start-1 col-span-1 bg-transparent ml-[5vw] md:ml-[4vw] xl:ml-0 my-auto justify-self-start p-1">
+      <Fragment set:html={logo} />
+    </div>
     <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-[6px] cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
-      <span id="ham-1" class="bg-sky-800 h-1 w-10 rounded-full" />
-      <span id="ham-2" class="bg-sky-800 h-1 w-10 rounded-full" />
-      <span id="ham-3" class="bg-sky-800 h-1 w-10 rounded-full" />
+      <span id="ham-1" class="bg-blue-900 h-1 w-10 rounded-full" />
+      <span id="ham-2" class="bg-blue-900 h-1 w-10 rounded-full" />
+      <span id="ham-3" class="bg-blue-900 h-1 w-10 rounded-full" />
     </div>
     <ol id="nav-links" class:list={[
       "hidden absolute flex-col md:flex md:static md:flex-row overflow-hidden",
-      "bg-white shadow-xl md:shadow-none",
+      "bg-white max-md:mt-12 md:bg-transparent shadow-xl md:shadow-none",
       "translate-x-full md:translate-x-0", 
-      "rounded-bl-2xl md:rounded-md",
-      "border-t-2 border-sky-800 md:border-none", 
+      "rounded-bl-xl md:rounded-md",
       "opacity-0 md:opacity-100", 
       "row-start-2 md:row-start-1 col-start-1 md:col-start-2 col-span-2 md:col-span-1", 
-      "md:my-auto md:mr-[4vw] xl:mr-0 md:gap-3 lg:gap-8 md:px-5 md:py-2", 
+      "md:my-auto md:mr-[4vw] xl:mr-0 md:gap-3 lg:gap-8 md:px-5 xl:px-0 md:py-2", 
       "w-fit justify-self-end",
       "transition-all"
     ]}>
       { links.map((link) => (
         <li>
-          <a class="nav-link block md:inline-block hover:bg-sky-800 md:hover:bg-transparent hover:text-white md:hover:text-gray-800 text-center py-3 md:py-0 px-5 md:px-0 transition-all" href={link.href}>
+          <a class="nav-link block md:inline-block hover:bg-blue-900 md:hover:bg-transparent hover:text-white md:hover:text-blue-950 text-center py-4 text-2xl md:text-base md:py-0 px-5 md:px-0 transition-all" href={link.href}>
             {link.text}
           </a>
         </li>
@@ -70,7 +61,7 @@ const { links }: Props = Astro.props;
         closeNav();
       }
     } else {
-      window.location.href = '/';
+      window.location.href = '/klimatec/';
     }
   });
 
@@ -148,18 +139,9 @@ const { links }: Props = Astro.props;
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 10) {
-      navbar?.classList.add('!backdrop-blur-lg', 'shadow-sm', '!bg-transparent', 'border-sky-800', 'border-b-2');
-      navLinks?.classList.add('md:!bg-sky-800', 'md:text-white');
-      Array.from(allLinks).forEach(link => {
-        link.classList.add('hover:!text-gray-300');
-      });
+      navbar?.classList.add('!backdrop-blur-xl', 'shadow-[0_0_10px]', '!bg-white/75');
     } else {
-      navbar?.classList.remove('!backdrop-blur-lg', 'shadow-sm', '!bg-transparent', 'border-sky-800', 'border-b-2');
-      navLinks?.classList.remove('md:!bg-sky-800', 'md:text-white');
-      Array.from(allLinks).forEach(link => {
-        link.classList.remove('hover:!text-gray-300');
-      });
+      navbar?.classList.remove('!backdrop-blur-xl', 'shadow-[0_0_10px]', '!bg-white/75');
     }
   });
 </script>
-

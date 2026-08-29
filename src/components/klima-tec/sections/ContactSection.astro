@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+
+import Headline from "../atoms/Headline.astro"
+import Button from "../atoms/Button.astro"
+import Underscore from '../atoms/Underscore.astro';
+import Section from '../../Section.astro';
+import HeroItems from '../molecules/HeroItems.astro';
+import SectionHeadline from '../atoms/SectionHeadline.astro';
+import ContactForm from '../molecules/ContactForm.astro';
+
+type Props = {
+  id: string,
+  image: ImageMetadata,
+};
+
+const { id, image }: Props = Astro.props;
+---
+
+<Section {id} fullWidth>
+  <div class="relative rounded-lg shadow-[0_0_15px] shadow-black/25 overflow-hidden">
+    <Image
+      src={image}
+      alt="Hero"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 768px) 100vw, 800px"
+      format="webp"
+      class:list={["w-full object-cover max-h-[40rem]"]}
+      priority
+      loading="eager"
+    />
+    <div class="absolute inset-0 grid grid-cols-6">
+      <div class:list={[
+        "flex flex-col gap-4 px-8 py-8 max-w-[35rem] col-start-1 col-span-2",
+        "bg-gradient-to-r from-white from-0% via-white via-80% to-transparent to-100%"  
+      ]}>
+        <SectionHeadline>Kontakt</SectionHeadline>
+        <Headline>
+          Ihre Klimaanlage - individuell geplant
+        </Headline>
+        <p>Unverbindlich anfragen - wir beraten Sie gerne!</p>
+      </div>
+      <div class="col-start-3 col-span-4 pr-8 py-8">
+        <ContactForm />
+      </div>
+    </div>
+  </div>
+</Section>

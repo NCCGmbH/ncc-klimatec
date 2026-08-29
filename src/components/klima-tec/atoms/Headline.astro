@@ -1,0 +1,48 @@
+---
+
+type HeadlineLevel = 1 | 2 | 3 | 4;
+
+type Props = {
+  level?: HeadlineLevel,
+  size?: HeadlineLevel,
+  bold?: boolean,
+  color?: "white" | "blue",
+  class?: string,
+}
+
+const {
+  level=2,
+  size,
+  bold=false,
+  color="blue",
+  class: classList
+}: Props = Astro.props;
+
+const Tag = (
+  {
+    1: "h1",
+    2: "h2",
+    3: "h3",
+    4: "h4",
+  } as const
+)[level];
+
+const sizeClass = {
+  1: "text-[48px]",
+  2: "text-[32px]",
+  3: "text-[24px]",
+  4: "text-[20px]",
+}[size ?? level];
+
+const colorClass = {
+  "white": "text-white",
+  "blue": "text-blue-900"
+}[color];
+
+---
+
+<div class:list={["break-words leading-tight"]}>
+  <Tag class:list={[sizeClass, colorClass, bold && "font-bold", classList]}>
+    <slot />
+  </Tag>
+</div>

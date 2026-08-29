@@ -1,0 +1,56 @@
+---
+import Headline from '../atoms/Headline.astro';
+import { Image } from 'astro:assets';
+import IconCircle from '../atoms/IconCircle.astro';
+
+type Props = {
+  image: ImageMetadata,
+  alt: string,
+  headline: string,
+  link: string,
+}
+
+const {
+  image,
+  alt,
+  headline,
+  link,
+}: Props = Astro.props;
+---
+
+<style>
+  .overlay-toggle:checked ~ .service-overlay {
+    display: flex;
+  }
+  .service-overlay {
+    display: none;
+  }
+</style>
+
+<a href="/" class="hover:scale-105 flex h-full transition-all group">
+<div class="flex flex-col rounded-lg overflow-hidden shadow-[0px_0px_15px] shadow-black/25 transition-color group-hover:shadow-blue-500/25">
+  <div class="relative">
+    <Image
+      src={image}
+      alt={alt}
+      widths={[300, 600]}
+      sizes="(max-width: 768px) 100vw, 600px"
+      class="aspect-[9/7] w-full object-cover"
+    />
+    <IconCircle class="self-end ml-3 translate-y-5 absolute" color="blue" size="md" padding={2} shadow>
+      <slot name="icon" />
+    </IconCircle>
+  </div>
+  <div class="flex h-full flex-col gap-2 p-4 pt-8">
+    <Headline bold level={4}>{headline}</Headline>
+    <div class="flex h-full">
+      <div class="w-full pb-8">
+        <slot />
+      </div>
+      <div class="self-end font-bold [&>*]:text-blue-900">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+</a>

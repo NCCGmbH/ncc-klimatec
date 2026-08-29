@@ -1,0 +1,32 @@
+---
+import IconCircle from "../atoms/IconCircle.astro";
+import Headline from "../atoms/Headline.astro";
+import Underscore from "../atoms/Underscore.astro";
+
+type Props = {
+  title: string,
+  index: number,
+  class?: string,
+}
+
+const { title, index, class: classList }: Props = Astro.props;
+
+---
+
+<div class:list={["flex flex-col items-center gap-8 max-w-48", classList]}>
+  <div class="relative hover:scale-110 transition-all">
+    <IconCircle color="blue" size="lg" padding={3} shadow>
+      <slot name="icon" />
+    </IconCircle>
+    <div class="w-8 h-8 rounded-full bg-ncc-green text-white absolute self-end flex justify-center items-center font-bold -translate-x-2 translate-y-2">
+      {index}
+    </div>
+  </div>
+  <div class="flex flex-col gap-4 items-center">
+    <Headline bold level={4}>{title}</Headline>
+    <Underscore />
+    <div class="text-center">
+      <slot />
+    </div>
+  </div>
+</div>

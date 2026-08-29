@@ -1,0 +1,71 @@
+---
+import FormField from "../atoms/FormField.astro";
+import Button from "../atoms/Button.astro";
+---
+
+<form data-login-form class="flex flex-col gap-6 bg-white shadow-[0_0_15px] shadow-black/25 p-8 rounded-lg">
+  <FormField
+    required
+    fieldType="email"
+    name="email"
+    id="email"
+    label="E-Mail"
+  />
+
+  <FormField
+    required
+    fieldType="password"
+    name="password"
+    id="password"
+    label="Passwort:"
+  />
+
+  <div class="flex gap-4 justify-between items-end">
+    <p data-login-error class="hidden text-xs text-red-600"></p>
+    <Button as="button" type="submit" class="self-end">
+      Login
+    </Button>
+  </div>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-login-form]");
+  const errorText = document.querySelector<HTMLParagraphElement>("[data-login-error]");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const submitButton = form.querySelector<HTMLButtonElement>("button[type=submit]");
+    submitButton?.setAttribute("disabled", "true");
+    errorText?.classList.add("hidden");
+
+    const data = Object.fromEntries(new FormData(form));
+
+    try {
+      const response = await fetch("/klimatec/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        if (errorText) {
+          errorText.textContent = error ?? "Login fehlgeschlagen.";
+          errorText.classList.remove("hidden");
+        }
+        return;
+      }
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      if (errorText) {
+        errorText.textContent = "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.";
+        errorText.classList.remove("hidden");
+      }
+    } finally {
+      submitButton?.removeAttribute("disabled");
+    }
+  });
+</script>

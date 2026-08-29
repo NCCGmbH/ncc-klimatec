@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
     "./src/**/*.{astro,js,ts,jsx,tsx,html}"
@@ -7,9 +9,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        manrope: ['Manrope', 'sans-serif'],
+        manrope: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        "ncc-green": '#4b9b00',
+        "ncc-light-blue": '#f6faff',
         turquoise: '#1e40af',        // z. B. bg-primary
         accent: '#f43f5e',         // z. B. text-accent
         turquoise: {

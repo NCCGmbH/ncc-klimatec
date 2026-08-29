@@ -1,0 +1,45 @@
+---
+type FieldType = 'text' | 'email' | 'tel' | 'password' | 'date' | 'select';
+
+type Option = {
+  label: string,
+  value: string,
+}
+
+type Props = {
+  fieldType?: FieldType,
+  textarea?: boolean,
+  label: string,
+  name: string;
+  id: string,
+  placeholder?: string,
+  required?: boolean,
+  options?: Option[],
+}
+
+const { fieldType, textarea=false, label, name, id, placeholder, required=false, options=[] }: Props = Astro.props;
+
+---
+
+
+<div class="flex flex-col gap-2">
+  <label class="font-bold" for={name}>{label}{required && <span class="text-red-600"> *</span>}</label>
+  {textarea ? (
+    <textarea
+      id={id}
+      name={name}
+      {placeholder}
+      {required}
+      class="w-full h-24 max-h-64 outline-blue-900 border-gray-400 border rounded-md px-3 py-2"
+    />
+  ) : fieldType === 'select' ? (
+    <select id={id} name={name} required={required} class="border px-3 py-2 outline-blue-900 rounded-md border-gray-400">
+      {placeholder && <option value="" disabled selected>{placeholder}</option>}
+      {options.map((option) => (
+        <option value={option.value}>{option.label}</option>
+      ))}
+    </select>
+  ) : (
+    <input {placeholder} class="border px-3 py-2 outline-blue-900 rounded-md border-gray-400" type={fieldType} name={name} id={name} required={required} />
+  )}
+</div>

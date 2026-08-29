@@ -1,0 +1,176 @@
+---
+
+import Section from "../../Section.astro";
+import FormField from "../atoms/FormField.astro";
+import Button from "../atoms/Button.astro";
+
+---
+
+<form data-contact-form class="flex flex-col gap-6 bg-white shadow-[0_0_15px] shadow-black/25 p-8 rounded-lg">
+  <div class="grid grid-cols-3 gap-6">
+    <FormField
+      required
+      fieldType="select"
+      name="gender"
+      id="gender"
+      label="Anrede"
+      placeholder="Bitte wählen"
+      options={[
+        { label: "Herr", value: "male" },
+        { label: "Frau", value: "female" },
+        { label: "Divers", value: "diverse" },
+      ]}
+    />
+
+    <FormField
+      required
+      fieldType="text"
+      name="name"
+      id="name"
+      label="Name"
+      placeholder="Name"
+    />
+
+    <FormField
+      fieldType="text"
+      name="firstName"
+      id="firstName"
+      label="Vorname"
+      placeholder="Vorname"
+    />
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+    <FormField
+      required
+      fieldType="email"
+      name="email"
+      id="email"
+      label="E-Mail"
+      placeholder="example@mail.com"
+    />
+
+    <FormField
+      required
+      fieldType="date"
+      name="birthDate"
+      id="birthDate"
+      label="Geburtsdatum"
+    />
+
+    <FormField
+      fieldType="tel"
+      name="tel"
+      id="tel"
+      label="Telefon"
+      placeholder="0170 1234567"
+    />
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+    <FormField
+      required
+      fieldType="text"
+      name="street"
+      id="street"
+      label="Straße & Hausnummer"
+      placeholder="Musterstraße 1"
+    />
+
+    <FormField
+      required
+      fieldType="text"
+      name="zipCode"
+      id="zipCode"
+      label="PLZ"
+      placeholder="12345"
+    />
+
+    <FormField
+      required
+      fieldType="text"
+      name="city"
+      id="city"
+      label="Ort"
+      placeholder="Musterstadt"
+    />
+    </div>
+
+    <FormField
+      required
+      textarea
+      name="textField"
+      id="textField"
+      label="Ihr Anliegen"
+      placeholder="z.B. Installation Klimaanlage, Beratung, Wartung ..."
+    />
+
+    <div class="flex gap-4 justify-between">
+      <div class="text-xs flex flex-col gap-2">
+        <p class="font-bold"><span class="text-red-600">*</span> Pflichtfelder</p>
+        <p>
+        Ihre Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.<br />
+        Weitere Informationen finden Sie in unserer <a href="/datenschutz" class="font-bold text-blue-900 hover:underline">Datenschutzerklärung</a>.
+        </p>
+      </div>
+      <Button as="button" type="submit" class="self-end">
+        Anfrage senden
+      </Button>
+    </div>
+    <div data-contact-form-info-status class="hidden group/form-status items-center gap-4 rounded-md p-2">
+      <div class="rounded-full p-2 bg-white">
+        <svg data-contact-form-info-success class="group-data-[contact-form-info-status='error']/form-status:hidden text-ncc-green lucide lucide-check-icon lucide-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <svg data-contact-form-info-error class="group-data-[contact-form-info-status='success']/form-status:hidden text-red-500 lucide lucide-x-icon lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </div>
+      <div data-contact-form-info>
+        
+      </div>
+    </div>
+  </form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  
+  const infoText = document.querySelector<HTMLDivElement>("[data-contact-form-info]");
+  const status = document.querySelector<HTMLDivElement>("[data-contact-form-info-status]");
+
+  const setStatus = (state: "error" | "success") => {
+    status?.setAttribute("data-contact-form-info-status", String(state));
+    if (infoText) {
+      infoText.innerHTML = state === "success" ? "Ihre Anfrage wurde erfolgreich übermittelt. Wir melden uns so bald wie möglich bei Ihnen." : "Bei der Übermittlung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder nutzen Sie die direkten Kontaktmöglichkeiten.";
+    }
+    status?.classList.remove("hidden");
+    status?.classList.add("flex");
+    status?.classList.toggle("bg-green-100", state === "success");
+    status?.classList.toggle("bg-red-100", state === "error");
+  }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const submitButton = form.querySelector<HTMLButtonElement>("button[type=submit]");
+    submitButton?.setAttribute("disabled", "true");
+
+    const data = Object.fromEntries(new FormData(form));
+
+    try {
+      const response = await fetch("/klimatec/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        setStatus("error");
+      } else {
+        form.reset();
+        setStatus("success");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.");
+    } finally {
+      submitButton?.removeAttribute("disabled");
+    }
+  });
+</script>

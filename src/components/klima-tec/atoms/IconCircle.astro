@@ -1,0 +1,55 @@
+---
+
+type IconColor = "blue" | "green";
+
+type IconBgColor = "white" | "transparent";
+
+type IconSize = "sm" | "md" | "lg";
+
+type Props = {
+  color?: IconColor,
+  bgColor?: IconBgColor,
+  size?: IconSize,
+  padding?: 1 | 2 | 3,
+  shadow?: boolean,
+  class?: string,
+}
+
+const {
+  color="blue",
+  bgColor="white",
+  size="md",
+  padding=2,
+  shadow=false,
+  class: classList,
+}: Props = Astro.props;
+
+const sizeClass = {
+  "sm": "h-12 w-12",
+  "md": "h-14 w-14",
+  "lg": "h-28 w-28",
+}[size];
+
+const paddingClass = {
+  1: "p-1",
+  2: "p-2",
+  3: "p-6",
+}[padding];
+
+const bgColorClass = {
+  "white": "bg-white",
+  "transparent": "bg-transparent",
+}[bgColor];
+---  
+
+  <div class:list={[
+    sizeClass,
+    bgColorClass,
+    paddingClass,
+    shadow && "shadow-[0_0_5px] shadow-black/25",
+    color === "blue" ? "text-blue-900" : "text-ncc-green",
+    "h-12 w-12 shrink-0 flex items-center justify-center rounded-full [&>*]:size-full p-2",
+    classList,
+  ]}>
+    <slot />
+  </div>

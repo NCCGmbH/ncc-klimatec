@@ -1,0 +1,17 @@
+---
+import Headline from '../Headline.astro';
+
+type Props = {
+  title: string,
+}
+
+const { title }: Props = Astro.props;
+
+---
+
+<div class="rounded-md flex flex-col gap-4 p-2 bg-white shadow-[0_0_15px] shadow-black/25">
+  <Headline bold underline level={3}>{title}</Headline>
+  <div class="grid gap-2 gird-cols-2 md:grid-cols-4">
+    <slot />
+  </div>
+</div>

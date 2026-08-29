@@ -1,0 +1,34 @@
+---
+
+type ButtonType = "button" | "link";
+
+type Props = {
+  as?: ButtonType,
+  href?: string,
+  class?: string,
+  type?: "button" | "submit" | "reset",
+} & astroHTML.JSX.HTMLAttributes
+
+const {
+  as="link",
+  href,
+  type,
+  class: classList,
+  ...attrs
+}: Props = Astro.props;
+
+const Tag = (
+  {
+    "button": "button",
+    "link": "a",
+  } as const
+)[as];
+---
+
+<Tag class:list={[
+  "bg-blue-900 text-white rounded-md px-4 py-[6px] text-[14px] flex items-center gap-2 text-nowrap h-fit w-fit cursor-pointer hover:bg-blue-950 transition-colors",
+  classList
+]} {href} {type} {...attrs}>
+  <slot />
+  <slot name="icon" />
+</Tag>

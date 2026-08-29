@@ -1,0 +1,42 @@
+---
+type Props = {
+  dateSortHref: string,
+  dateSortDirection: "asc" | "desc",
+}
+
+const { dateSortHref, dateSortDirection }: Props = Astro.props;
+---
+
+<div class="rounded-lg overflow-x-auto border-gray-300 border-2 w-full">
+  <table class="table-fixed overflow-hidden border-collapse w-full">
+    <tr>
+      <th class="border-b-2 border-gray-300 bg-gray-100 p-2 text-start">
+        E-Mail
+      </th>
+      <th class="border-b-2 border-gray-300 bg-gray-100 p-2 text-start">Anfrage</th>
+      <th class="border-b-2 border-gray-300 bg-gray-100 p-2 text-start">
+        <a
+          href={dateSortHref}
+          class="inline-flex items-center gap-1 hover:text-blue-900"
+          aria-label={`Nach Datum ${dateSortDirection === "asc" ? "absteigend" : "aufsteigend"} sortieren`}
+        >
+          Datum
+          <svg
+            class:list={["transition-transform", dateSortDirection === "asc" && "rotate-180"]}
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ><path d="M12 19V5" /><path d="m5 12 7-7 7 7" /></svg>
+        </a>
+      </th>
+      <th class="border-b-2 border-gray-300 bg-gray-100 p-2 text-start">Status</th>
+    </tr>
+    <slot />
+  </table>
+</div>

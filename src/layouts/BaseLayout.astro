@@ -6,9 +6,10 @@ type Props = {
   description: string,
   image: string,
   domain: string,
+  design?: 'klima-tec' | 'ncc'
 }
 
-const { title, description, image, domain }: Props = Astro.props;
+const { title, description, image, domain, design="ncc" }: Props = Astro.props;
 ---
 
 <html lang="de" class="scroll-smooth">
@@ -24,6 +25,7 @@ const { title, description, image, domain }: Props = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -44,9 +46,9 @@ const { title, description, image, domain }: Props = Astro.props;
     <!-- Theme -->
     <meta name="theme-color" content="#ffffff" />
   </head>
-  <body class="min-h-screen flex flex-col bg-white text-gray-900 font-manrope">
+  <body class="min-h-screen flex flex-col bg-white text-gray-900 font-manrope group/design" data-page-design={design}>
     <slot name="nav" />
-    <div class="flex-grow">
+    <div class="flex-grow text-blue-950">
       <slot />
     </div>
     <slot name="footer" />

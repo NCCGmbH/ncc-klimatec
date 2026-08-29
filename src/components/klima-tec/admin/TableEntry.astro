@@ -1,0 +1,50 @@
+---
+import Label from './Label.astro';
+
+type Props = {
+  id: string,
+  name: string,
+  firstName?: string,
+  gender?: string,
+  birthDate?: string,
+  mail: string,
+  street?: string,
+  zipCode?: string,
+  city?: string,
+  request: string,
+  date: string,
+  tel?: string,
+  favorite?: boolean,
+  status?: "Offen" | "InKontakt" | "AuftragAngenommen" | "Abgeschlossen" | "Gelöscht",
+}
+
+const {
+  id, name, firstName, gender, birthDate, mail, street, zipCode, city, request, date, tel, favorite=false, status="Offen"
+}: Props = Astro.props;
+---
+
+<tr
+  class="text-sm hover:bg-blue-100 cursor-pointer"
+  data-request-row
+  data-id={id}
+  data-first-name={firstName}
+  data-last-name={name}
+  data-gender={gender}
+  data-birth-date={birthDate}
+  data-mail={mail}
+  data-street={street}
+  data-zip-code={zipCode}
+  data-city={city}
+  data-request={request}
+  data-date={date}
+  data-tel={tel}
+  data-status={status}
+  data-favorite={favorite}
+  tabindex="0"
+  role="button"
+>
+  <td class="border-t-2 border-gray-300 p-2">{mail}</td>
+  <td class="border-t-2 border-gray-300 p-2"><div class="line-clamp-1">{request}</div></td>
+  <td class="border-t-2 border-gray-300 p-2">{date}</td>
+  <td class="border-t-2 border-gray-300 p-2" data-status-label><Label {status} /></td>
+</tr>

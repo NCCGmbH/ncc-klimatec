@@ -8,21 +8,25 @@ type Props = {
   shadow?: boolean,
   bold?: boolean,
   small?: boolean,
+  class?: string,
 }
 
-const { level=2, textColor="green", underline=false, shadow=false, bold=false, small=false }: Props = Astro.props
+const { level=2, textColor="green", underline=false, shadow=false, bold=false, small=false, class: classList }: Props = Astro.props
 
 const textColorClass = {
   white: "text-white",
   green: "text-sky-800",
   black: "text-black",
 }[textColor];
+
+
 ---
-<div class:list={[textColorClass, "break-words leading-tight"]}>
+<div class:list={[textColorClass, "break-words leading-tight", classList]}>
   { (level == 1) && <h1 class:list={[small ? "text-4xl" : "text-5xl", shadow && "text-shadow"]}><slot/></h1> }
   { (level == 2) && <h2 class:list={[small ? "text-xl" : "text-3xl", shadow && "text-shadow"]}><slot/></h2> }
   { (level == 3) && <h3 class:list={[small ? "text-lg" : "text-xl", shadow && "text-shadow-small", bold && "font-semibold"]}><slot/></h3> }
-  { underline && <div class="h-1 w-24 bg-gradient-to-r from-blue-900 to-red-300 rounded-full"></div>}
+  { (level == 4) && <h4 class:list={[small ? "text-md" : "text-lg", shadow && "text-shadow-small", bold && "font-semibold"]}><slot/></h4> }
+  { underline && <div class="h-1 w-24 bg-gradient-to-r group-data-[page-design='klima-tec']/design:from-green-600 group-data-[page-design='klima-tec']/design:to-green-300 group-data-[page-design='ncc']/design:from-blue-900 group-data-[page-design='ncc']/design:to-red-300 rounded-full"></div>}
 </div>
 
 <style>

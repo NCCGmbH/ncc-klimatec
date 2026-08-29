@@ -1,0 +1,51 @@
+---
+
+import Section from "../Section.astro";
+import Headline from "../Headline.astro";
+import InputItem from "./InputItem.astro";
+
+---
+
+<Section bgColor="blue">
+  <Headline level={2}>Kontaktaufname zur Installation Ihrer Klimaanlage</Headline>
+  <p>Jetzt unvergleichlich anfragen - wir beraten Sie gerne.</p>
+  <form class="flex flex-col gap-2">
+    <div class="grid grid-cols-3 gap-4">
+    <InputItem 
+      required 
+      fieldType="text" 
+      name="name" 
+      id="name" 
+      label="Name"
+      placeholder="Ihr Name"
+    />
+
+    <InputItem 
+      required 
+      fieldType="email" 
+      name="email" 
+      id="email" 
+      label="E-Mail"
+      placeholder="example@mail.com"
+    />
+
+    <InputItem  
+      fieldType="tel" 
+      name="tel" 
+      id="tel" 
+      label="Telefon"
+      placeholder="0170 1234567"
+    />
+    </div>
+
+    <InputItem  
+      fieldType="text" 
+      name="address" 
+      id="address" 
+      label="Addresse"
+      placeholder="Straße und Hausnummer"
+    />
+
+  </form>
+  <slot />
+</Section>

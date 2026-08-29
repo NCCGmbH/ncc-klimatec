@@ -1,0 +1,55 @@
+---
+import Headline from '../Headline.astro';
+import { Image } from 'astro:assets';
+
+type Props = {
+  image: ImageMetadata,
+  alt: string,
+  headline: string,
+  link: string,
+}
+
+const {
+  image,
+  alt,
+  headline,
+  link,
+}: Props = Astro.props;
+---
+
+<style>
+  .overlay-toggle:checked ~ .service-overlay {
+    display: flex;
+  }
+  .service-overlay {
+    display: none;
+  }
+</style>
+
+<a href="/" class="hover:scale-105 flex h-full transition-all group">
+<div class="flex flex-col rounded-md overflow-hidden shadow-[0px_0px_15px] shadow-black/25 transition-color group-hover:shadow-cyan-600/25">
+  <div class="relative">
+    <Image
+      src={image}
+      alt={alt}
+      widths={[300, 600]}
+      sizes="(max-width: 768px) 100vw, 600px"
+      class="aspect-[5/2] w-full object-cover"
+    />
+    <div class="h-12 self-end shadow-[0px_0px_5px] shadow-black/25 flex items-center justify-center [&>*]:size-full [&>*]:text-sky-800 p-2 place-self-center translate-y-3 w-12 bg-white rounded-full absolute">
+      <slot name="icon" />
+    </div>
+  </div>
+  <div class="flex h-full flex-col gap-1 p-2 pt-3">
+    <Headline bold level={4}>{headline}</Headline>
+    <div class="flex h-full">
+      <div class="w-full">
+        <slot />
+      </div>
+      <div class="self-end font-bold [&>*]:text-sky-800">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+</a>

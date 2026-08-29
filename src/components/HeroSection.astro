@@ -5,37 +5,40 @@ import Headline from "./Headline.astro"
 import Button from "./Button.astro"
 
 type Props = {
-  title: string,
+  title?: string,
   heroImage: ImageMetadata,
-  button: {
+  button?: {
     text: string,
     href: string
   },
+  filter?: boolean,
+  small?: boolean,
 };
 
-const { title, heroImage, button }: Props = Astro.props;
+const { title, heroImage, button, filter = true, small }: Props = Astro.props;
 ---
 <div id="home" class="block h-[5rem] -mt-[5rem]"></div>
-<section class="relative w-full overflow-hidden">
+<section class:list={["relative w-full overflow-hidden"]}>
   <Image
     src={heroImage}
     alt="Hero"
     widths={[400, 800, 1200]}
     sizes="(max-width: 768px) 100vw, 800px"
     format="webp"
-    class="w-full object-cover h-[calc(100vh-5rem)] max-md:min-h-[100vw] md:max-h-[700px] xl:max-h-[800px]"
+    class:list={["w-full object-cover max-md:h-[calc(100vh-5rem)] max-md:min-h-[100vw]", small ? "md:h-72" : "md:max-h-[700px] xl:max-h-[800px]"]}
     priority
     loading="eager"
   />
-  <div class="absolute z-20 inset-0 bg-[#003a24]/70 md:bg-sky-800/40 mix-blend-multiply"></div>
+  { filter && <div class="absolute z-20 inset-0 bg-[#003a24]/70 md:bg-sky-800/40 mix-blend-multiply"></div> }
   <div class="absolute z-30 inset-0 w-full max-w-[1200px] max-md:pb-20 md:px-[5%] xl:px-0 mx-auto flex flex-col justify-center">
-    <div class="space-y-8 w-full md:max-w-[600px] max-md:px-[5%]">
-      <Headline shadow textColor="white" level={1}>{title}</Headline>
+    <div class="space-y-8 w-full group-data-[page-design='ncc']/design:md:max-w-[600px] max-md:px-[5%]">
+      { title && <Headline shadow textColor="white" level={1}>{title}</Headline> }
       <div class="flex flex-col gap-6">
+        <slot />
         <Headline small shadow textColor="white" level={2}>
           <slot name="subtitle" />
         </Headline>
-        <Button dark as="a" href={button.href}>{button.text}</Button>
+        { button && <Button dark as="a" href={button.href}>{button.text}</Button> }
       </div>
     </div>
   </div>

@@ -1,0 +1,32 @@
+---
+import Headline from '../atoms/Headline.astro';
+import Underscore from '../atoms/Underscore.astro';
+import IconCircle from '../atoms/IconCircle.astro';
+
+type IconColor = 'blue' | 'green';
+
+type Props = {
+  title: string,
+  color?: IconColor,
+  class?: string,
+}
+
+const {
+  title,
+  color="blue",
+  class: classList
+}: Props = Astro.props;
+---
+
+<div class="flex gap-4">
+  <IconCircle {color} size="sm" padding={2} shadow>
+    <slot name="icon" />
+  </IconCircle>
+  <div class="flex flex-col gap-4">
+    <Headline bold level={4}>{title}</Headline>
+    <Underscore />
+    <div>
+      <slot />
+    </div>
+  </div>
+</div>

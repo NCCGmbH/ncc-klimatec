@@ -5,15 +5,19 @@ type Props = {
   bgColor?: BgColors,
   paddingTop?: Padding,
   paddingBottom?: Padding,
-  id?: string
+  fullWidth?: boolean,
+  id?: string,
+  class?: string,
 }
 
-const { bgColor = "white", paddingTop = "large", paddingBottom = "large", id }: Props = Astro.props;
+const { bgColor = "white", paddingTop = "large", paddingBottom = "large", fullWidth=false, id, class: classList }: Props = Astro.props;
 
 const bgColorClass = {
   white: "bg-white",
   gray: "bg-gray-100",
   green: "bg-green-700",
+  blue: "bg-ncc-light-blue",
+  navi: "bg-blue-950",
 }[bgColor] || "bg-white";
 
 const paddingTopClass = {
@@ -31,8 +35,8 @@ const paddingBottomClass = {
 }[paddingBottom] || "pt-20";
 ---
 
-<section id={id} class:list={[bgColorClass, paddingTopClass, paddingBottomClass, "scroll-mt-20"]}>
-  <div class="mx-auto max-w-[1200px] w-full max-xl:px-[5%]">
+<section id={id} class:list={[bgColorClass, paddingTopClass, paddingBottomClass, "scroll-mt-12", classList]}>
+  <div class:list={["mx-auto max-w-[1200px] w-full", !fullWidth && "max-xl:px-[5%]"]}>
     <slot />
   </div>
 </section>
