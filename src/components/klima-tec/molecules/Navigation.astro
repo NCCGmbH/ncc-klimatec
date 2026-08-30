@@ -16,30 +16,34 @@ const { links }: Props = Astro.props;
     <div id="logo" class="row-start-1 cursor-pointer [&>*]:max-w-20 [&>*]:h-fit w-fit col-start-1 col-span-1 bg-transparent ml-[5vw] md:ml-[4vw] xl:ml-0 my-auto justify-self-start p-1">
       <Fragment set:html={logo} />
     </div>
-    <div id="hamburger" class="p-2 bg-white rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-[6px] cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
-      <span id="ham-1" class="bg-blue-900 h-1 w-10 rounded-full" />
-      <span id="ham-2" class="bg-blue-900 h-1 w-10 rounded-full" />
-      <span id="ham-3" class="bg-blue-900 h-1 w-10 rounded-full" />
-    </div>
-    <ol id="nav-links" class:list={[
-      "hidden absolute flex-col md:flex md:static md:flex-row overflow-hidden",
-      "bg-white max-md:mt-12 md:bg-transparent shadow-xl md:shadow-none",
-      "translate-x-full md:translate-x-0", 
-      "rounded-bl-xl md:rounded-md",
-      "opacity-0 md:opacity-100", 
-      "row-start-2 md:row-start-1 col-start-1 md:col-start-2 col-span-2 md:col-span-1", 
-      "md:my-auto md:mr-[4vw] xl:mr-0 md:gap-3 lg:gap-8 md:px-5 xl:px-0 md:py-2", 
-      "w-fit justify-self-end",
-      "transition-all"
-    ]}>
-      { links.map((link) => (
-        <li>
-          <a class="nav-link block md:inline-block hover:bg-blue-900 md:hover:bg-transparent hover:text-white md:hover:text-blue-950 text-center py-4 text-2xl md:text-base md:py-0 px-5 md:px-0 transition-all" href={link.href}>
-            {link.text}
-          </a>
-        </li>
-      )) }
-    </ol>
+    {
+      links.length > 0 && (
+        <div id="hamburger" class="p-2 rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-[6px] cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
+          <span id="ham-1" class="bg-blue-900 h-1 w-10 rounded-full" />
+          <span id="ham-2" class="bg-blue-900 h-1 w-10 rounded-full" />
+          <span id="ham-3" class="bg-blue-900 h-1 w-10 rounded-full" />
+        </div>
+        <ol id="nav-links" class:list={[
+          "hidden absolute flex-col md:flex md:static md:flex-row overflow-hidden",
+          "bg-white max-md:mt-12 md:bg-transparent shadow-xl md:shadow-none",
+          "translate-x-full md:translate-x-0", 
+          "rounded-bl-xl md:rounded-md",
+          "opacity-0 md:opacity-100", 
+          "row-start-2 md:row-start-1 col-start-1 md:col-start-2 col-span-2 md:col-span-1", 
+          "md:my-auto md:mr-[4vw] xl:mr-0 md:gap-3 lg:gap-8 md:px-5 xl:px-0 md:py-2", 
+          "w-fit justify-self-end",
+          "transition-all"
+        ]}>
+          { links.map((link) => (
+            <li>
+              <a class="nav-link block md:inline-block hover:bg-blue-900 md:hover:bg-transparent hover:text-white md:hover:text-blue-950 text-center py-4 text-2xl md:text-base md:py-0 px-5 md:px-0 transition-all" href={link.href}>
+                {link.text}
+              </a>
+            </li>
+          )) }
+        </ol>
+      )
+    }
   </div>
 </nav>
 

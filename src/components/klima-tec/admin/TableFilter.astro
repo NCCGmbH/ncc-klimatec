@@ -27,35 +27,37 @@ const toFilter = Astro.url.searchParams.get("to");
 const filterActive = (searchFilter || selectedStates.length > 0 || fromFilter || toFilter);
 ---
 
-<form data-table-filter class="flex justify-between p-4 rounded-lg bg-ncc-light-blue">
-  <div class="grid grid-cols-2 gap-4">
-    <div class="flex items-center gap-2">
-      <label class="font-bold" for="search">
+<form data-table-filter class="flex flex-col gap-4 rounded-xl bg-white shadow-[0_0_15px] shadow-black/25 p-4 lg:flex-row lg:items-end lg:justify-between">
+  <div class="flex flex-wrap gap-4">
+    <div class="flex flex-col gap-1.5">
+      <label class="text-xs font-semibold uppercase tracking-wide text-gray-500" for="search">
         Suche
       </label>
-      <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
-      </span>
-      <input value={searchFilter} class="border px-2 py-1 outline-blue-900 rounded-md border-gray-400" type="text" name="search" id="search" />
+      <div class="relative">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        <input value={searchFilter} class="w-full rounded-md border border-gray-300 bg-white py-1.5 pl-8 pr-2 text-sm outline-blue-900 sm:w-56" type="text" name="search" id="search" />
+      </div>
     </div>
 
-    <div class="flex items-center gap-2">
-      <p class="font-bold">
+    <div class="flex flex-col gap-1.5">
+      <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">
         Datum
       </p>
-      <label for="from">von</label>
-      <input value={fromFilter} class="border px-2 py-1 outline-blue-900 rounded-md border-gray-400" name="from" id="from" type="date" />
-      <label for="to">bis</label>
-      <input value={toFilter} class="border px-2 py-1 outline-blue-900 rounded-md border-gray-400" name="to" id="to" type="date" />
+      <div class="flex flex-wrap items-center gap-2">
+        <input value={fromFilter} aria-label="Von" class="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm outline-blue-900" name="from" id="from" type="date" />
+        <span class="text-gray-400">–</span>
+        <input value={toFilter} aria-label="Bis" class="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm outline-blue-900" name="to" id="to" type="date" />
+      </div>
     </div>
 
-    <div class="flex items-center gap-2">
-      <p class="font-bold">Status</p>
+    <div class="flex flex-col gap-1.5">
+      <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">Status</p>
       <details data-status-filter class="relative">
-        <summary class="cursor-pointer list-none rounded-md border border-gray-400 bg-white px-2 py-1 text-sm select-none">
+        <summary class="flex items-center gap-1.5 cursor-pointer list-none rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-sm select-none">
           <span data-status-filter-summary>{summaryText}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
-        <div class="absolute z-10 mt-1 flex w-max flex-col gap-1 rounded-md border border-gray-300 bg-white p-2 shadow-lg">
+        <div class="absolute z-10 mt-1 flex w-max max-w-[calc(100vw-2rem)] flex-col gap-1 rounded-md border border-gray-200 bg-white p-2 shadow-lg">
           {STATUS_OPTIONS.map((option) => (
             <label class="flex items-center gap-2 rounded px-1 py-0.5 text-sm hover:bg-gray-100">
               <input
@@ -72,16 +74,18 @@ const filterActive = (searchFilter || selectedStates.length > 0 || fromFilter ||
     </div>
   </div>
 
-  <Button as="button" type="submit" class="self-end">
-    Filtern
-  </Button>
-  {
-    filterActive && (
-      <Button as="button" type="button" data-reset-filter class="self-end">
-        Filter zurücksetzen
-      </Button>      
-    )
-  }
+  <div class="flex items-center gap-4">
+    {
+      filterActive && (
+        <button type="button" data-reset-filter class="cursor-pointer text-sm font-medium text-gray-500 underline-offset-2 transition-colors hover:text-blue-900 hover:underline">
+          Zurücksetzen
+        </button>
+      )
+    }
+    <Button as="button" type="submit">
+      Filtern
+    </Button>
+  </div>
 </form>
 
 <script>

@@ -9,11 +9,11 @@ const { darker=false, class: classList }: Props = Astro.props;
 
 ---
 
-<div class:list={["flex gap-4 rounded-lg py-4 px-8", darker ? "bg-[#e4effc]" : "bg-blue-50", classList]}>
-  <div class="h-12 self-center flex [&>*]:size-full [&>*]:text-blue-900">
+<div class:list={["flex max-md:flex-col gap-4 rounded-lg py-4 px-4 md:px-8", darker ? "bg-[#e4effc]" : "bg-blue-50", classList]}>
+  <div class="h-12 self-start md:self-center flex [&>*]:size-full [&>*]:text-blue-900">
     <slot name="icon" />
   </div>
-  <div class="w-[2px] min-h-max rounded-full bg-blue-100" />
+  <div class="w-full h-[2px] md:w-[2px] md:min-h-max rounded-full bg-blue-100" />
   <div class="w-full">
     <slot />
   </div>

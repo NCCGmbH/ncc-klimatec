@@ -7,10 +7,10 @@ type Props = {
 const { dateSortHref, dateSortDirection }: Props = Astro.props;
 ---
 
-<div class="rounded-lg overflow-x-auto border-gray-300 border-2 w-full">
-  <table class="table-fixed overflow-hidden border-collapse w-full">
+<div class="rounded-lg overflow-x-auto border-2 w-full bg-white shadow-[0_0_15px] shadow-black/25">
+  <table class="overflow-hidden border-collapse w-full">
     <tr>
-      <th class="border-b-2 border-gray-300 bg-gray-100 p-2 text-start">
+      <th class="max-md:hidden border-b-2 border-gray-300 bg-gray-100 p-2 text-start">
         E-Mail
       </th>
       <th class="border-b-2 border-gray-300 bg-gray-100 p-2 text-start">Anfrage</th>
@@ -35,7 +35,7 @@ const { dateSortHref, dateSortDirection }: Props = Astro.props;
           ><path d="M12 19V5" /><path d="m5 12 7-7 7 7" /></svg>
         </a>
       </th>
-      <th class="border-b-2 border-gray-300 bg-gray-100 p-2 text-start">Status</th>
+      <th class="border-b-2 border-gray-300 bg-gray-100 p-2 text-start"><p class="max-md:hidden">Status</p></th>
     </tr>
     <slot />
   </table>

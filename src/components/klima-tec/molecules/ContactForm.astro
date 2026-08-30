@@ -4,99 +4,100 @@ import Section from "../../Section.astro";
 import FormField from "../atoms/FormField.astro";
 import Button from "../atoms/Button.astro";
 
+type Props = {
+  class?: string,
+}
+
+const { class: classList }: Props = Astro.props;
+
 ---
 
-<form data-contact-form class="flex flex-col gap-6 bg-white shadow-[0_0_15px] shadow-black/25 p-8 rounded-lg">
-  <div class="grid grid-cols-3 gap-6">
-    <FormField
-      required
-      fieldType="select"
-      name="gender"
-      id="gender"
-      label="Anrede"
-      placeholder="Bitte wählen"
-      options={[
-        { label: "Herr", value: "male" },
-        { label: "Frau", value: "female" },
-        { label: "Divers", value: "diverse" },
-      ]}
-    />
-
-    <FormField
-      required
-      fieldType="text"
-      name="name"
-      id="name"
-      label="Name"
-      placeholder="Name"
-    />
-
-    <FormField
-      fieldType="text"
-      name="firstName"
-      id="firstName"
-      label="Vorname"
-      placeholder="Vorname"
-    />
-  </div>
-
-  <div class="grid grid-cols-3 gap-6">
-    <FormField
-      required
-      fieldType="email"
-      name="email"
-      id="email"
-      label="E-Mail"
-      placeholder="example@mail.com"
-    />
-
-    <FormField
-      required
-      fieldType="date"
-      name="birthDate"
-      id="birthDate"
-      label="Geburtsdatum"
-    />
-
-    <FormField
-      fieldType="tel"
-      name="tel"
-      id="tel"
-      label="Telefon"
-      placeholder="0170 1234567"
-    />
-  </div>
-
-  <div class="grid grid-cols-3 gap-6">
-    <FormField
-      required
-      fieldType="text"
-      name="street"
-      id="street"
-      label="Straße & Hausnummer"
-      placeholder="Musterstraße 1"
-    />
-
-    <FormField
-      required
-      fieldType="text"
-      name="zipCode"
-      id="zipCode"
-      label="PLZ"
-      placeholder="12345"
-    />
-
-    <FormField
-      required
-      fieldType="text"
-      name="city"
-      id="city"
-      label="Ort"
-      placeholder="Musterstadt"
-    />
-  </div>
+<form data-contact-form class:list={["grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 bg-white shadow-[0_0_15px] shadow-black/25 p-8 rounded-lg", classList]}>
+  <FormField
+    required
+    fieldType="select"
+    name="gender"
+    id="gender"
+    label="Anrede"
+    placeholder="Bitte wählen"
+    options={[
+      { label: "Herr", value: "male" },
+      { label: "Frau", value: "female" },
+      { label: "Divers", value: "diverse" },
+    ]}
+  />
 
   <FormField
+    required
+    fieldType="text"
+    name="name"
+    id="name"
+    label="Name"
+    placeholder="Name"
+  />
+
+  <FormField
+    fieldType="text"
+    name="firstName"
+    id="firstName"
+    label="Vorname"
+    placeholder="Vorname"
+  />
+
+  <FormField
+    required
+    fieldType="email"
+    name="email"
+    id="email"
+    label="E-Mail"
+    placeholder="example@mail.com"
+  />
+
+  <FormField
+    required
+    fieldType="date"
+    name="birthDate"
+    id="birthDate"
+    label="Geburtsdatum"
+  />
+
+  <FormField
+    fieldType="tel"
+    name="tel"
+    id="tel"
+    label="Telefon"
+    placeholder="0170 1234567"
+  />
+
+  <FormField
+    required
+    fieldType="text"
+    name="street"
+    id="street"
+    label="Straße & Hausnummer"
+    placeholder="Musterstraße 1"
+  />
+
+  <FormField
+    required
+    fieldType="text"
+    name="zipCode"
+    id="zipCode"
+    label="PLZ"
+    placeholder="12345"
+  />
+
+  <FormField
+    required
+    fieldType="text"
+    name="city"
+    id="city"
+    label="Ort"
+    placeholder="Musterstadt"
+  />
+
+  <FormField
+    class="sm:col-span-2 md:col-span-3"
     required
     textarea
     name="textField"
@@ -105,7 +106,7 @@ import Button from "../atoms/Button.astro";
     placeholder="z.B. Installation Klimaanlage, Beratung, Wartung ..."
   />
 
-  <div class="flex gap-4 justify-between">
+  <div class="flex gap-4 justify-between sm:col-span-2 md:col-span-3">
     <div class="text-xs flex flex-col gap-2">
       <p class="font-bold"><span class="text-red-600">*</span> Pflichtfelder</p>
       <p>

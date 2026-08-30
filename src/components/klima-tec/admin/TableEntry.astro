@@ -12,7 +12,7 @@ type Props = {
   zipCode?: string,
   city?: string,
   request: string,
-  date: string,
+  date: Date,
   tel?: string,
   favorite?: boolean,
   status?: "Offen" | "InKontakt" | "AuftragAngenommen" | "Abgeschlossen" | "Gelöscht",
@@ -21,6 +21,14 @@ type Props = {
 const {
   id, name, firstName, gender, birthDate, mail, street, zipCode, city, request, date, tel, favorite=false, status="Offen"
 }: Props = Astro.props;
+
+const getDate = (date: Date) => {
+  return `${date.toLocaleDateString()}`;
+}
+
+const getTime = (date: Date) => {
+  return `${date.toLocaleTimeString().slice(0, -3)}`;
+}
 ---
 
 <tr
@@ -36,7 +44,7 @@ const {
   data-zip-code={zipCode}
   data-city={city}
   data-request={request}
-  data-date={date}
+  data-date={`${getDate(date)}, ${getTime(date)}`}
   data-tel={tel}
   data-status={status}
   data-favorite={favorite}
@@ -44,7 +52,7 @@ const {
   role="button"
 >
   <td class="border-t-2 border-gray-300 p-2">{mail}</td>
-  <td class="border-t-2 border-gray-300 p-2"><div class="line-clamp-1">{request}</div></td>
-  <td class="border-t-2 border-gray-300 p-2">{date}</td>
-  <td class="border-t-2 border-gray-300 p-2" data-status-label><Label {status} /></td>
+  <td class="border-t-2 border-gray-300 p-2 max-md:hidden"><div class="line-clamp-1">{request}</div></td>
+  <td class="border-t-2 border-gray-300 p-2">{getDate(date)}</td>
+  <td class="border-t-2 border-gray-300 p-2 max-md:place-items-end" data-status-label><Label {status} /></td>
 </tr>

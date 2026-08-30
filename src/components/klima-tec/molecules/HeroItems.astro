@@ -6,12 +6,13 @@ import Headline from "../atoms/Headline.astro";
 type Props = {
   title: string,
   color?: "blue" | "green",
+  class?: string,
 }
 
-const { title, color="blue" }: Props = Astro.props;
+const { title, color="blue", class: classList }: Props = Astro.props;
 ---
 
-<div class="flex flex-col items-center gap-2">
+<div class:list={["flex flex-col items-center gap-1 md:gap-2", classList]}>
   <IconCircle bgColor="transparent" {color} class="bg-transparent!">
     <slot name="icon" />
   </IconCircle>
