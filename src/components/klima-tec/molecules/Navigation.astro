@@ -1,31 +1,52 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '../../../assets/svgs/ncc-klimatec-logo.svg?raw';
+
+type LinkType = { text: string, href: string };
 
 type Props = {
-  links: { text: string, href: string }[];
+  links: LinkType[],
+  logo?: string,
+  logoImg?: ImageMetadata,
+  klimatecDesign?: boolean,
 };
 
-const { links }: Props = Astro.props;
+const { links, logo, logoImg, klimatecDesign=false }: Props = Astro.props;
+
+const textColorClass = klimatecDesign ? 'text-ncc-blue' : 'text-ncc-sky';
+
+const bgColorClass = klimatecDesign ? 'bg-ncc-blue' : 'bg-ncc-sky';
 ---
 
 <div id="nav-overlay" class="fixed inset-0 z-40 hidden"></div>
 
-<nav id="navbar" class="sticky overflow-x-clip overflow-y-visible md:overflow-visible top-0 h-12 z-50 w-full backdrop-blur-xl bg-white/75 max-w-full shadow-black/25 transition-all">
-  <div class="mx-auto max-w-[1200px] h-full grid grid-cols-[auto_1fr] md:items-center text-blue-900 transition-all text-xl md:text-[1.2rem]">
+<nav id="navbar" class="sticky overflow-x-clip overflow-y-visible md:overflow-visible top-0 h-14 z-50 w-full backdrop-blur-xl bg-white/75 max-w-full shadow-black/25 transition-all">
+  <div class:list={["mx-auto max-w-[1200px] h-full grid grid-cols-[auto_1fr] md:items-center transition-all text-xl md:text-[1.2rem]", textColorClass]}>
     <div id="logo" class="row-start-1 cursor-pointer [&>*]:max-w-20 [&>*]:h-auto w-fit col-start-1 col-span-1 bg-transparent ml-[5vw] md:ml-[4vw] xl:ml-0 my-auto justify-self-start p-1">
-      <Fragment set:html={logo} />
+      { logo && <Fragment set:html={logo} /> }
+      { logoImg && (
+        <Image
+          id="logo"
+          src={logoImg}
+          loading="eager"
+          alt="Logo"
+          widths={[128, 256, 512]}
+          sizes="128px"
+          priority
+          format="webp"
+          class="object-scale-down"
+        />
+      )}
     </div>
     {
       links.length > 0 && (
         <div id="hamburger" class="p-2 rounded-lg row-start-1 col-start-2 mr-[5vw] md:mr-10 col-span-1 my-auto justify-self-end flex flex-col gap-[6px] cursor-pointer md:hidden [&>span]:transition-all [&>span]:duration-300">
-          <span id="ham-1" class="bg-blue-900 h-1 w-10 rounded-full" />
-          <span id="ham-2" class="bg-blue-900 h-1 w-10 rounded-full" />
-          <span id="ham-3" class="bg-blue-900 h-1 w-10 rounded-full" />
+          <span id="ham-1" class:list={["h-1 w-10 rounded-full", bgColorClass]} />
+          <span id="ham-2" class:list={["h-1 w-10 rounded-full", bgColorClass]} />
+          <span id="ham-3" class:list={["h-1 w-10 rounded-full", bgColorClass]} />
         </div>
         <ol id="nav-links" class:list={[
           "hidden absolute flex-col md:flex md:static md:flex-row overflow-hidden",
-          "bg-white max-md:mt-16 md:bg-transparent shadow-xl md:shadow-none",
+          "bg-white max-md:mt-14 md:bg-transparent shadow-xl md:shadow-none",
           "translate-x-full right-0 md:translate-x-0", 
           "rounded-bl-xl md:rounded-md",
           "opacity-0 md:opacity-100", 
@@ -36,7 +57,9 @@ const { links }: Props = Astro.props;
         ]}>
           { links.map((link) => (
             <li>
-              <a class="nav-link block md:inline-block hover:bg-blue-900 md:hover:bg-transparent hover:text-white md:hover:text-blue-950 text-center py-4 text-2xl md:text-base md:py-0 px-5 md:px-0 transition-all" href={link.href}>
+              <a class:list={["nav-link block md:inline-block md:hover:bg-transparent hover:text-white text-center py-4 text-2xl md:text-base md:py-0 px-5 md:px-0 transition-all",
+                klimatecDesign ? "hover:bg-ncc-blue md:hover:text-ncc-blue" : "hover:bg-ncc-sky md:hover:text-ncc-sky"
+              ]} href={link.href}>
                 {link.text}
               </a>
             </li>
@@ -75,6 +98,7 @@ const { links }: Props = Astro.props;
     ham1?.classList.add('rotate-45', 'translate-y-[10px]');
     ham2?.classList.add('!bg-transparent');
     ham3?.classList.add('-rotate-45', '-translate-y-[10px]');
+    navbar?.classList.add('!bg-white');
 
     /** Nav Overlay */
     navOverlay?.classList.remove('hidden');
@@ -96,6 +120,7 @@ const { links }: Props = Astro.props;
     ham2?.classList.remove('!bg-transparent');
     ham3?.classList.remove('-rotate-45', '-translate-y-[10px]');
     hamburger?.classList.add('pointer-events-none');
+    navbar?.classList.remove('!bg-white');
 
     /** Nav Overlay */
     navOverlay?.classList.add('hidden');

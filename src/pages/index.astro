@@ -3,7 +3,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 // Components
-import Navigation from "../components/Navigation.astro";
+import Navigation from "../components/klima-tec/molecules/Navigation.astro";
 import HeroSection from "../components/HeroSection.astro";
 import About from "../components/About.astro";
 import Services from "../components/Services.astro";
@@ -37,13 +37,15 @@ import logoEos from "../assets/images/logo_eos.png";
   domain="https://nccgmbh.com/"
 >
 
-  <Navigation slot="nav" links={[
+  <Navigation slot="nav" logoImg={Logo} links={[
     { text: "KlimaTec", href: "/klimatec/" },
     { text: "Leistungen", href: "#services" },
     { text: "Über uns", href: "#about" },
     { text: "Subdevisions", href: "#subdevisions" },
     { text: "Kontakt", href: "#contact" }
   ]} />
+
+
   
   <HeroSection 
     title="Wir helfen bei IT-Problemen jeglicher Art"

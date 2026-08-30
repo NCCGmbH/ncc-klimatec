@@ -13,7 +13,9 @@ module.exports = {
       },
       colors: {
         "ncc-green": '#4b9b00',
+        'ncc-blue': '#1e3a8a',
         "ncc-light-blue": '#f6faff',
+        'ncc-sky': '#075985',
         turquoise: '#1e40af',        // z. B. bg-primary
         accent: '#f43f5e',         // z. B. text-accent
         turquoise: {
