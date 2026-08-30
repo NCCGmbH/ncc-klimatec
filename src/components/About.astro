@@ -18,7 +18,7 @@ const { bgColor="white", headline, subtitle, image }: Props = Astro.props;
 ---
 
 <Section class="[&>*]:max-md:p-0 max-md:bg-ncc-light-blue" id="about" bgColor={bgColor}>
-  <div class="grid px-8 md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-center md:rounded-lg bg-ncc-light-blue md:p-10 lg:p-12">
+  <div class="grid grid-cols-1 px-8 md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-center md:rounded-lg bg-ncc-light-blue md:p-10 lg:p-12">
     <div class="w-40 md:w-56 shrink-0 mx-auto md:mx-0 max-md:hidden">
       <Image
         src={image}
