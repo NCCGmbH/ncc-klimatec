@@ -13,7 +13,7 @@ const { links }: Props = Astro.props;
 
 <nav id="navbar" class="sticky overflow-x-clip overflow-y-visible md:overflow-visible top-0 h-12 z-50 w-full backdrop-blur-xl bg-white/75 max-w-full shadow-black/25 transition-all">
   <div class="mx-auto max-w-[1200px] h-full grid grid-cols-[auto_1fr] md:items-center text-blue-900 transition-all text-xl md:text-[1.2rem]">
-    <div id="logo" class="row-start-1 cursor-pointer [&>*]:max-w-20 [&>*]:h-fit w-fit col-start-1 col-span-1 bg-transparent ml-[5vw] md:ml-[4vw] xl:ml-0 my-auto justify-self-start p-1">
+    <div id="logo" class="row-start-1 cursor-pointer [&>*]:max-w-20 [&>*]:h-auto w-fit col-start-1 col-span-1 bg-transparent ml-[5vw] md:ml-[4vw] xl:ml-0 my-auto justify-self-start p-1">
       <Fragment set:html={logo} />
     </div>
     {
@@ -25,8 +25,8 @@ const { links }: Props = Astro.props;
         </div>
         <ol id="nav-links" class:list={[
           "hidden absolute flex-col md:flex md:static md:flex-row overflow-hidden",
-          "bg-white max-md:mt-12 md:bg-transparent shadow-xl md:shadow-none",
-          "translate-x-full md:translate-x-0", 
+          "bg-white max-md:mt-16 md:bg-transparent shadow-xl md:shadow-none",
+          "translate-x-full right-0 md:translate-x-0", 
           "rounded-bl-xl md:rounded-md",
           "opacity-0 md:opacity-100", 
           "row-start-2 md:row-start-1 col-start-1 md:col-start-2 col-span-2 md:col-span-1", 
