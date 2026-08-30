@@ -11,11 +11,11 @@ type Props = {
 const { text, links, klimatecDesign=false }: Props = Astro.props;
 ---
 
-<footer class:list={["w-full px-[3%] pt-24 pb-12 text-white text-base", klimatecDesign ? "bg-blue-950" : "bg-sky-950"]}>
+<footer class:list={["w-full px-[3%] pt-24 pb-12 text-white text-base bg-blue-950"]}>
   <slot />
-  <div class="gap-4 flex max-md:flex-col items-center justify-center">
+  <div class="gap-4 flex max-lg:flex-col items-center justify-center">
     <p class="text-center">{text}</p>
-    <span class="max-md:hidden">|</span>
+    <span class="max-lg:hidden">|</span>
     <div class="flex gap-4 flex-wrap justify-center">
       {links.map((link, idx) => (
         <>

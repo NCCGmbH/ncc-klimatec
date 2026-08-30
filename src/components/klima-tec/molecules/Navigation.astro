@@ -10,7 +10,7 @@ type Props = {
   klimatecDesign?: boolean,
 };
 
-const { links, logo, logoImg, klimatecDesign=false }: Props = Astro.props;
+const { links, logo, logoImg, klimatecDesign=true }: Props = Astro.props;
 
 const textColorClass = klimatecDesign ? 'text-ncc-blue' : 'text-ncc-sky';
 
@@ -58,7 +58,7 @@ const bgColorClass = klimatecDesign ? 'bg-ncc-blue' : 'bg-ncc-sky';
           { links.map((link) => (
             <li>
               <a class:list={["nav-link block md:inline-block md:hover:bg-transparent hover:text-white text-center py-4 text-2xl md:text-base md:py-0 px-5 md:px-0 transition-all",
-                klimatecDesign ? "hover:bg-ncc-blue md:hover:text-ncc-blue" : "hover:bg-ncc-sky md:hover:text-ncc-sky"
+                klimatecDesign ? "hover:bg-ncc-blue md:hover:text-blue-950" : "hover:bg-ncc-sky md:hover:text-ncc-sky"
               ]} href={link.href}>
                 {link.text}
               </a>

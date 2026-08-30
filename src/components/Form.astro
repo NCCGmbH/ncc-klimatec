@@ -2,15 +2,16 @@
 type Props = {
   fid?: string;
   fmethod?: string;
+  class?: string
 }
 
-const { fid, fmethod }: Props = Astro.props;
+const { fid, fmethod, class: classList }: Props = Astro.props;
 ---
 
 <form 
   id={fid ?? undefined} 
   method={fmethod ?? undefined} 
-  class="w-full flex flex-col max-h-fit gap-4 bg-white shadow-lg p-4 rounded-md"
+  class:list={["w-full flex flex-col max-h-fit gap-4 bg-white shadow-lg p-4 rounded-lg", classList]}
 >
   <slot />
 </form>

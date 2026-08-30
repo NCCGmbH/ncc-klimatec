@@ -31,16 +31,16 @@ const { fieldType, textarea=false, label, name, id, placeholder, required=false,
       name={name}
       {placeholder}
       {required}
-      class="w-full h-24 max-h-64 outline-blue-900 border-gray-400 border rounded-md px-3 py-2"
+      class="w-full h-24 max-h-64 group-data-[page-design='ncc']/design:outline-sky-900 group-data-[page-design='klimatec']/design:outline-blue-900 border-gray-400 border rounded-md px-3 py-2"
     />
   ) : fieldType === 'select' ? (
-    <select id={id} name={name} required={required} class="border px-3 py-2 outline-blue-900 rounded-md border-gray-400">
+    <select id={id} name={name} required={required} class="border px-3 py-2 group-data-[page-design='ncc']/design:outline-sky-900 group-data-[page-design='klimatec']/design:outline-blue-900 rounded-md border-gray-400">
       {placeholder && <option value="" disabled selected>{placeholder}</option>}
       {options.map((option) => (
         <option value={option.value}>{option.label}</option>
       ))}
     </select>
   ) : (
-    <input {placeholder} class="border px-3 py-2 outline-blue-900 rounded-md border-gray-400" type={fieldType} name={name} id={name} required={required} />
+    <input {placeholder} class="border px-3 py-2 group-data-[page-design='ncc']/design:outline-sky-900 group-data-[page-design='klimatec']/design:outline-blue-900 rounded-md border-gray-400" type={fieldType} name={name} id={name} required={required} />
   )}
 </div>

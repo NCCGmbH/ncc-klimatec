@@ -40,19 +40,19 @@ import FooterLink from "../../components/klima-tec/molecules/FooterLink.astro";
 import HeroItems from "../../components/klima-tec/molecules/HeroItems.astro";
 import Underscore from "../../components/klima-tec/atoms/Underscore.astro";
 
-import logo from '../../assets/svgs/ncc-klimatec-logo.svg?raw';
+import logoImg from '../../assets/images/ncc-klimatec-logo-final.png';
 
 ---
 
 <BaseLayout
   title="NCC GmbH - Wir helfen bei IT-Problemen jeglicher Art"
   description="Die NCC GmbH ist Ihr Partner für IT-Service, Netzwerktechnik und smarte Sicherheitslösungen – kompetent, unabhängig und zuverlässig. Jetzt mehr über unser Leistungsspektrum erfahren."
-  image="og-image.png"
+  image="og-klimatec.png"
   domain="https://nccgmbh.com/"
-  design="klima-tec"
+  design="klimatec"
 >
 
-  <Navigation slot="nav" klimatecDesign {logo} links={[
+  <Navigation slot="nav" klimatecDesign {logoImg} links={[
     { text: "NCC", href: "/" },
     { text: "Leistungen", href: "/klimatec/#services" },
     { text: "Vorteile", href: "/klimatec/#benefits" },
@@ -61,15 +61,10 @@ import logo from '../../assets/svgs/ncc-klimatec-logo.svg?raw';
   ]} />
 
   <HeroSection id="klimatec-home" image={HeroImage}>
-    <Headline level={1}>
-      <div class="[&>*]:size-full">
-        <Fragment set:html={logoHeadline} />
-      </div>
-    </Headline>
-    <Headline bold level={2}>Angenehme Temperaturen.<br />Stabile IT.<br />Mehr Lebensqualität.</Headline>
+    <Headline bold level={1} size={2}>Angenehme Temperaturen.<br />Stabile IT.<br />Mehr Lebensqualität.</Headline>
     <Underscore />
     <p>Wir verbinden moderne Klimatechnik mit sicherer IT-Infrastruktur - für Unternehmen und Privathaushalte.</p>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 lg:pr-8 pt-4 pb-8 max-md:text-sm">
+    <div slot="features" class="grid grid-cols-3 gap-2 lg:pr-8 pt-4 pb-8 max-md:text-sm [&_h4]:max-md:text-base">
       <HeroItems title="Kühlen">
         Für IT-Infrastruktur & Wohnkomfort
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-snowflake-icon lucide-snowflake"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg>
@@ -78,12 +73,12 @@ import logo from '../../assets/svgs/ncc-klimatec-logo.svg?raw';
         Zuhause & im Homeoffice
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
       </HeroItems>
-      <HeroItems class="col-start-1 row-start-2 col-span-2 max-w-[50%] mx-auto md:col-start-3 md:row-start-1 md:col-span-1 md:max-w-full" color="green" title="Energieeffizient">
+      <HeroItems color="green" title="Energieeffizient">
         Moderne Technik, geringer Verbrauch
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf-icon lucide-leaf"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
       </HeroItems>
     </div>
-    <Button href="/klimatec/#contact">
+    <Button slot="cta" href="/klimatec/#contact">
       Jetzt beraten lassen
       <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
     </Button>
@@ -245,7 +240,9 @@ import logo from '../../assets/svgs/ncc-klimatec-logo.svg?raw';
     </div>
   </Section>
 
-  <ContactSection id="contact" image={HeroImage} />
+  <ContactSection id="contact" image={HeroImage}>
+    <ContactForm slot="form" class="max-lg:!shadow-none max-lg:!rounded-none" />
+  </ContactSection>
 
   <Footer slot="footer" 
     klimatecDesign

@@ -1,4 +1,4 @@
-export type BgColors = "white" | "gray" | "green" | "blue" | "navi";
+export type BgColors = "white" | "gray" | "green" | "blue" | "navi" | "sky-dark";
 
 export type Padding = "none" | "small" | "medium" | "large";
 

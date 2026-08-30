@@ -2,9 +2,10 @@
 type Props = {
   length?: "sm" | "md" | "lg",
   class?: string,
+  design?: "ncc" | "klimatec",
 }
 
-const { length="md", class: classList }: Props = Astro.props;
+const { length="md", class: classList, design="klimatec" }: Props = Astro.props;
 ---
 
-<div class:list={["h-1 w-16 rounded-full bg-ncc-green", classList]} />
+<div class:list={["h-1 w-16 rounded-full", design === "klimatec" ? "bg-ncc-green" : "bg-ncc-sky-light", classList]} />

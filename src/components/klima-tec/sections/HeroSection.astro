@@ -10,9 +10,19 @@ import HeroItems from '../molecules/HeroItems.astro';
 type Props = {
   id: string,
   image: ImageMetadata,
+  design?: "ncc" | "klimatec",
 };
 
-const { id, image }: Props = Astro.props;
+const { id, image, design="klimatec" }: Props = Astro.props;
+
+const hasFeatures = Astro.slots.has("features");
+
+const overlayColorClasses = {
+  "ncc": "bg-ncc-light-blue",
+  "klimatec": "bg-ncc-light-blue",
+}[design];
+
+const dividerPath = "M0,20 C300,40 1080,20 1440,0 L1440,40 L0,40 Z";
 ---
 
 <Section {id} fullWidth paddingBottom='none' paddingTop='none'>
@@ -24,29 +34,59 @@ const { id, image }: Props = Astro.props;
       sizes="(max-width: 768px) 100vw, 800px"
       format="webp"
       class:list={[
-        "col-start-1 row-start-1 w-full object-cover object-right",
-        "min-h-[620px] lg:min-h-[680px] lg:px-[1px] max-lg:opacity-50"
+        "col-start-1 row-start-1 w-full object-cover object-right max-lg:hidden",
+        "lg:h-[680px] lg:px-[1px]"
       ]}
       priority
       loading="eager"
     />
-    <div class:list={[
-      "col-start-1 max-md:min-h-[calc(100vh-56px)] row-start-1 flex justify-center z-10 px-4 lg:px-8 py-8 md:py-16 max-w-full lg:max-w-[35rem]",
-      "bg-gradient-to-t from-ncc-light-blue from-0% via-ncc-light-blue via-40% to-transparent to-100%",
-      "lg:bg-gradient-to-r lg:from-0% lg:via-90%"
-    ]}>
-      <div class="flex flex-col gap-4 max-w-[35rem]">
+    <div
+      aria-hidden="true"
+      class:list={[
+        "hidden lg:block col-start-1 row-start-1 lg:w-[58%] xl:w-[54%] lg:h-[680px]",
+        "[clip-path:polygon(0_0,100%_0,78%_100%,0_100%)]",
+        overlayColorClasses,
+      ]}
+    />
+    <div class="col-start-1 row-start-1 flex justify-center z-10 px-4 lg:px-8 py-8 md:py-16 max-w-full lg:max-w-[36rem] xl:max-w-[36rem] lg:pr-10">
+      <div class="flex flex-col gap-4 w-full md:mx-auto lg:mx-0">
         <slot />
+
+        {hasFeatures && (
+          <div class="max-lg:hidden">
+            <slot name="features" />
+          </div>
+        )}
+
+        <slot name="cta" />
+
+        <div class="lg:hidden max-md:-mx-4 md:mx-auto md:rounded-lg md:overflow-hidden">
+          <Image
+            src={image}
+            alt="Hero"
+            widths={[400, 800]}
+            sizes="100vw"
+            format="webp"
+            class="min-w-full aspect-[4/3] max-h-96 object-cover object-right"
+            loading="lazy"
+          />
+        </div>
+
+        {hasFeatures && (
+          <div class="lg:hidden bg-ncc-light-blue rounded-lg p-4 max-md:-mx-4 md:mx-auto">
+            <slot name="features" />
+          </div>
+        )}
       </div>
     </div>
     <svg
-      class="absolute bottom-[-1px] left-0 w-full h-24 md:h-32 lg:z-20"
+      class="absolute bottom-[-1px] left-0 w-full h-24 md:h-32 lg:z-20 max-lg:hidden"
       viewBox="0 0 1440 40"
       preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M0,20 C300,40 1080,20 1440,0 L1440,40 L0,40 Z"
+        d={dividerPath}
         class="fill-white"
       />
     </svg>

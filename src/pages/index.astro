@@ -1,23 +1,29 @@
 ---
+import { Image } from "astro:assets";
+
 // Layout
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 // Components
 import Navigation from "../components/klima-tec/molecules/Navigation.astro";
-import HeroSection from "../components/HeroSection.astro";
+import HeroSection from "../components/klima-tec/sections/HeroSection.astro";
 import About from "../components/About.astro";
-import Services from "../components/Services.astro";
-import ServicesItem from "../components/ServicesItem.astro";
+import Section from "../components/Section.astro";
+import SectionHeadline from "../components/klima-tec/atoms/SectionHeadline.astro";
+import Services from "../components/klima-tec/molecules/Services.astro";
+import ServiceCard from "../components/klima-tec/molecules/ServiceCard.astro";
 import ReviewSection from "../components/ReviewSection.astro";
 import Review from "../components/Review.astro";
-import ContactForm from "../components/ContactForm.astro";
+import ContactSection from "../components/klima-tec/sections/ContactSection.astro";
 import Form from "../components/Form.astro";
 import InputField from "../components/InputField.astro";
-import Button from "../components/Button.astro";
+import Button from "../components/klima-tec/atoms/Button.astro";
 import Footer from "../components/Footer.astro";
+import FooterLink from "../components/klima-tec/molecules/FooterLink.astro";
+import FormField from "../components/klima-tec/atoms/FormField.astro";
 
 // Images
-import HeroImage from "../assets/images/tastatur.jpg";
+import HeroImage from "../assets/images/ncc-hero-image-2.png";
 import Logo from "../assets/images/logo.png";
 import picart_pc from "../assets/images/picart_pc.png";
 import Helpmed from "../assets/images/helpmed.jpg";
@@ -28,6 +34,10 @@ import Settings from "../assets/images/Settings.jpg";
 import nccRealEstate from "../assets/images/ncc_real_estate.png";
 import myBodyMinerals from "../assets/images/logo_my_body_minerals.jpg";
 import logoEos from "../assets/images/logo_eos.png";
+import klimatecLogo from "../assets/images/ncc-klimatec-logo-final.png";
+
+import Headline from "../components/klima-tec/atoms/Headline.astro";
+import Datenschutz from "../components/klima-tec/molecules/Datenschutz.astro";
 ---
 
 <BaseLayout
@@ -45,66 +55,60 @@ import logoEos from "../assets/images/logo_eos.png";
     { text: "Kontakt", href: "#contact" }
   ]} />
 
-
-  
-  <HeroSection 
-    title="Wir helfen bei IT-Problemen jeglicher Art"
-    heroImage={HeroImage}
-    button={{
-      text: "Kontakt aufnehmen",
-      href: "#contact"
-    }}
-  >
-    <div slot="subtitle" class="space-y-2">
-      <p>Professionelle IT-Dienstleistungen, Netzwerktechnik und maßgeschneiderte Sicherheitslösungen für Privatpersonen und Unternehmen.</p>
-      <ul class="list-disc list-inside">
-        <li>Persönlich. Schnell. Unabhängig.</li>
-      </ul>
-    </div>
+  <HeroSection design="ncc" id="home" image={HeroImage}>
+    <Image
+      src={Logo}
+      alt="Hero"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 768px) 100vw, 800px"
+      format="webp"
+      class="max-w-56"
+      priority
+      loading="eager"
+    />
+    <Headline bold level={2}>
+      Wir helfen bei IT-Problemen jeglicher Art
+    </Headline>
+    <p>Professionelle IT-Dienstleistungen, Netzwerktechnik und maßgeschneiderte Sicherheitslösungen für Privatpersonen und Unternehmen.</p>
+    <ul class="list-disc list-inside">
+      <li>Persönlich. Schnell. Unabhängig.</li>
+    </ul>
+    <Button slot="cta" href="#contact">
+      Kontakt aufnehmen
+      <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+    </Button>
   </HeroSection>
 
 
-  <Services
-    bgColor="white"
-    headline="Leistungen"
-    ID="services"
-  >
-    <ServicesItem 
-      headline="IT-Service & Reparatur" 
-      image={Laptop}
-      alt="Spinat"
-      id={1}
-    >
-      Ob defekter Laptop, langsamer PC oder fehlerhafte Software – wir finden die Ursache und lösen das Problem effizient. Vor-Ort-Service oder Fernwartung – Sie entscheiden!
-    </ServicesItem>
-    <ServicesItem 
-      headline="Netzwerk & Infrastruktur" 
-      image={Netzwerk}
-      alt="Kräuter"
-      id={2}
-    >
-      Vom privaten WLAN bis zum komplexen Firmennetzwerk: Wir planen, installieren und betreuen Ihre Netzwerklösungen – sicher, zuverlässig und herstellerunabhängig.
-    </ServicesItem>
-    <ServicesItem 
-      headline="Beratung & Betreuung" 
-      image={Beratung}
-      alt="Steine"
-      id={3}
-    >
-      Wir unterstützen Sie bei der Auswahl und Einrichtung moderner Technik – mit individueller Beratung, verständlich erklärt. Ideal für Privatpersonen und kleine Unternehmen.
-    </ServicesItem>
-    <ServicesItem 
-      headline="Sicherheit & Smart Home" 
-      image={Settings}
-      alt="Steine"
-      id={4}
-    >
-      Ob Kameraüberwachung, Alarmanlage oder intelligente Lichtsteuerung – wir setzen Ihre Wünsche in Sachen Sicherheit und Komfort technisch sauber um.
-    </ServicesItem>
-  </Services>
+  <Section id="services" bgColor="white" paddingTop="medium">
+    <div class="flex flex-col items-center gap-4 pb-4">
+      <SectionHeadline design="ncc" center>Leistungen</SectionHeadline>
+      <Headline bold level={2}>Unser Leistungsspektrum für Sie</Headline>
+      <p>Von der Reparatur bis zur Beratung – wir kümmern uns um Ihre IT.</p>
+    </div>
+
+    <Services>
+      <ServiceCard image={Laptop} alt="IT-Service & Reparatur" headline="IT-Service & Reparatur">
+        Ob defekter Laptop, langsamer PC oder fehlerhafte Software – wir finden die Ursache und lösen das Problem effizient. Vor-Ort-Service oder Fernwartung – Sie entscheiden!
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+      </ServiceCard>
+      <ServiceCard image={Netzwerk} alt="Netzwerk & Infrastruktur" headline="Netzwerk & Infrastruktur">
+        Vom privaten WLAN bis zum komplexen Firmennetzwerk: Wir planen, installieren und betreuen Ihre Netzwerklösungen – sicher, zuverlässig und herstellerunabhängig.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-network-icon lucide-network"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+      </ServiceCard>
+      <ServiceCard image={Beratung} alt="Beratung & Betreuung" headline="Beratung & Betreuung">
+        Wir unterstützen Sie bei der Auswahl und Einrichtung moderner Technik – mit individueller Beratung, verständlich erklärt. Ideal für Privatpersonen und kleine Unternehmen.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+      </ServiceCard>
+      <ServiceCard image={Settings} alt="Sicherheit & Smart Home" headline="Sicherheit & Smart Home">
+        Ob Kameraüberwachung, Alarmanlage oder intelligente Lichtsteuerung – wir setzen Ihre Wünsche in Sachen Sicherheit und Komfort technisch sauber um.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check-icon lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+      </ServiceCard>
+    </Services>
+  </Section>
 
   <About
-    bgColor="gray"
+    bgColor="navi"
     headline="Über uns"
     subtitle="NCC GmbH – Ihr verlässlicher Partner für zukunftsfähige IT- und Kommunikationslösungen."
     image={Logo}
@@ -119,56 +123,39 @@ import logoEos from "../assets/images/logo_eos.png";
     Unser erfahrenes Team verbindet technisches Know-how mit praxisnaher Beratung – effizient, kreativ und lösungsorientiert. Dabei setzen wir auf persönliche Betreuung und langfristige Partnerschaften, um Unternehmen technologisch nachhaltig zu unterstützen.
   </About>
 
- <Services
-    bgColor="white"
-    headline="Subdevisions"
-    ID="subdevisions"
-  >
+  <Section id="subdevisions" bgColor="white">
+    <div class="flex flex-col items-center gap-4 pb-4">
+      <SectionHeadline design="ncc" center>Subdevisions</SectionHeadline>
+      <Headline bold level={2}>Unsere Partnerunternehmen</Headline>
+      <p>Weitere Marken und Unternehmen aus unserem Netzwerk.</p>
+    </div>
 
-  <ServicesItem 
-      headline="HelpMED" 
-      image={Helpmed}
-      alt="HelpMED"
-      fullWidth
-      id={5}
-    >
-      Helpmed berät Patienten ganzheitlich im Bereich der Orthomolekularmedizin, Mikronährstofftherapie und Ernährungsoptimierung. Unsere Mission ist es, Gesundheit ursachenorientiert zu fördern und körperliche Balance zu erhalten.
-    </ServicesItem>
+    <Services>
+      <ServiceCard image={Helpmed} alt="HelpMED" headline="HelpMED" link="https://helpmed.de/" objectFit="contain">
+        Helpmed berät Patienten ganzheitlich im Bereich der Orthomolekularmedizin, Mikronährstofftherapie und Ernährungsoptimierung. Unsere Mission ist es, Gesundheit ursachenorientiert zu fördern und körperliche Balance zu erhalten.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sprout-icon lucide-sprout"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/></svg>
+      </ServiceCard>
+      <ServiceCard image={klimatecLogo} alt="KlimaTec" headline="KlimaTec" link="/klimatec/" objectFit="contain">
+        Unsere eigene Marke für Klimatechnik: von der Klimaanlage fürs Zuhause bis zur Kühlung ganzer IT-Infrastrukturen – geplant, installiert und gewartet aus einer Hand.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+      </ServiceCard>
+      <ServiceCard image={logoEos} alt="EOS Design" headline="EOS Designs" objectFit="contain">
+        EOS Design steht für luxuriöse Maßanfertigung, die höchste Schneiderkunst mit exklusiven Stoffen verbindet. Jedes Kleidungsstück ist ein Unikat, das Eleganz und Persönlichkeit auf unvergleichliche Weise vereint.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+      </ServiceCard>
+      <ServiceCard image={nccRealEstate} alt="NCC Real Estate" headline="NCC Real Estate" objectFit="contain">
+        NCC Real Estate begleitet Sie kompetent beim Kauf und Verkauf von Immobilien. Als lizenzierte Makler bieten wir professionelle Beratung und eine zuverlässige Abwicklung rund um Ihre Immobilie.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2-icon lucide-building-2"><path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/></svg>
+      </ServiceCard>
+    </Services>
+  </Section>
 
-     <ServicesItem 
-      headline="myBodyMinerals" 
-      image={myBodyMinerals}
-      alt="myBodyMinerals"
-      fullWidth
-      id={6}
-    >
-      myBodyMinerals begleitet Sie auf dem Weg zu mehr Energie und Wohlbefinden mit individuell abgestimmten Nahrungsergänzungen. Nach einer Blutanalyse erhalten Sie genau die Mineralstoffe und Vitamine, die Ihr Körper wirklich braucht.
-    </ServicesItem>
-
-    <ServicesItem 
-      headline="EOS Designs" 
-      image={logoEos}
-      alt="EOS Design"
-      fullWidth
-      id={7}
-    >
-      EOS Design steht für luxuriöse Maßanfertigung, die höchste Schneiderkunst mit exklusiven Stoffen verbindet. Jedes Kleidungsstück ist ein Unikat, das Eleganz und Persönlichkeit auf unvergleichliche Weise vereint.
-    </ServicesItem>
-    
-    <ServicesItem 
-      headline="NCC Real Estate" 
-      image={nccRealEstate}
-      alt="NCC Real Estate"
-      fullWidth
-      padding
-      id={8}
-    >
-      NCC Real Estate begleitet Sie kompetent beim Kauf und Verkauf von Immobilien. Als lizenzierte Makler bieten wir professionelle Beratung und eine zuverlässige Abwicklung rund um Ihre Immobilie.
-    </ServicesItem>
-  </Services>
-
-  <ContactForm 
-    bgColor="gray"
+  <ContactSection
+    id="contact"
+    design="ncc"
+    image={HeroImage}
+    headline="Wir sind für Sie da"
+    text="Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular."
     contactLines={[
       "Telefon: 06737 761073",
       "Mobile: 0151 59044488",
@@ -176,20 +163,16 @@ import logoEos from "../assets/images/logo_eos.png";
       "E-Mail: info@nccgmbh.de"
     ]}
   >
-    <p>Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular.</p>
-    <Form>
-      <InputField itype="text" id="name" name="name" required>
-        Name:
-      </InputField>
-      <InputField itype="text" id="telefon" name="email" required>
-        Telefon:
-      </InputField>
-      <InputField itype="textarea" id="message" name="message" required>
-        Nachricht:
-      </InputField>
-      <Button id="openMail" as="a" href="">Absenden</Button>
+    <Form slot="form" class="max-lg:!rounded-none max-lg:!shadow-none">
+      <FormField fieldType="text" label="Name" id="name" name="name" required />
+      <FormField fieldType="text" label="Telefon" id="telefon" name="telefon" required />
+      <FormField textarea label="Nachricht" id="message" name="message" required />
+      <div class="flex max-md:flex-col gap-4 justify-between items-end [&>div]:self-start">
+        <Datenschutz />
+        <Button id="openMail" href="">Absenden</Button>
+      </div>
     </Form>
-  </ContactForm>
+  </ContactSection>
 
   <script>
     const TO = "info@nccgmbh.de";                 // << anpassen
@@ -221,6 +204,25 @@ import logoEos from "../assets/images/logo_eos.png";
       { text: "Datenschutz", href: "/datenschutz" },
       { text: "Kontakt", href: "#contact" }
     ]}
-  />
+  >
+    <div class="md:justify-self-center flex max-md:flex-col gap-8 mb-12 max-md:pl-10"> 
+      <FooterLink title="Telefon">
+        <a href="tel:+015159044488" class="font-bold hover:underline">+49 151 59044488</a>
+        <p>Mo. - Fr. 08:00 - 17:00 Uhr</p>
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+      </FooterLink>
+      <div class="bg-white w-[2px] min-h-max rounded-full max-lg:hidden" />
+      <FooterLink title="E-Mail">
+        <a href="mailto:info@nccgmbh.de" class="font-bold hover:underline">info@nccgmbh.de</a>
+        <p>Wir antworten schnellstmöglich.</p>
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+      </FooterLink>
+      <div class="bg-white w-[2px] min-h-max rounded-full max-lg:hidden" />
+      <FooterLink title="Standort">
+        <p>Heerweg 12<br />55278 Undenheim</p>
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+      </FooterLink>
+    </div>
+  </Footer>
 
 </BaseLayout>

@@ -1,9 +1,9 @@
 ---
-import type { string } from "astro:schema";
 import { type BgColors } from "../types";
 
-import Headline from "./Headline.astro"
 import Section from "./Section.astro"
+import SectionHeadline from "./klima-tec/atoms/SectionHeadline.astro";
+import Headline from "./klima-tec/atoms/Headline.astro";
 
 import { Image } from 'astro:assets';
 
@@ -17,24 +17,31 @@ type Props = {
 const { bgColor="white", headline, subtitle, image }: Props = Astro.props;
 ---
 
-<Section id="about" bgColor={bgColor}>
-  <div class="grid md:grid-cols-[auto_1fr] gap-12 items-center">
-    <div class="aspect-square w-64 flex items-center rounded-full bg-white max-sm:justify-self-center sm:self-start shadow-xl">
+<Section class="[&>*]:max-md:p-0 max-md:bg-ncc-light-blue" id="about" bgColor={bgColor}>
+  <div class="grid px-8 md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-center md:rounded-lg bg-ncc-light-blue md:p-10 lg:p-12">
+    <div class="w-40 md:w-56 shrink-0 mx-auto md:mx-0 max-md:hidden">
       <Image
         src={image}
-        alt="Profil"
+        alt="Logo"
         widths={[256]}
         sizes="256px"
-        class="w-30 px-4"
+        class="w-full h-auto"
       />
     </div>
-    <div class="felx flex-col space-y-8">
-      <Headline level={2} underline>{headline}</Headline>
-      <div class="space-y-4">
-        <Headline level={3}>{subtitle}</Headline>
-        <div>
-          <slot />
-        </div>
+    <div class="flex flex-col items-center md:items-start gap-4 text-center">
+      <SectionHeadline class="max-md:items-center" design="ncc">{headline}</SectionHeadline>
+      <Headline class="md:text-left" bold level={2}>{subtitle}</Headline>
+      <div class="w-40 md:w-56 shrink-0 mx-auto py-4 md:hidden">
+        <Image
+          src={image}
+          alt="Logo"
+          widths={[256]}
+          sizes="256px"
+          class="w-full h-auto"
+        />
+      </div>
+      <div class="text-left">
+        <slot />
       </div>
     </div>
   </div>

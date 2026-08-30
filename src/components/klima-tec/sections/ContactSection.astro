@@ -2,46 +2,65 @@
 import { Image } from 'astro:assets';
 
 import Headline from "../atoms/Headline.astro"
-import Button from "../atoms/Button.astro"
-import Underscore from '../atoms/Underscore.astro';
 import Section from '../../Section.astro';
-import HeroItems from '../molecules/HeroItems.astro';
 import SectionHeadline from '../atoms/SectionHeadline.astro';
-import ContactForm from '../molecules/ContactForm.astro';
 
 type Props = {
   id: string,
   image: ImageMetadata,
+  design?: "ncc" | "klimatec",
+  eyebrow?: string,
+  headline?: string,
+  text?: string,
+  contactLines?: string[],
+  headlineWhite?: boolean,
 };
 
-const { id, image }: Props = Astro.props;
+const {
+  id,
+  image,
+  design = "klimatec",
+  eyebrow = "Kontakt",
+  headline = "Ihre Klimaanlage -\nindividuell geplant",
+  text = "Unverbindlich anfragen - wir beraten Sie gerne!",
+  contactLines,
+  headlineWhite=false,
+}: Props = Astro.props;
 ---
 
 <Section {id} fullWidth class="max-lg:px-4 max-md:p-0 max-md:[&>*]:!p-0">
-  <div class="grid md:rounded-lg md:shadow-[0_0_15px] md:shadow-black/25 overflow-hidden">
+  <div class="grid lg:relative max md:rounded-lg md:shadow-[0_0_15px] md:shadow-black/25 overflow-hidden">
     <Image
       src={image}
       alt="Hero"
       widths={[400, 800, 1200]}
       sizes="(max-width: 768px) 100vw, 800px"
       format="webp"
-      class:list={["col-start-1 row-start-1 w-full h-full max-lg:max-h-[700px] object-cover object-right"]}
+      class:list={["col-start-1 row-start-1 w-full h-full max-lg:max-h-[700px] object-cover object-right", "lg:absolute lg:inset-0"]}
       priority
       loading="eager"
     />
-    <div class="col-start-1 row-start-1 grid grid-cols-1 lg:grid-cols-6">
+    <div class="col-start-1 row-start-1 grid grid-cols-1 lg:grid-cols-6 z-10">
       <div class:list={[
-        "flex flex-col gap-4 px-8 py-8 md:max-w-[35rem] lg:w-[26rem] lg:col-start-1 lg:col-span-2",
-        "bg-gradient-to-r from-white/75 lg:from-white from-0% via-white/75 lg:via-white via-80% to-white/25 sm:to-transparent to-100%"  
+        "flex flex-col gap-4 px-8 py-8 md:max-w-[35rem] lg:col-start-1 lg:col-span-2 max-md:pt-8",
+        "bg-gradient-to-r lg:from-white from-0% lg:via-white via-80% sm:to-transparent to-100%",
+        "group-data-[page-design='klimatec']/design:from-white/75 group-data-[page-design='klimatec']/design:via-white/75 group-data-[page-design='klimatec']/design:to-white/25",
+        "group-data-[page-design='ncc']/design:from-black/25 group-data-[page-design='ncc']/design:via-black/25 group-data-[page-design='ncc']/design:[&>*]:text-white",
+        design === "ncc" && "!from-white/90 !to-white/90"
       ]}>
-        <SectionHeadline>Kontakt</SectionHeadline>
-        <Headline bold>
-          Ihre Klimaanlage -<br />individuell geplant
-        </Headline>
-        <p>Unverbindlich anfragen - wir beraten Sie gerne!</p>
+        <SectionHeadline {design}>{eyebrow}</SectionHeadline>
+        <Headline color={headlineWhite ? "white" : "blue"} bold class="whitespace-pre-line">{headline}</Headline>
+        <p>{text}</p>
+        {contactLines && (
+          <ol class="list-none space-y-2">
+            {contactLines.map((line) => (
+              <li class="">{line}</li>
+            ))}
+          </ol>
+        )}
       </div>
-      <div class="lg:col-start-3 lg:col-span-4 lg:pr-8 lg:py-8">
-        <ContactForm class="max-lg:!shadow-none max-lg:!rounded-none" />
+      <div class="lg:col-start-3 lg:col-span-4 lg:pr-8 lg:py-8 [&>*]:max-lg:pb-20">
+        <slot name="form" />
       </div>
     </div>
   </div>

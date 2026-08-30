@@ -7,12 +7,14 @@ type Props = {
   level?: HeadlineLevel,
   center?: boolean,
   class?: string,
+  design?: "ncc" | "klimatec",
 }
 
 const {
   level=2,
   center=false,
-  class: classList
+  class: classList,
+  design="klimatec",
 }: Props = Astro.props;
 
 const Tag = (
@@ -25,9 +27,12 @@ const Tag = (
 )[level];
 ---
 
-<div class:list={["break-words leading-tight flex flex-col gap-4", center && "items-center"]}>
-  <Tag class:list={["text-[16px] font-bold tracking-widest uppercase text-ncc-green", classList]}>
+<div class:list={["break-words leading-tight flex flex-col gap-4", center && "items-center", classList]}>
+  <Tag class:list={[
+    "text-[16px] font-bold tracking-widest uppercase",
+    design === "klimatec" ? "text-ncc-green" : "text-ncc-sky-light"
+  ]}>
     <slot />
   </Tag>
-  <Underscore />
+  <Underscore {design} />
 </div>

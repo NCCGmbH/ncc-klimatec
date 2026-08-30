@@ -7,7 +7,10 @@ type Props = {
   image: ImageMetadata,
   alt: string,
   headline: string,
-  link: string,
+  link?: string,
+  objectFit?: "cover" | "contain",
+  colorStyle?: "white" | "dark",
+  iconColor?: "blue" | "green" | "sky",
 }
 
 const {
@@ -15,7 +18,22 @@ const {
   alt,
   headline,
   link,
+  objectFit = "cover",
+  colorStyle="white",
+  iconColor="blue",
 }: Props = Astro.props;
+
+
+const bodyColorClass = {
+  "white": "bg-white",
+  "dark": "bg-sky-900 !text-white [&_h4]:!text-white",
+}[colorStyle];
+
+const linkIconColor = {
+  "blue": "[&>*]:text-ncc-blue",
+  "sky": "[&>*]:text-ncc-sky",
+  "green": "[&>*]:text-ncc-green",
+}[iconColor];
 ---
 
 <style>
@@ -27,30 +45,57 @@ const {
   }
 </style>
 
-<a href="/" class="hover:scale-105 flex h-full transition-all group">
-<div class="flex flex-col rounded-lg overflow-hidden shadow-[0px_0px_15px] shadow-black/25 transition-color group-hover:shadow-blue-500/25">
-  <div class="relative">
-    <Image
-      src={image}
-      alt={alt}
-      widths={[300, 600]}
-      sizes="(max-width: 768px) 100vw, 600px"
-      class="aspect-[9/7] w-full object-cover"
-    />
-    <IconCircle class="absolute left-3 bottom-0 translate-y-5" color="blue" size="md" padding={2} shadow>
-      <slot name="icon" />
-    </IconCircle>
-  </div>
-  <div class="flex h-full flex-col gap-2 p-4 pt-8">
-    <Headline bold level={4}>{headline}</Headline>
-    <div class="flex h-full">
-      <div class="w-full pb-8">
-        <slot />
+{
+  link ? (
+    <a href={link} class="hover:scale-105 flex h-full transition-all group">
+    <div class="flex flex-col rounded-lg overflow-hidden shadow-[0px_0px_15px] shadow-black/25 transition-color group-data-[page-design='klimatec']/design:group-hover:shadow-blue-500/25 group-data-[page-design='ncc']/design:group-hover:shadow-sky-500/25">
+      <div class="relative">
+        <Image
+          src={image}
+          alt={alt}
+          widths={[300, 600]}
+          sizes="(max-width: 768px) 100vw, 600px"
+          class:list={["aspect-[9/7] w-full", objectFit === "cover" ? "object-cover" : "object-contain bg-white p-6"]}
+        />
+        <IconCircle color={iconColor} class="absolute left-3 bottom-0 translate-y-5" size="md" padding={2} shadow>
+          <slot name="icon" />
+        </IconCircle>
       </div>
-      <div class="self-end font-bold [&>*]:text-blue-900">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+      <div class:list={["flex h-full flex-col gap-2 p-4 pt-8 border-t-2 border-gray-200", bodyColorClass]}>
+        <Headline bold level={4}>{headline}</Headline>
+        <div class="flex h-full">
+          <div class="w-full pb-8">
+            <slot />
+          </div>
+          <div class:list={["self-end font-bold", colorStyle === "dark" ? "white" : linkIconColor]}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</a>
+    </a>
+  ) : (
+    <div class="flex flex-col rounded-lg overflow-hidden shadow-[0px_0px_15px] shadow-black/25">
+      <div class="relative">
+        <Image
+          src={image}
+          alt={alt}
+          widths={[300, 600]}
+          sizes="(max-width: 768px) 100vw, 600px"
+          class:list={["aspect-[9/7] w-full", objectFit === "cover" ? "object-cover" : "object-contain bg-white p-6"]}
+        />
+        <IconCircle color={iconColor} class="absolute left-3 bottom-0 translate-y-5" size="md" padding={2} shadow>
+          <slot name="icon" />
+        </IconCircle>
+      </div>
+      <div class:list={["flex h-full flex-col gap-2 p-4 pt-8 border-t-2 border-gray-200", bodyColorClass]}>
+        <Headline bold level={4}>{headline}</Headline>
+        <div class="flex h-full">
+          <div class="w-full pb-8">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

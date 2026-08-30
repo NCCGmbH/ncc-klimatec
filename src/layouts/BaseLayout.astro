@@ -6,10 +6,10 @@ type Props = {
   description: string,
   image: string,
   domain: string,
-  design?: 'klima-tec' | 'ncc'
+  design?: 'klimatec' | 'ncc'
 }
 
-const { title, description, image, domain, design="ncc" }: Props = Astro.props;
+const { title, description, image, domain, design="klimatec" }: Props = Astro.props;
 ---
 
 <html lang="de" class="scroll-smooth">
@@ -48,7 +48,7 @@ const { title, description, image, domain, design="ncc" }: Props = Astro.props;
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-900 font-manrope group/design" data-page-design={design}>
     <slot name="nav" />
-    <div class="flex-grow text-blue-950">
+    <div class:list={["flex-grow", design === "klimatec" ? "text-blue-950" : "text-sky-950"]}>
       <slot />
     </div>
     <slot name="footer" />
