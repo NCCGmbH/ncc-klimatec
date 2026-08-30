@@ -17,8 +17,8 @@ type Props = {
 const { id, image }: Props = Astro.props;
 ---
 
-<Section {id} fullWidth class="max-lg:px-4">
-  <div class="grid rounded-lg shadow-[0_0_15px] shadow-black/25 overflow-hidden">
+<Section {id} fullWidth class="max-lg:px-4 max-md:p-0 max-md:[&>*]:!p-0">
+  <div class="grid md:rounded-lg md:shadow-[0_0_15px] md:shadow-black/25 overflow-hidden">
     <Image
       src={image}
       alt="Hero"
@@ -31,12 +31,12 @@ const { id, image }: Props = Astro.props;
     />
     <div class="col-start-1 row-start-1 grid grid-cols-1 lg:grid-cols-6">
       <div class:list={[
-        "flex flex-col gap-4 px-8 py-8 max-w-[35rem] lg:col-start-1 lg:col-span-2",
-        "max-sm:bg-white/75 sm:bg-gradient-to-r sm:from-white from-0% sm:via-white via-80% to-transparent to-100%"  
+        "flex flex-col gap-4 px-8 py-8 md:max-w-[35rem] lg:w-[26rem] lg:col-start-1 lg:col-span-2",
+        "bg-gradient-to-r from-white/75 lg:from-white from-0% via-white/75 lg:via-white via-80% to-white/25 sm:to-transparent to-100%"  
       ]}>
         <SectionHeadline>Kontakt</SectionHeadline>
         <Headline bold>
-          Ihre Klimaanlage - individuell geplant
+          Ihre Klimaanlage -<br />individuell geplant
         </Headline>
         <p>Unverbindlich anfragen - wir beraten Sie gerne!</p>
       </div>
