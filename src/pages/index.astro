@@ -6,198 +6,246 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 // Components
 import Navigation from "../components/klima-tec/molecules/Navigation.astro";
-import HeroSection from "../components/klima-tec/sections/HeroSection.astro";
-import About from "../components/About.astro";
-import Section from "../components/Section.astro";
-import SectionHeadline from "../components/klima-tec/atoms/SectionHeadline.astro";
-import Services from "../components/klima-tec/molecules/Services.astro";
-import ServiceCard from "../components/klima-tec/molecules/ServiceCard.astro";
-import ReviewSection from "../components/ReviewSection.astro";
-import Review from "../components/Review.astro";
-import ContactSection from "../components/klima-tec/sections/ContactSection.astro";
-import Form from "../components/Form.astro";
-import InputField from "../components/InputField.astro";
-import Button from "../components/klima-tec/atoms/Button.astro";
 import Footer from "../components/Footer.astro";
-import FooterLink from "../components/klima-tec/molecules/FooterLink.astro";
-import FormField from "../components/klima-tec/atoms/FormField.astro";
+import Section from "../components/Section.astro";
 
-// Images
-import HeroImage from "../assets/images/ncc-hero-image-2.png";
-import Logo from "../assets/images/logo.png";
-import picart_pc from "../assets/images/picart_pc.png";
-import Helpmed from "../assets/images/helpmed.jpg";
-import Laptop from "../assets/images/laptop.jpg";
-import Beratung from "../assets/images/Beratung.jpg";
-import Netzwerk from "../assets/images/Netzwerk.jpg";
-import Settings from "../assets/images/Settings.jpg";
-import nccRealEstate from "../assets/images/ncc_real_estate.png";
-import myBodyMinerals from "../assets/images/logo_my_body_minerals.jpg";
-import logoEos from "../assets/images/logo_eos.png";
-import klimatecLogo from "../assets/images/ncc-klimatec-logo-final.png";
+import HeroSection from "../components/klima-tec/sections/HeroSection.astro";
 
 import Headline from "../components/klima-tec/atoms/Headline.astro";
-import Datenschutz from "../components/klima-tec/molecules/Datenschutz.astro";
+import SectionHeadline from "../components/klima-tec/atoms/SectionHeadline.astro";
+import Button from "../components/klima-tec/atoms/Button.astro";
+
+import ServiceCard from "../components/klima-tec/molecules/ServiceCard.astro";
+import Services from "../components/klima-tec/molecules/Services.astro";
+import IconInfoPanel from "../components/klima-tec/molecules/IconInfoPanel.astro";
+import BenefitItem from "../components/klima-tec/molecules/BenefitItem.astro";
+import WorkflowItem from "../components/klima-tec/molecules/WorkflowItem.astro";
+
+// Images
+import Cards1 from "../assets/images/server.png";
+import Cards2 from "../assets/images/cards-2.png";
+import Cards3 from "../assets/images/cards-3.png";
+import Cards4 from "../assets/images/cards-4.png";
+import IconCircle from "../components/klima-tec/atoms/IconCircle.astro";
+
+const iconThickness = "1.5";
+
+
+import HeroImage from "../assets/images/hero-section-image.png";
+
+import logoHeadline from '../assets/svgs/ncc-klimatec-headline.svg?raw';
+import ContactForm from "../components/klima-tec/molecules/ContactForm.astro";
+import ContactSection from "../components/klima-tec/sections/ContactSection.astro";
+import FooterLink from "../components/klima-tec/molecules/FooterLink.astro";
+import HeroItems from "../components/klima-tec/molecules/HeroItems.astro";
+import Underscore from "../components/klima-tec/atoms/Underscore.astro";
+
+import logoImg from '../assets/images/ncc-klimatec-logo-final.png';
+
 ---
 
 <BaseLayout
   title="NCC GmbH - Wir helfen bei IT-Problemen jeglicher Art"
   description="Die NCC GmbH ist Ihr Partner für IT-Service, Netzwerktechnik und smarte Sicherheitslösungen – kompetent, unabhängig und zuverlässig. Jetzt mehr über unser Leistungsspektrum erfahren."
-  image="og-image.png"
+  image="og-klimatec.png"
   domain="https://nccgmbh.com/"
+  design="klimatec"
 >
 
-  <Navigation slot="nav" logoImg={Logo} links={[
-    { text: "KlimaTec", href: "/klimatec/" },
-    { text: "Leistungen", href: "#services" },
-    { text: "Über uns", href: "#about" },
-    { text: "Subdevisions", href: "#subdevisions" },
-    { text: "Kontakt", href: "#contact" }
+  <Navigation slot="nav" klimatecDesign {logoImg} links={[
+    { text: "NCC", href: "www.nccgmbh.com" },
+    { text: "Leistungen", href: "/klimatec/#services" },
+    { text: "Vorteile", href: "/klimatec/#benefits" },
+    { text: "Ablauf", href: "/klimatec/#workflow" },
+    { text: "Kontakt", href: "/klimatec/#contact" }
   ]} />
 
-  <HeroSection design="ncc" id="home" image={HeroImage}>
-    <Image
-      src={Logo}
-      alt="Hero"
-      widths={[400, 800, 1200]}
-      sizes="(max-width: 768px) 100vw, 800px"
-      format="webp"
-      class="max-w-56"
-      priority
-      loading="eager"
-    />
-    <Headline bold level={2}>
-      Wir helfen bei IT-Problemen jeglicher Art
-    </Headline>
-    <p>Professionelle IT-Dienstleistungen, Netzwerktechnik und maßgeschneiderte Sicherheitslösungen für Privatpersonen und Unternehmen.</p>
-    <ul class="list-disc list-inside">
-      <li>Persönlich. Schnell. Unabhängig.</li>
-    </ul>
-    <Button slot="cta" href="#contact">
-      Kontakt aufnehmen
+  <HeroSection id="klimatec-home" image={HeroImage}>
+    <Headline bold level={1} size={2}>Angenehme Temperaturen.<br />Stabile IT.<br />Mehr Lebensqualität.</Headline>
+    <Underscore />
+    <p>Wir verbinden moderne Klimatechnik mit sicherer IT-Infrastruktur - für Unternehmen und Privathaushalte.</p>
+    <div slot="features" class="grid grid-cols-3 gap-2 lg:pr-8 pt-4 pb-8 max-md:text-sm [&_h4]:max-md:text-base">
+      <HeroItems title="Kühlen">
+        Für IT-Infrastruktur & Wohnkomfort
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-snowflake-icon lucide-snowflake"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg>
+      </HeroItems>
+      <HeroItems title="Wohlfühlen">
+        Zuhause & im Homeoffice
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      </HeroItems>
+      <HeroItems color="green" title="Energieeffizient">
+        Moderne Technik, geringer Verbrauch
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={1.5} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf-icon lucide-leaf"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+      </HeroItems>
+    </div>
+    <Button slot="cta" href="/klimatec/#contact">
+      Jetzt beraten lassen
       <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
     </Button>
   </HeroSection>
 
-
-  <Section id="services" bgColor="white" paddingTop="medium">
+  <Section id="services" paddingTop="medium">
     <div class="flex flex-col items-center gap-4 pb-4">
-      <SectionHeadline design="ncc" center>Leistungen</SectionHeadline>
-      <Headline bold level={2}>Unser Leistungsspektrum für Sie</Headline>
-      <p>Von der Reparatur bis zur Beratung – wir kümmern uns um Ihre IT.</p>
+      <SectionHeadline center>Unsere Leistungen</SectionHeadline>
+      <Headline bold>Maßgeschneiderte Lösungen für jedes Anliegen</Headline>
+      <p>Ob Rechenzentrum, Büro oder Zuhause - wir sorgen für das perfekte Klima.</p>
     </div>
 
     <Services>
-      <ServiceCard image={Laptop} alt="IT-Service & Reparatur" headline="IT-Service & Reparatur">
-        Ob defekter Laptop, langsamer PC oder fehlerhafte Software – wir finden die Ursache und lösen das Problem effizient. Vor-Ort-Service oder Fernwartung – Sie entscheiden!
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+      <ServiceCard image={Cards1} alt="" headline="IT-Infrastruktur kühlen" link="">
+        Schutz vor Überhitzung und stabile Leistung für Ihre Systeme.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-snowflake-icon lucide-snowflake"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg>
       </ServiceCard>
-      <ServiceCard image={Netzwerk} alt="Netzwerk & Infrastruktur" headline="Netzwerk & Infrastruktur">
-        Vom privaten WLAN bis zum komplexen Firmennetzwerk: Wir planen, installieren und betreuen Ihre Netzwerklösungen – sicher, zuverlässig und herstellerunabhängig.
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-network-icon lucide-network"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+      <ServiceCard image={Cards2} alt="" headline="Klimaanlage für Zuhause" link="">
+        Angenehme Raumtemperaturen für mehr Komfort - auch im Homeoffice.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
       </ServiceCard>
-      <ServiceCard image={Beratung} alt="Beratung & Betreuung" headline="Beratung & Betreuung">
-        Wir unterstützen Sie bei der Auswahl und Einrichtung moderner Technik – mit individueller Beratung, verständlich erklärt. Ideal für Privatpersonen und kleine Unternehmen.
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+      <ServiceCard image={Cards3} alt="" headline="Klimasysteme für Büro & Gewerbe" link="">
+        Produktive Arbeitsumgebungen durch optimales Raumklima.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2-icon lucide-building-2"><path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/></svg>
       </ServiceCard>
-      <ServiceCard image={Settings} alt="Sicherheit & Smart Home" headline="Sicherheit & Smart Home">
-        Ob Kameraüberwachung, Alarmanlage oder intelligente Lichtsteuerung – wir setzen Ihre Wünsche in Sachen Sicherheit und Komfort technisch sauber um.
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check-icon lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-      </ServiceCard>
-    </Services>
-  </Section>
-
-  <About
-    bgColor="navi"
-    headline="Über uns"
-    subtitle="NCC GmbH – Ihr verlässlicher Partner für zukunftsfähige IT- und Kommunikationslösungen."
-    image={Logo}
-  >
-    Die <strong>NCC Network Communication Computer GmbH </strong>mit Sitz in Undenheim steht seit über 30 Jahren für zuverlässige IT‑Lösungen und moderne Kommunikationstechnologien. 
-    <br />
-    <strong>Ob Netzwerktechnik, IT-Sicherheit, VoIP oder Cloud:</strong> 
-    <br />
-    Wir entwickeln maßgeschneiderte Systeme, die auf die individuellen Bedürfnisse unserer Kunden abgestimmt sind.
-    <br />
-    <br />
-    Unser erfahrenes Team verbindet technisches Know-how mit praxisnaher Beratung – effizient, kreativ und lösungsorientiert. Dabei setzen wir auf persönliche Betreuung und langfristige Partnerschaften, um Unternehmen technologisch nachhaltig zu unterstützen.
-  </About>
-
-  <Section id="subdevisions" bgColor="white">
-    <div class="flex flex-col items-center gap-4 pb-4">
-      <SectionHeadline design="ncc" center>Subdevisions</SectionHeadline>
-      <Headline bold level={2}>Unsere Partnerunternehmen</Headline>
-      <p>Weitere Marken und Unternehmen aus unserem Netzwerk.</p>
-    </div>
-
-    <Services>
-      <ServiceCard image={Helpmed} alt="HelpMED" headline="HelpMED" link="https://helpmed.de/" objectFit="contain">
-        Helpmed berät Patienten ganzheitlich im Bereich der Orthomolekularmedizin, Mikronährstofftherapie und Ernährungsoptimierung. Unsere Mission ist es, Gesundheit ursachenorientiert zu fördern und körperliche Balance zu erhalten.
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sprout-icon lucide-sprout"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/></svg>
-      </ServiceCard>
-      <ServiceCard image={klimatecLogo} alt="KlimaTec" headline="KlimaTec" link="/klimatec/" objectFit="contain">
-        Unsere eigene Marke für Klimatechnik: von der Klimaanlage fürs Zuhause bis zur Kühlung ganzer IT-Infrastrukturen – geplant, installiert und gewartet aus einer Hand.
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
-      </ServiceCard>
-      <ServiceCard image={logoEos} alt="EOS Design" headline="EOS Designs" objectFit="contain">
-        EOS Design steht für luxuriöse Maßanfertigung, die höchste Schneiderkunst mit exklusiven Stoffen verbindet. Jedes Kleidungsstück ist ein Unikat, das Eleganz und Persönlichkeit auf unvergleichliche Weise vereint.
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
-      </ServiceCard>
-      <ServiceCard image={nccRealEstate} alt="NCC Real Estate" headline="NCC Real Estate" objectFit="contain">
-        NCC Real Estate begleitet Sie kompetent beim Kauf und Verkauf von Immobilien. Als lizenzierte Makler bieten wir professionelle Beratung und eine zuverlässige Abwicklung rund um Ihre Immobilie.
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2-icon lucide-building-2"><path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/></svg>
+      <ServiceCard image={Cards4} alt="" headline="Beratung, Planung & Installation" link="">
+        Individuelle Lösungen und fachgerechte Umsetzung.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
       </ServiceCard>
     </Services>
-  </Section>
 
-  <ContactSection
-    id="contact"
-    design="ncc"
-    image={HeroImage}
-    headline="Wir sind für Sie da"
-    text="Bei persönlichen Fragen schreiben Sie uns gerne eine E-Mail über das Kontaktformular."
-    contactLines={[
-      "Telefon: 06737 761073",
-      "Mobile: 0151 59044488",
-      "Fax: 06737 751074",
-      "E-Mail: info@nccgmbh.de"
-    ]}
-  >
-    <Form slot="form" class="max-lg:!rounded-none max-lg:!shadow-none">
-      <FormField fieldType="text" label="Name" id="name" name="name" required />
-      <FormField fieldType="text" label="Telefon" id="telefon" name="telefon" required />
-      <FormField textarea label="Nachricht" id="message" name="message" required />
-      <div class="flex max-md:flex-col gap-4 justify-between items-end [&>div]:self-start">
-        <Datenschutz />
-        <Button id="openMail" href="">Absenden</Button>
+    <IconInfoPanel class="mt-10">
+      <div class="flex justify-between max-md:flex-col md:items-center gap-4">
+        <div>
+          <Headline bold level={4}>Persönliche Beratung gewünscht?</Headline>
+          <p>Unsere Experten finden die optimale Lösung für Ihr Projekt.</p>
+        </div>
+        <Button href="/klimatec/#contact">
+          Jetzt beraten lassen
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+        </Button>      
       </div>
-    </Form>
+      <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-headset-icon lucide-headset"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg>
+    </IconInfoPanel>
+  </Section>
+
+  <Section class="max-md:[&>*]:!p-0 max-md:!bg-ncc-light-blue" bgColor="navi" id="benefits">
+    <div class="grid grid-cols-1 lg:grid-cols-2 md:rounded-lg bg-[#f6faff] overflow-hidden">
+      <div class="flex flex-col gap-4 p-4 md:p-8 max-md:pb-8">
+        <SectionHeadline>Warum Klimatec von NCC?</SectionHeadline>
+        <Headline bold>Ihre Vorteile auf einen Blick</Headline>
+        <p>Wir verbinden moderne Klimatechnik mit sicherer IT-Infrastruktur und echtem Serviceverständnis. Darauf können Sie sich verlassen.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
+          <BenefitItem title="Effiziente Kühlung">
+            Verhindert Überhitzung von IT-Systemen und sichert stabile Leistung.
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-snowflake-icon lucide-snowflake"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg>
+          </BenefitItem>
+          <BenefitItem title="Mehr Komfort">
+            Angenehme Temperaturen zuhause und im Homeoffice.
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </BenefitItem>
+          <BenefitItem title="Energie sparen" color="green">
+            Moderne, effiziente Klimasysteme senken Ihren Energieverbrauch.
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf-icon lucide-leaf"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          </BenefitItem>
+          <BenefitItem title="Zuverlässiger Service" color="green">
+            Von der Beratung bis zur professionellen Installation - wir sind für Sie da.
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={iconThickness} stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check-icon lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </BenefitItem>
+        </div>
+        <IconInfoPanel darker>
+          <div>
+            <Headline bold level={4}>Erfahrung, auf die Sie zählen können.</Headline>
+            <p>NCC steht für Qualität, Zuverlässigkeit und persönliche Betreuung - seit vielen Jahren.</p>
+          </div>
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+        </IconInfoPanel>      
+      </div>
+      <Image 
+        src={Cards3}
+        alt="Hero"
+        widths={[400, 800, 1200]}
+        sizes="(max-width: 768px) 100vw, 800px"
+        format="webp"
+        class:list={["w-full h-full object-cover"]}
+        priority
+        loading="eager"
+      />
+    </div>
+  </Section>
+
+  <Section id="workflow" bgColor="blue">
+    <div class="flex flex-col gap-4 items-center">
+      <SectionHeadline center>So läuft Ihr Projekt mit uns ab</SectionHeadline>
+      <Headline bold>Ein klarer Ablauf - von Anfang an</Headline>
+      <p>Wir begleiten Sie Schritt für Schritt - von der ersten Beratung bis zur Wartung Ihrer Klimaanlage.</p>
+    </div>
+    <div class="grid sm:grid-cols-[repeat(7,minmax(0,1fr))] md:grid-cols-[repeat(15,minmax(0,1fr))] sm:gap-y-8 mt-12">
+      <WorkflowItem class="sm:col-span-3" index={1} title="Beratung">
+        Wir analysieren Ihre Anforderungen und beraten Sie individuell. Für die optimale Lösung.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+      </WorkflowItem>
+
+      <div class="h-24 flex mx-auto">
+        <svg class="text-gray-500 size-12 self-center max-sm:rotate-90" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+      </div>
+      
+      <WorkflowItem class="sm:col-span-3" index={2} title="Planung">
+        Passgenaue Konzepte für Ihr Zuhause oder Ihr Unternehmen.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+      </WorkflowItem>
+
+      <div class="flex sm:hidden h-24 md:flex mx-auto">
+        <svg class="text-gray-500 size-12 self-center max-sm:rotate-90" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+      </div>
+
+      <WorkflowItem class="sm:col-span-3" index={3} title="Installation">
+        Fachgerechte Montage durch unsere erfahrenen Techniker.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+      </WorkflowItem>
+
+      <div class="h-24 flex mx-auto">
+        <svg class="text-gray-500 size-12 self-center max-sm:rotate-90" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+      </div>
+
+      <WorkflowItem class="sm:col-span-3" index={4} title="Service">
+        Regelmäßige Wartung und schnelle Unterstützung - auch nach Projektabschluss.
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check-icon lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+      </WorkflowItem>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 rounded-lg shadow-[0_0_15px] shadow-black/25 overflow-hidden mt-16 bg-white">
+      <div class="relative">
+        <Image
+          src={Cards3}
+          alt="Hero"
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 768px) 100vw, 800px"
+          format="webp"
+          class:list={["md:absolute inset-0 w-full h-full object-cover"]}
+          priority
+          loading="eager"
+        />
+      </div>
+      <div class="flex gap-4 p-8 md:pl-8 md:pr-16 md:py-16">
+        <div class="w-1 min-h-max rounded-full bg-ncc-green" />
+        <IconCircle class="self-center" shadow>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake-icon lucide-handshake"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+        </IconCircle>
+        <div class="flex flex-col gap-4 self-center">
+          <Headline level={3} bold>Vertrauen Sie auf Kompetenz und Erfahrung</Headline>
+          <p>NCC KlimaTec steht für zuverlässige Lösungen, hochwertige Produkte und persönlichen Service.</p>
+          <Button href="/klimatec/#contact">
+            Jetzt beraten lassen
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </Button>
+        </div>    
+      </div>
+    </div>
+  </Section>
+
+  <ContactSection id="contact" image={HeroImage}>
+    <ContactForm slot="form" class="max-lg:!shadow-none max-lg:!rounded-none" />
   </ContactSection>
 
-  <script>
-    const TO = "info@nccgmbh.de";                 // << anpassen
-    const SUBJECT = "Anfrage NCC Webseite";    // << optional
-
-    const openMail = document.getElementById("openMail")
-
-    openMail?.addEventListener("click", () => {
-      const message = document.getElementById("message") as HTMLInputElement;
-      const name = document.getElementById("name") as HTMLInputElement;
-      const telefon = document.getElementById("telefon") as HTMLInputElement;
-      const nameStr = name?.value.trim();
-      const telefonStr = telefon?.value.trim();
-      const msg = message?.value.trim();
-      if (!msg || !nameStr ||  !telefonStr) { alert("Bitte alle Felder ausfüllen."); return; }
-
-      const finalMessage = `Name: ${nameStr}\n\nTelefon: ${telefonStr}\n\n${msg}`;
-
-      // Öffnet NUR das Standard-Mailprogramm mit fertig befüllter Mail
-      const href = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(finalMessage)}`;
-      window.location.href = href;
-    });
-  </script>
-
   <Footer slot="footer" 
+    klimatecDesign
     text="© 2025 NCC Network Communication Computer GmbH"
     links={[
       { text: "Impressum", href: "/impressum" },
@@ -207,13 +255,13 @@ import Datenschutz from "../components/klima-tec/molecules/Datenschutz.astro";
   >
     <div class="md:justify-self-center flex max-md:flex-col gap-8 mb-12 max-md:pl-10"> 
       <FooterLink title="Telefon">
-        <a href="tel:+015159044488" class="font-bold hover:underline">+49 151 59044488</a>
+        <a href="tel:+4915255919044" class="font-bold hover:underline">+49 152 55919044</a>
         <p>Mo. - Fr. 08:00 - 17:00 Uhr</p>
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
       </FooterLink>
       <div class="bg-white w-[2px] min-h-max rounded-full max-lg:hidden" />
       <FooterLink title="E-Mail">
-        <a href="mailto:info@nccgmbh.de" class="font-bold hover:underline">info@nccgmbh.de</a>
+        <a href="mailto:info@nccgmbh.com" class="font-bold hover:underline">info@nccgmbh.com</a>
         <p>Wir antworten schnellstmöglich.</p>
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
       </FooterLink>
@@ -224,5 +272,4 @@ import Datenschutz from "../components/klima-tec/molecules/Datenschutz.astro";
       </FooterLink>
     </div>
   </Footer>
-
 </BaseLayout>
